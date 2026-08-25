@@ -4,8 +4,8 @@
   "private": true,
   "description": "Personal portfolio site built with HTML and Tailwind CSS",
   "scripts": {
-    "dev": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
-    "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --minify"
+    "dev": "tailwindcss -i ./src/css/input.css -o ./src/output.css --watch",
+    "build": "tailwindcss -i ./src/css/input.css -o ./src/output.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0"
