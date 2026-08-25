@@ -1,10 +1,10 @@
-/* Recoleta Alt is the design's display face (Latinotype, commercial), so the
-   font files are not in this repo. The `font-serif` stack in tailwind.config.js
-   asks for "Recoleta Alt" first, which means:
-     - anyone with Recoleta Alt installed locally already sees the real face;
+/* Recoleta is the display face (Latinotype, commercial), so the font files are
+   not in this repo. The `font-serif` stack in tailwind.config.js asks for
+   "Recoleta" first, which means:
+     - anyone with Recoleta installed locally already sees the real face;
      - everyone else falls back to Instrument Serif.
 
-   To serve it to all visitors, drop RecoletaAlt-Medium.woff2 into src/fonts/
+   To serve it to all visitors, drop Recoleta-Medium.woff2 into src/fonts/
    and uncomment the rule below.
 
    Do NOT uncomment it before the file exists: a declared @font-face whose src
@@ -12,8 +12,8 @@
    Instrument Serif and lands on generic serif instead.
 
 @font-face {
-  font-family: "Recoleta Alt";
-  src: local("Recoleta Alt"), url("fonts/RecoletaAlt-Medium.woff2") format("woff2");
+  font-family: "Recoleta";
+  src: local("Recoleta Medium"), local("Recoleta"), url("fonts/Recoleta-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
