@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/*
+  Token layer — extracted from Figma file PKjnHe4B7HwvhIkhiohVRM,
+  frame 5826:24084 "Portfolio(Home)".
+
+  Colours under "Figma variables" are the file's bound variables
+  (collection "Shopper - 1"), read via get_variable_defs.
+
+  Colours under "Frame values" are raw fills in the frame. The file defines
+  no paint styles and no variables for them, so they are promoted to tokens
+  here to keep components free of literal hex values.
+*/
+@theme {
+  /* ---- Figma variables: Gray ramp ---- */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-500: #70707b;
+  --color-gray-600: #51525c;
+  --color-gray-700: #3f3f46;
+  --color-gray-900: #18181b;
+
+  /* ---- Figma variables: Base ---- */
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  /* ---- Frame values ---- */
+  --color-canvas: #fdfcf9; /* frame fill — page background */
+  --color-accent: #ff791a; /* availability marker (5826:24280/24281) */
+  --color-hairline: #e8e8e8; /* dominant border stroke */
+  --color-hairline-soft: #f2f2f2; /* card borders */
+  --color-surface-muted: #f8f8f8; /* card header fill */
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-figtree: var(--font-figtree), ui-sans-serif, sans-serif;
+  --font-display: "Recoleta Alt", "Recoleta", "Ltt Recoleta", Georgia, serif;
+  --font-circular: "Circular Std", var(--font-satoshi), ui-sans-serif, sans-serif;
+
+  /* ---- Layout ---- */
+  --spacing-frame: 1904px; /* frame width */
+  --spacing-gutter: 48px; /* section inset: content starts at x=49 */
+  --spacing-content: 1808px; /* section content width */
+  --spacing-section-gap: 120px; /* wrapper itemSpacing (5841:31965) */
+}
+
+html {
+  background-color: var(--color-canvas);
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-base-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

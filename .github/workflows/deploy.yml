@@ -27,14 +27,16 @@ jobs:
 
       - run: npm ci
 
-      - name: Build Tailwind CSS
+      # next.config.ts sets output:"export" and basePath:"/Portfolio-AJ-2026",
+      # so this writes a fully static site to ./out
+      - name: Build static export
         run: npm run build
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./src
+          path: ./out
 
   deploy:
     needs: build

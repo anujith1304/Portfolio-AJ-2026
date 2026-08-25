@@ -1,59 +1,36 @@
-# Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Personal portfolio site — plain HTML, styled with Tailwind CSS via the Tailwind CLI.
-Implemented from the Vitra Landing Page Figma file (`Portfolio(Home)` frame).
+## Getting Started
 
-## Setup
-
-```bash
-npm install
-```
-
-## Development
-
-Watches `src/css/input.css` and rebuilds `src/output.css` on save:
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Then serve the `src/` folder (it is self-contained):
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npx serve src        # or: python3 -m http.server -d src 8000
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Production build
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Generates a minified `src/output.css`:
+## Learn More
 
-```bash
-npm run build
-```
+To learn more about Next.js, take a look at the following resources:
 
-## Deployment
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which installs
-dependencies, runs the Tailwind build, and publishes `src/` to GitHub Pages.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-The generated `src/output.css` is gitignored — the workflow rebuilds it on every
-deploy, so it never needs to be committed.
+## Deploy on Vercel
 
-One-time setup: repo **Settings → Pages → Source → GitHub Actions**.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Structure
-
-```
-portfolio/
-├── .github/workflows/deploy.yml   # builds + deploys to GitHub Pages
-├── src/                            # published as the site root
-│   ├── index.html                  # entry page
-│   ├── output.css                  # generated Tailwind build (gitignored)
-│   ├── css/input.css               # Tailwind source (edit this)
-│   ├── js/main.js                  # JS
-│   ├── images/                     # image assets from the Figma design
-│   └── pages/                      # additional HTML pages
-├── public/                          # static files copied as-is (favicon, etc.)
-├── tailwind.config.js
-└── package.json
-```
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
