@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: "Recoleta";
-  src: local("Recoleta Medium"), local("Recoleta"), url("fonts/Recoleta-Medium.woff2") format("woff2");
+  src: local("Ltt Recoleta Medium"), url("fonts/Recoleta-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
