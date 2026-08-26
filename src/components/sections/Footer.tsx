@@ -36,7 +36,7 @@ export function Footer() {
         alt=""
         width={696}
         height={448}
-        className="absolute left-[400px] top-[166px] h-[224px] w-[348px] max-w-none"
+        className="absolute left-[400px] top-[166px] h-[224px] w-[348px] max-w-none mix-blend-multiply"
       />
 
       {/* 5854:51588 — email line at (400,406); copy control at (938,412) */}
