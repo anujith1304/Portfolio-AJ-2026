@@ -14,10 +14,13 @@ export function StatusBar() {
     <div className="relative h-[56px] w-[1801px]">
       {/* Variant 2 — location */}
       <div className="absolute left-0 top-0 w-[219px]">
-        <p className="text-[16px] font-bold leading-[19.2px] text-black/60">
-          Based in Tamil nadu
-        </p>
-        <LocalTime className="mt-[4px] block text-[12px] leading-[12px] text-black/40" />
+        <p className="type-status text-black/60">Based in Tamil nadu</p>
+        <span className="mt-[4px] flex items-center gap-[6px]">
+          <LocalTime className="type-meta-12 text-black/40" />
+          <span aria-hidden className="text-[12px] leading-[12px]">
+            {"\u{1F5FB}"}
+          </span>
+        </span>
       </div>
 
       {/* Scroll cue */}
@@ -25,7 +28,7 @@ export function StatusBar() {
         href="#works"
         className="absolute left-[887px] top-[9px] flex w-[87px] flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50"
       >
-        <span className="text-[16px] font-medium leading-[19.2px]">
+        <span className="type-scroll-16">
           Scroll down
         </span>
         <svg width="10" height="4" viewBox="0 0 10 4" fill="none" aria-hidden="true">
@@ -41,14 +44,14 @@ export function StatusBar() {
 
       {/* Variant 1 — availability */}
       <div className="absolute left-[1643px] top-[11px] h-[34px] w-[158px]">
-        <span className="absolute left-[11px] top-0 text-[16px] font-medium leading-[14.4px] text-black/60">
+        <span className="absolute left-[11px] top-0 type-avail-16 text-black/60">
           Freelance Availibility
         </span>
         <span
-          className="absolute left-[55px] top-[20px] h-[14px] w-[10px] rounded-full bg-accent"
+          className="absolute left-[55px] top-[20px] h-[14px] w-[10px] rounded-full bg-brand-orange"
           aria-hidden="true"
         />
-        <span className="absolute left-[70px] top-[21px] text-[12px] leading-[12.6px] uppercase text-black/40">
+        <span className="absolute left-[70px] top-[21px] type-meta-12-up text-black/40">
           Limited Hours
         </span>
       </div>

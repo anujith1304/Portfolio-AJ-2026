@@ -12,7 +12,12 @@ const LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-export function Nav() {
+/**
+ * `base` prefixes the in-page anchors so the same bar works off the home page.
+ * On a case study the hashes have no targets, so they resolve to "/#works" and
+ * navigate home first.
+ */
+export function Nav({ base = "", active = "Home" }: { base?: string; active?: string }) {
   return (
     <nav
       className="flex h-[54px] w-[452px] items-center gap-[16px] rounded-[66px] border border-[#F3F3F3] bg-white px-[24px] py-[18px]"
@@ -23,9 +28,11 @@ export function Nav() {
       }}
     >
       <a
-        href="#top"
-        aria-current="page"
-        className="flex shrink-0 items-center gap-[2px] text-[16px] font-bold leading-[10px] tracking-[-0.4px] text-black"
+        href={base || "#top"}
+        aria-current={active === "Home" ? "page" : undefined}
+        className={`flex shrink-0 items-center gap-[2px] ${
+          active === "Home" ? "type-nav-active text-black" : "type-nav text-black/55 transition-colors hover:text-black"
+        }`}
       >
         <svg
           width="18"
@@ -49,8 +56,13 @@ export function Nav() {
         {LINKS.map((l) => (
           <a
             key={l.label}
-            href={l.href}
-            className="text-[16px] font-medium leading-[10px] tracking-[-0.4px] text-black/55 transition-colors hover:text-black"
+            href={`${base}${l.href}`}
+            aria-current={active === l.label ? "page" : undefined}
+            className={
+              active === l.label
+                ? "type-nav-active text-black"
+                : "type-nav text-black/55 transition-colors hover:text-black"
+            }
           >
             {l.label}
           </a>

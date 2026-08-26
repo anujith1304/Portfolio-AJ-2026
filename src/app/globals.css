@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/*
+  ---break---
+*/
+@custom-variant dark (&:is(.dark *));
 
 /*
   Token layer — extracted from Figma file PKjnHe4B7HwvhIkhiohVRM,
@@ -27,7 +33,9 @@
 
   /* ---- Frame values ---- */
   --color-canvas: #fdfcf9; /* frame fill — page background */
-  --color-accent: #ff791a; /* availability marker (5826:24280/24281) */
+  /* Named brand-orange, not "accent": shadcn defines --color-accent:
+     var(--accent) in its @theme inline block, which would override this. */
+  --color-brand-orange: #ff791a; /* availability marker (5826:24280/24281) */
   --color-hairline: #e8e8e8; /* dominant border stroke */
   --color-hairline-soft: #f2f2f2; /* card borders */
   --color-surface-muted: #f8f8f8; /* card header fill */
@@ -35,8 +43,8 @@
   /* ---- Typography ---- */
   --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
   --font-figtree: var(--font-figtree), ui-sans-serif, sans-serif;
-  --font-display: "Recoleta Alt", "Recoleta", "Ltt Recoleta", Georgia, serif;
-  --font-circular: "Circular Std", var(--font-satoshi), ui-sans-serif, sans-serif;
+  --font-display: var(--font-recoleta), Georgia, serif;
+  --font-circular: var(--font-circular-std), ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Layout ---- */
   --spacing-frame: 1904px; /* frame width */
@@ -55,4 +63,232 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+/*
+  ---break---
+*/
+@theme inline {
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+/*
+  ---break---
+*/
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+/*
+  ---break---
+*/
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+/*
+  ---break---
+*/
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+/* =========================================================================
+   Type scale — read from Figma page 5854:32054 via getStyledTextSegments.
+   Every value below is verbatim from the file: family, style, size,
+   line-height, letter-spacing and text-case. Percentage tracking is
+   converted to px against its own size (e.g. -2% at 32px = -0.64px).
+
+   "Recoleta Alt" is Recoleta with stylistic set 02 — see src/app/fonts.ts —
+   so .type-hero carries ss02 and .type-connect deliberately does not.
+
+   Deliberately excluded: the 5-7px Satoshi/General Sans inside the embedded
+   product mockups and the Inter labels on the collage stickers. Those are
+   artwork baked into exported images, not page typography.
+   ========================================================================= */
+@layer utilities {
+  /* ---- Display: Recoleta ---- */
+  .type-hero {            /* 5854:49620 hero H1 */
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 72px; line-height: 80px; letter-spacing: -1.28px;
+    font-feature-settings: "ss02" 1;
+  }
+  .type-connect {         /* footer "Let's Connect - or collaborate" */
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 72px; line-height: normal; letter-spacing: -1.28px;
+  }
+
+  /* ---- Display: Satoshi ---- */
+  .type-display-72 { font-family: var(--font-sans); font-weight: 500; font-size: 72px; line-height: 86px;   letter-spacing: -2.4px;  }
+  .type-works-72   { font-family: var(--font-sans); font-weight: 500; font-size: 72px; line-height: 45.6px; letter-spacing: -2.5px;  }
+  .type-quote-72   { font-family: var(--font-sans); font-weight: 700; font-size: 72px; line-height: 74px;   letter-spacing: -1.09px; }
+
+  /* ---- Satoshi body ---- */
+  .type-role-32    { font-family: var(--font-sans); font-weight: 500; font-size: 32px; line-height: 14px;   letter-spacing: -0.64px; }
+  .type-lead-28    { font-family: var(--font-sans); font-weight: 500; font-size: 28px; line-height: 36px;   letter-spacing: 0.5px;   }
+  .type-bio-24     { font-family: var(--font-sans); font-weight: 500; font-size: 24px; line-height: 32px;   letter-spacing: -0.36px; }
+  .type-email-24   { font-family: var(--font-sans); font-weight: 700; font-size: 24px; line-height: 10px;                            }
+  .type-eyebrow-20 { font-family: var(--font-sans); font-weight: 400; font-size: 20px; line-height: normal; letter-spacing: -0.72px; }
+  .type-section-20 { font-family: var(--font-sans); font-weight: 500; font-size: 20px; line-height: 18px;   text-transform: capitalize; }
+  .type-date-20    { font-family: var(--font-sans); font-weight: 500; font-size: 20px; line-height: 12px;   }
+  .type-exp-18     { font-family: var(--font-sans); font-weight: 500; font-size: 18px; line-height: 28.8px; }
+  .type-exp-18-reg { font-family: var(--font-sans); font-weight: 400; font-size: 18px; line-height: 28.8px; }
+  .type-btn-18     { font-family: var(--font-sans); font-weight: 500; font-size: 18px; line-height: 20px;   }
+  .type-btn-16     { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 29.7px; }
+  .type-nav        { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 10px;   letter-spacing: -0.4px;  }
+  .type-nav-active { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 10px;   letter-spacing: -0.4px;  }
+  .type-status     { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 19.2px; }
+  .type-scroll-16  { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 19.2px; }
+  .type-avail-16   { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 14.4px; }
+  .type-meta-12    { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 12px;   }
+  .type-meta-12-up { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 12.6px; text-transform: uppercase; }
+
+  /* ---- Circular Std (Book = 450) ---- */
+  .type-circ-32    { font-family: var(--font-circular); font-weight: 450; font-size: 32px; line-height: 14px;    letter-spacing: -0.64px; }
+  .type-circ-24    { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 37.29px; letter-spacing: -0.5px;  }
+  .type-circ-24-lg { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 32px;    letter-spacing: -0.4px;  }
+  .type-circ-24-sm { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 10px;    letter-spacing: -0.96px; }
+  .type-circ-20    { font-family: var(--font-circular); font-weight: 450; font-size: 20px; line-height: 29.13px; }
+  .type-circ-20-sm { font-family: var(--font-circular); font-weight: 450; font-size: 20px; line-height: 12px;    }
+  .type-circ-18    { font-family: var(--font-circular); font-weight: 450; font-size: 18px; line-height: 19.23px; }
+}
+
+/*
+  The page is a fixed 1904px frame, so on a wider window the two full-bleed
+  backdrops (hero and footer) are widened past it to reach the window edge —
+  otherwise a strip of canvas shows down each side. Every other element keeps
+  its exact Figma coordinate inside the 1904 frame. Clipping the overflow here
+  keeps that bleed from producing a horizontal scrollbar.
+*/
+html,
+body {
+  overflow-x: hidden;
+}
+
+/*
+  The idea bulb in the bio paragraph sits dim until pointed at, then lights up.
+  `filter` drives both halves: brightness/saturate dim the glyph itself, and the
+  two drop-shadows fake the glow an emoji cannot cast on its own.
+*/
+@layer utilities {
+  .bulb {
+    display: inline-block;
+    /* Resting state is 60% of the lit state — opacity only, so the glyph keeps
+       its own colour instead of being greyed down. */
+    filter: opacity(0.6);
+    transition: filter 260ms ease, transform 260ms ease;
+    will-change: filter, transform;
+  }
+  .bulb:hover,
+  .bulb:focus-visible {
+    filter: grayscale(0) brightness(1.14) saturate(1.25)
+      drop-shadow(0 0 10px rgba(255, 200, 60, 0.85))
+      drop-shadow(0 0 26px rgba(255, 176, 32, 0.55));
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bulb { transition: none; }
+    .bulb:hover { transform: none; }
+  }
 }

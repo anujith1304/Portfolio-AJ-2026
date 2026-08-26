@@ -4,10 +4,10 @@ import { Figtree } from "next/font/google";
 /**
  * Fonts read from Figma frame 5826:24084.
  *
- * Satoshi and Figtree are free to serve, so they are loaded properly here.
- * Recoleta Alt and Circular Std are commercial (Latinotype / Lineto) and
- * cannot be redistributed, so no files ship in this repo — see the note on
- * `display` below.
+ * Satoshi and Figtree are free to serve. Recoleta is licensed (Latinotype)
+ * and self-hosted from a subset built out of the licensed desktop OTF —
+ * see the note on `recoleta` below. Circular Std is still unlicensed here,
+ * so it remains a name-only stack.
  */
 
 /** Satoshi — body, navigation, and most UI. Weights 300/400/500/700. */
@@ -33,18 +33,43 @@ export const figtree = Figtree({
 /**
  * Recoleta Alt Medium 72 — the hero display face.
  *
- * Commercial, so there is nothing to load. The stack names it first so a
- * machine with it installed renders the real face; everyone else falls
- * through. Once the licensed woff2 exists at ../fonts/RecoletaAlt-Medium.woff2,
- * swap this for a localFont() call.
+ * Built from the licensed LttRecoleta-Medium.otf, subset to Latin and
+ * converted to woff2. "Recoleta Alt" is not a separate family: it is
+ * Recoleta with stylistic set 02 applied — ss02 swaps a/e/g/y for the
+ * alternate forms, which was verified by matching the ss02 outlines
+ * against the Recoleta Alt release (a: 550 vs 550, y: 497 vs 499, where
+ * the default forms are 520 and 528). So the Alt look comes from
+ * `font-feature-settings: "ss02"`, applied in `displayFontFeature` below.
  *
- * Deliberately NOT declared via @font-face against a missing file: a declared
- * face whose src 404s claims the family name and stops the stack falling
- * through to the next entry.
+ * The Fontspring "Recoleta Alt Medium" demo file is deliberately NOT used:
+ * it carries only 96 glyphs, has no curly apostrophe (U+2019, which the
+ * hero headline needs), and watermarks the straight quote.
  */
-export const displayFontStack =
-  '"Recoleta Alt", "Recoleta", "Ltt Recoleta", Georgia, serif';
+export const recoleta = localFont({
+  variable: "--font-recoleta",
+  display: "swap",
+  src: [
+    { path: "../fonts/RecoletaAlt-Medium.woff2", weight: "500", style: "normal" },
+  ],
+  fallback: ["Georgia", "serif"],
+});
 
-/** Circular Std — used in the About section. Also commercial. */
-export const circularFontStack =
-  '"Circular Std", "Satoshi", ui-sans-serif, system-ui, sans-serif';
+/** Turns Recoleta into Recoleta Alt. Pair with the `font-display` family. */
+export const displayFontFeature = '"ss02" 1';
+
+/**
+ * Circular Std — testimonials, the contact block, and several About labels.
+ * Figma uses the "Book" style, which is usWeightClass 450 (not 400) — the
+ * weights below are the font's real weight classes, so `font-[450]` selects
+ * Book, `font-medium` selects Medium and `font-bold` selects Bold.
+ */
+export const circular = localFont({
+  variable: "--font-circular-std",
+  display: "swap",
+  src: [
+    { path: "../fonts/CircularStd-Book.woff2", weight: "450", style: "normal" },
+    { path: "../fonts/CircularStd-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/CircularStd-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
+});
