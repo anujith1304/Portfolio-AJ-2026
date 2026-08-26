@@ -11,15 +11,24 @@ import type { NextConfig } from "next";
  * serves from http://localhost:3000/ without the prefix.
  */
 const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? "/Portfolio-AJ-2026" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isProd ? "/Portfolio-AJ-2026" : "",
+  basePath,
   trailingSlash: true,
   images: {
     // next/image's default loader needs a server; static export requires this.
     unoptimized: true,
   },
+  /*
+   * basePath is applied automatically to next/link hrefs and to everything
+   * under /_next/ (JS, CSS, fonts), but NOT to a plain string `src` on
+   * next/image — and with `unoptimized: true` the src is emitted verbatim,
+   * so /images/x.png stays /images/x.png and 404s under a basePath deploy.
+   * Exposing the value here lets <Img> prefix those srcs itself.
+   */
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
 };
 
 export default nextConfig;

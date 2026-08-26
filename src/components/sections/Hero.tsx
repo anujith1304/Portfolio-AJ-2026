@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Img";
 import { Nav } from "@/components/Nav";
 import { StatusBar } from "@/components/StatusBar";
 

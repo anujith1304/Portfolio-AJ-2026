@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Img";
 
 /**
  * Testimonials — Figma 5854:51420 "Frame 2147228580".

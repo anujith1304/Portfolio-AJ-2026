@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Img";
 
 /**
  * Bio + collage — Figma 5854:49704 "Frame 2147228576".
