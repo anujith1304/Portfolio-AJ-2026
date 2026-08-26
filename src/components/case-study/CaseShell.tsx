@@ -101,18 +101,33 @@ export function CaseLogo({
   );
 }
 
-/** Meta row — Timeline / Platform / My Role / Tools Used. */
+/**
+ * Meta row — Timeline / Platform / My Role / Tools Used.
+ * 5854:34742 / 5854:39476: a 101-tall box with 1px #e0e0e0 rules on its top
+ * and bottom edges only (strokeAlign INSIDE), labels 22px down and values 61px
+ * down. The rules are part of the design, not a divider I have added.
+ */
 export function MetaRow({
-  top,
+  box,
   items,
 }: {
-  top: number;
+  box: { left: number; top: number; width: number; height: number };
   items: { label: string; value: string; left: number }[];
 }) {
   return (
     <>
+      <div
+        aria-hidden
+        className="absolute border-t border-b border-[#e0e0e0]"
+        style={{
+          left: box.left,
+          top: box.top,
+          width: box.width,
+          height: box.height,
+        }}
+      />
       {items.map((m) => (
-        <div key={m.label} className="absolute" style={{ left: m.left, top }}>
+        <div key={m.label} className="absolute" style={{ left: m.left, top: box.top + 22 }}>
           <p className="type-circ-20 text-[#6b6b6b]" style={{ lineHeight: "24.8px" }}>
             {m.label}
           </p>
@@ -188,6 +203,7 @@ export function NumberedCard({
   body,
   impactLabel,
   impact,
+  bodyColor = "#494949",
 }: {
   top: number;
   eyebrow: string;
@@ -196,6 +212,7 @@ export function NumberedCard({
   body: string;
   impactLabel?: string;
   impact?: string;
+  bodyColor?: string;
 }) {
   return (
     <div className="absolute left-[521px] w-[1046px]" style={{ top }}>
@@ -208,7 +225,10 @@ export function NumberedCard({
       <h3 className="mt-[12px] font-display text-[23.6px] leading-[35.8px] font-semibold text-[#222227]">
         {title}
       </h3>
-      <p className="mt-[12px] text-[16px] leading-[24.8px] font-normal text-[#494949]">
+      <p
+        className="mt-[12px] text-[16px] leading-[24.8px] font-normal"
+        style={{ color: bodyColor }}
+      >
         {body}
       </p>
       {impact && (
@@ -216,7 +236,10 @@ export function NumberedCard({
           <p className="mt-[24px] text-[14px] leading-[24.8px] font-medium text-[#222227]">
             {impactLabel ?? "IMPACT"}
           </p>
-          <p className="mt-[12px] text-[16px] leading-[24.8px] font-normal text-[#494949]">
+          <p
+            className="mt-[12px] text-[16px] leading-[24.8px] font-normal"
+            style={{ color: bodyColor }}
+          >
             {impact}
           </p>
         </>

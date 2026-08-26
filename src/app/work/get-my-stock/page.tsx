@@ -191,7 +191,7 @@ export default function GetMyStockCaseStudy() {
 
       {/* 5854:34742 — meta row */}
       <MetaRow
-        top={1834}
+        box={{ left: 521, top: 1812, width: 929, height: 101 }}
         items={[
           { label: "Timeline", value: "Oct 2024—Mar 2025", left: 521 },
           { label: "Platform", value: "iOS & Android App", left: 771 },

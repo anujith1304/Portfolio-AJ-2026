@@ -7,6 +7,7 @@ import {
   MetaRow,
   SectionHeading,
   Body,
+  NumberedCard,
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
 
@@ -62,28 +63,39 @@ const SIDE_NAV = [
   { label: "Drop Shadow", id: "drop-shadow", top: 13173 },
 ];
 
-/** Problem and solution entries here are a title plus two paragraphs. */
+/*
+ * Each entry is eyebrow / title / body / IMPACT / impact body — the same
+ * five-part shape the Get My Stock cards use. `top` is the eyebrow's y.
+ * An earlier pass read this page's copy with a >=16px filter, which silently
+ * dropped every 14px label: the PROBLEM/Solution eyebrows and all eight
+ * IMPACT headings. Body copy here is #777777, not the #494949 used on the
+ * other case study.
+ */
 const PROBLEMS = [
   {
-    top: 3465,
+    top: 3429,
+    eyebrow: "PROBLEM #01",
     title: "Un-balanced Type Scale",
     a: "Designers and developers were building UI elements independently, the heading, nav labels, table headers, and body text are all inconsistent in size and weight, with no clear typographic hierarchy governing them.",
     b: "Typography is the primary tool for guiding a user's attention through a screen. Without a defined type scale, every section competes for the same visual weight nothing feels more important than anything else.",
   },
   {
-    top: 3740,
+    top: 3704,
+    eyebrow: "PROBLEM #02",
     title: "Broken Spacing System",
     a: "The upload card, resource usage card, and data table all use different internal padding and gaps spacing decisions were made per component rather than from a shared token system.",
     b: "Inconsistent spacing is one of the hardest problems to fix, because it touches every single component in the product. Without spacing tokens, every new component a designer creates will default to a different value, and every developer will interpret spacing from the design file differently.",
   },
   {
-    top: 4015,
+    top: 3979,
+    eyebrow: "PROBLEM #03",
     title: "In-consistent Button Hierarchy",
     a: "Upload uses a blue filled button, Top-up uses a purple filled button, and Cancel is un-styled text all on the same screen with no defined rule for when to use which style.",
     b: "When users can't visually distinguish a primary action from a secondary one, they hesitate. In a product built around fast, repetitive workflows like uploading and processing files, that hesitation adds up.",
   },
   {
-    top: 4289,
+    top: 4253,
+    eyebrow: "PROBLEM #04",
     title: "Conflicting Surface Colors",
     a: "The dark sidebar, white content cards, and grey background have no defined elevation system or surface hierarchy and also they coexist without a clear rule in the product.",
     b: "Without a surface system, the layout has no reliable way to communicate depth, focus, or containment. Users struggle to distinguish interactive areas from static ones, and the overall interface feels assembled rather than designed.",
@@ -92,56 +104,34 @@ const PROBLEMS = [
 
 const SOLUTIONS = [
   {
-    top: 6270,
+    top: 6234,
+    eyebrow: "SOLUTION #01",
     title: "Balanced Type Scale",
     a: "A consistent type scale was applied across headings, navigation labels, cards, tables, form fields, and body text. This created a clear visual hierarchy and made the dashboard easier to scan.",
     b: "Compared to the old dashboard, where text sizes felt inconsistent and every section competed for attention, the new type system helps users quickly identify important areas like recent projects, tool cards, usage balance, and primary actions.",
   },
   {
-    top: 6545,
+    top: 6509,
+    eyebrow: "SOLUTION #02",
     title: "Consistent 4px Grid Spacing",
     a: "The interface was rebuilt using a 4px spacing system to keep padding, gaps, card spacing, and form alignment consistent across the dashboard and workflow screens.",
     b: "The old UI felt uneven because each component had different spacing rules. The new layout feels more organized and predictable, helping users move through the dashboard without visual clutter or confusion.",
   },
   {
-    top: 6820,
+    top: 6784,
+    eyebrow: "SOLUTION #03",
     title: "Clear Button Hierarchy",
     a: "Primary, secondary, and supporting actions were redesigned with clear visual differences. Key actions like Create Dub and Upgrade are now more visible, while less important actions remain subtle.",
     b: "In the old dashboard, users could not easily distinguish between main actions and secondary actions. The new button hierarchy guides users toward the next step faster and reduces hesitation during tasks like uploading, creating, or upgrading.",
   },
   {
-    top: 7094,
+    top: 7058,
+    eyebrow: "SOLUTION #04",
     title: "Refined Color System",
     a: "The color system was simplified using one primary color, one secondary color, and neutral shades for backgrounds, borders, and text. This created a cleaner and more controlled visual style.",
     b: "The old dashboard used colors without a clear system, making the interface feel busy and inconsistent. The new color system improves focus, separates interactive elements from static content, and gives the product a more polished and professional look.",
   },
 ];
-
-function TwoParaCard({
-  top,
-  title,
-  a,
-  b,
-}: {
-  top: number;
-  title: string;
-  a: string;
-  b: string;
-}) {
-  return (
-    <div className="absolute left-[521px] w-[1046px]" style={{ top }}>
-      <h3 className="font-display text-[24px] leading-[35.8px] font-semibold text-[#222227]">
-        {title}
-      </h3>
-      <p className="mt-[12px] text-[16px] leading-[24.8px] font-normal text-[#494949]">
-        {a}
-      </p>
-      <p className="mt-[60px] text-[16px] leading-[24.8px] font-normal text-[#494949]">
-        {b}
-      </p>
-    </div>
-  );
-}
 
 export default function DesignSystemCaseStudy() {
   return (
@@ -207,7 +197,7 @@ export default function DesignSystemCaseStudy() {
       </p>
 
       <MetaRow
-        top={1830}
+        box={{ left: 521, top: 1808, width: 995, height: 101 }}
         items={[
           { label: "Timeline", value: "Nov 2025—Jan 2026", left: 521 },
           { label: "Platform", value: "Across All Products", left: 791 },
@@ -263,7 +253,16 @@ export default function DesignSystemCaseStudy() {
       </Body>
 
       {PROBLEMS.map((p) => (
-        <TwoParaCard key={p.title} {...p} />
+        <NumberedCard
+          key={p.title}
+          top={p.top}
+          eyebrow={p.eyebrow}
+          eyebrowColor="#d62518"
+          title={p.title}
+          body={p.a}
+          impact={p.b}
+          bodyColor="#777777"
+        />
       ))}
 
       <SectionHeading top={4559} width={196}>Issues Solved</SectionHeading>
@@ -274,24 +273,18 @@ export default function DesignSystemCaseStudy() {
         dubbing simple with a focused upload, language selection, settings, and
         creation flow.
       </Body>
-      <Body top={5370} left={521} width={1025} size={16} lh={24} color="#494949">
-        The dashboard provides users with a centralized view of their workspace,
-        including tool shortcuts, recent process, usage balance, and
-        subscription details. The improved layout reduces clutter by grouping
-        related information into clear sections, making it easier for users to
-        understand project status and take action quickly.
-      </Body>
-      <Body top={6104} left={521} width={1025} size={16} lh={24} color="#494949">
-        The video dubbing screen is designed to keep the creation flow simple
-        and focused. Users can upload a video, enter process details, choose
-        languages, enable optional settings, and start the dubbing process
-        through a clear primary action. The form uses consistent spacing, input
-        styling, and button hierarchy to create a smooth and predictable
-        experience.
-      </Body>
 
       {SOLUTIONS.map((s) => (
-        <TwoParaCard key={s.title} {...s} />
+        <NumberedCard
+          key={s.title}
+          top={s.top}
+          eyebrow={s.eyebrow}
+          eyebrowColor="#03ad00"
+          title={s.title}
+          body={s.a}
+          impact={s.b}
+          bodyColor="#777777"
+        />
       ))}
 
       <SectionHeading top={7364}>Components</SectionHeading>
@@ -300,13 +293,15 @@ export default function DesignSystemCaseStudy() {
         working without a shared system, leading to inconsistencies across the
         UI. Here are the key problems with the existing experience:
       </Body>
-      <Body top={8209} left={521} width={1046} size={16} lh={24} color="#494949">
-        A design system foundations sheet showcasing the complete color token
-        palette and typography scale.
-      </Body>
 
       <SectionHeading top={11214} width={1052}>Spacing</SectionHeading>
       <SectionHeading top={13173} width={1052}>Drop Shadow</SectionHeading>
+
+      {/*
+        The Issues Solved captions (5370, 6104) and the Components caption
+        (8209) are children of ds-solved-1 / ds-solved-2 / ds-comp-1, so they
+        already appear in those exports. Drawing them again printed each twice.
+      */}
 
       {/* 5854:40812 "Related", 1905x642 at y=16107 */}
       <Image
