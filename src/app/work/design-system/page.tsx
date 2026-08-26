@@ -294,8 +294,50 @@ export default function DesignSystemCaseStudy() {
         UI. Here are the key problems with the existing experience:
       </Body>
 
+      {/*
+        Four component captions plus the Spacing and Drop Shadow bodies. These
+        are siblings of the exported sheets, not children, so unlike the three
+        captions that ARE inside their blocks they have to be drawn here — an
+        earlier extract windowed to y 2500-8600 and never saw any of them.
+      */}
+      <Body top={8933} left={521} width={1046} size={16} lh={22} color="#777777">
+        Button (Call to Action) Three interaction states Default, Hover, and
+        Disabled ensuring clear visual feedback across all user interactions.
+      </Body>
+      <Body top={9657} left={521} width={1046} size={16} lh={22} color="#777777">
+        Dropdown &amp; Context Menu A paired selection and action component,
+        with clear hierarchy and red reserved for destructive actions.
+      </Body>
+      <Body top={10375} left={521} width={1046} size={16} lh={22} color="#777777">
+        A dual-theme profile creation modal that combines structured form inputs
+        with a clean layout, enabling users to set up their public identity
+        through guided fields with built-in light and dark mode support.
+      </Body>
+      <Body top={11115.5} left={521} width={1046} size={16} lh={22} color="#777777">
+        Two utility components built for content organization and time-based
+        inputs. The accordion manages progressive disclosure, revealing
+        information only when needed. The date picker handles date and time
+        selection with month navigation and event indicators, styled
+        consistently within the system.
+      </Body>
+
       <SectionHeading top={11214} width={1052}>Spacing</SectionHeading>
+      <Body top={11274} width={1052}>
+        We established a base-4 spacing token system a fixed set of values (4,
+        8, 12, 16, 20, 24, 32, 48px) that every component and layout is built
+        from. This replaced the padding decisions that were causing
+        inconsistencies across the product, ensuring whitespace feels
+        intentional and consistent regardless of who designed or built the
+        screens.
+      </Body>
+
       <SectionHeading top={13173} width={1052}>Drop Shadow</SectionHeading>
+      <Body top={13233} width={1052}>
+        A defined set of shadow tokens used to communicate elevation and depth
+        across the product. Each level is intentionally scoped from subtle card
+        lifts to prominent modal overlays ensuring depth is applied consistently
+        rather than decided on a case-by-case basis.
+      </Body>
 
       {/*
         The Issues Solved captions (5370, 6104) and the Components caption
