@@ -11,6 +11,7 @@ import {
   NumberedCard,
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
+import { canvasSurface } from "@/lib/canvas";
 
 /** Blocks exported from Figma and placed on their node coordinates. */
 type Block = { src: string; alt: string; left: number; top: number; w: number; h: number };
@@ -134,7 +135,10 @@ const SOLUTIONS = [
 
 export default function GetMyStockCaseStudy() {
   return (
-    <main className="relative mx-auto h-[20497px] w-[1905px] bg-canvas">
+    <main
+      className="relative mx-auto h-[20497px] w-[1905px]"
+      style={canvasSurface}
+    >
       <CaseNav />
       <BackLink />
       <CaseLogo

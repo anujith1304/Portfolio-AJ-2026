@@ -5,6 +5,7 @@ import { Works } from "@/components/sections/Works";
 import { About } from "@/components/sections/About";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Footer } from "@/components/sections/Footer";
+import { canvasSurface } from "@/lib/canvas";
 
 /**
  * Home — Figma 5854:49620 "Portfolio(Home)", 1904x7305.
@@ -28,7 +29,10 @@ import { Footer } from "@/components/sections/Footer";
 export default function Home() {
   return (
     <main className="relative mx-auto w-[1904px]">
-      <div className="relative z-10 flex flex-col items-start gap-[120px] bg-canvas pb-[120px]">
+      <div
+        className="relative z-10 flex flex-col items-start gap-[120px] pb-[120px]"
+        style={canvasSurface}
+      >
         <Hero />
         <div className="ml-[49px]">
           <Bio />
