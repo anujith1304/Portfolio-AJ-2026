@@ -299,32 +299,14 @@ export default function DesignSystemCaseStudy() {
       </Body>
 
       {/*
-        Four component captions plus the Spacing and Drop Shadow bodies. These
-        are siblings of the exported sheets, not children, so unlike the three
-        captions that ARE inside their blocks they have to be drawn here — an
-        earlier extract windowed to y 2500-8600 and never saw any of them.
-      */}
-      <Body top={8933} left={521} width={1046} size={16} lh={22} color="#777777">
-        Button (Call to Action) Three interaction states Default, Hover, and
-        Disabled ensuring clear visual feedback across all user interactions.
-      </Body>
-      <Body top={9657} left={521} width={1046} size={16} lh={22} color="#777777">
-        Dropdown &amp; Context Menu A paired selection and action component,
-        with clear hierarchy and red reserved for destructive actions.
-      </Body>
-      <Body top={10375} left={521} width={1046} size={16} lh={22} color="#777777">
-        A dual-theme profile creation modal that combines structured form inputs
-        with a clean layout, enabling users to set up their public identity
-        through guided fields with built-in light and dark mode support.
-      </Body>
-      <Body top={11115.5} left={521} width={1046} size={16} lh={22} color="#777777">
-        Two utility components built for content organization and time-based
-        inputs. The accordion manages progressive disclosure, revealing
-        information only when needed. The date picker handles date and time
-        selection with month navigation and event indicators, styled
-        consistently within the system.
-      </Body>
+        The four component captions (y 8933, 9657, 10375, 11116) are CHILDREN
+        of ds-comp-2..5, so they already appear in those exports and must not
+        be drawn again. Only the Spacing and Drop Shadow bodies below are
+        standalone siblings and need markup.
 
+        Ownership here cannot be judged from coordinates — all six sit inside a
+        sheet's bounds. It has to come from each node's ancestry.
+      */}
       <SectionHeading top={11214} width={1052}>Spacing</SectionHeading>
       <Body top={11274} width={1052}>
         We established a base-4 spacing token system a fixed set of values (4,
