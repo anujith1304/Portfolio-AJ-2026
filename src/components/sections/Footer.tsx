@@ -26,17 +26,23 @@ export function Footer() {
       id="contact"
       className="relative h-[712px] w-[1905px]"
     >
-      {/* 5854:51585 — image card above the copy, 348x224 at (400,166).
-          Figma's export covered the render bounds and baked the 4px shadow
-          spill as opaque canvas colour, which showed as a pale rectangle over
-          the artwork behind. The spill is cropped off, so this is the node's
-          own box and sits at its true Figma coordinate. */}
+      {/*
+        5854:51585 — image card above the copy, 348x224 at (400,166).
+        Figma's export covered the render bounds and baked the 4px shadow
+        spill as opaque canvas colour, so the spill is cropped off and this is
+        the node's own box on its true coordinate.
+        The ground was baked into the source bitmap too (rgb(248,248,245)) and
+        has been flood-filled to transparent from the border inwards. A plain
+        colour key would have removed the drawing's interior whites as well,
+        since it is black line art; the fill only reaches what connects to the
+        edge, so the linework is untouched.
+      */}
       <Image
         src="/images/footer/connect-card.png"
         alt=""
         width={696}
         height={448}
-        className="absolute left-[400px] top-[166px] h-[224px] w-[348px] max-w-none mix-blend-multiply"
+        className="absolute left-[400px] top-[166px] h-[224px] w-[348px] max-w-none"
       />
 
       {/* 5854:51588 — email line at (400,406); copy control at (938,412) */}

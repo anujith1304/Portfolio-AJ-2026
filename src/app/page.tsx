@@ -22,17 +22,46 @@ import { canvasSurface } from "@/lib/canvas";
  * the 1808-wide sections sit at x=49, where centring would put them at 48 —
  * so each section carries its explicit Figma left offset instead.
  *
- * "image 163" (5854:49627) is a sibling of that wrapper, not a child of the
- * footer, and is painted behind everything at y=6593 — hence the absolute
- * placement below rather than inside <Footer />.
+ * The footer scrolls with the page like every other section. Its backdrop
+ * ("image 163", 5854:49627) is a sibling of the section wrapper rather than a
+ * child of the footer, painted behind everything at y=6593, so it and the
+ * gradient panel above it are placed here instead of inside <Footer />. Both
+ * bleed to the window edge, which is why the overlay is measured from the
+ * page rather than confined to the 1905-wide frame.
  */
 export default function Home() {
   return (
-    <main className="relative mx-auto w-[1904px]">
+    <main
+      className="relative mx-auto h-[7305px] w-[1904px]"
+      style={canvasSurface}
+    >
+      {/* 5854:49627 — page-level backdrop, behind the section stack */}
+      <Image
+        src="/images/footer/footer-bg.png"
+        alt=""
+        width={3808}
+        height={1424}
+        className="absolute left-1/2 top-[6593px] h-[712px] w-screen min-w-[1904px] max-w-none -translate-x-1/2 object-cover"
+      />
+
+      {/*
+        5854:51581 — the gradient that fades the backdrop in behind the footer
+        copy. Figma nests it in the footer frame, but the backdrop it covers is
+        the page-level image above, which bleeds to the window edge. Kept
+        inside the 1905-wide frame it left the image bare down both sides and
+        across the bottom 15px, so it is bled to match. Geometry is Figma's: it
+        starts at the footer's own top (6578) and runs its full 794px.
+      */}
       <div
-        className="relative z-10 flex flex-col items-start gap-[120px] pb-[120px]"
-        style={canvasSurface}
-      >
+        aria-hidden
+        className="absolute left-1/2 top-[6578px] h-[794px] w-screen min-w-[1904px] -translate-x-1/2"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",
+        }}
+      />
+
+      <div className="relative flex flex-col items-start gap-[120px]">
         <Hero />
         <div className="ml-[49px]">
           <Bio />
@@ -46,37 +75,7 @@ export default function Home() {
         <div className="ml-[399px]">
           <Testimonials />
         </div>
-      </div>
-      {/* Uncovers the fixed footer at the end of the scroll. */}
-      <div className="h-[712px]" aria-hidden />
-
-      {/*
-        The footer is pinned to the bottom of the viewport and the rest of the
-        page scrolls over it, so it is revealed rather than scrolled through.
-        Its backdrop ("image 163", 5854:49627) and the gradient panel
-        (5854:51581) travel with it — all three are one fixed layer at z-0,
-        behind the scrolling stack, which carries its own canvas background.
-        The 712px spacer at the end of the stack is what uncovers it.
-      */}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-0 h-[712px]">
-        <Image
-          src="/images/footer/footer-bg.png"
-          alt=""
-          width={3808}
-          height={1424}
-          className="absolute left-1/2 top-0 h-[712px] w-screen min-w-[1904px] max-w-none -translate-x-1/2 object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute left-1/2 top-[-15px] h-[794px] w-screen min-w-[1904px] -translate-x-1/2"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",
-          }}
-        />
-        <div className="pointer-events-auto absolute left-1/2 top-0 -translate-x-1/2">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </main>
   );
