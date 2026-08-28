@@ -1,13 +1,17 @@
 "use client";
 
-
 /**
  * "~ Before / After" toggle — Figma 5908:24503, 155x40 at (462,2618).
  *
- * The frame is 155 wide and clips, so only option1 ("~ Before") and option2
- * ("After") are visible; options 3-5 sit past the clip and are hidden. Option1
- * is the selected state — Satoshi Medium 14 #18181b on a white pill — and
- * option2 is #92979d.
+ * The node tree and the render disagree here, and the render wins. The tree has
+ * a #18181b separator at x89 and a #fafafa fill on option2, but neither appears
+ * in Figma's own output: the separator sits under the selected pill, and the
+ * option2 fill reads as the track colour. So this draws what actually renders —
+ * a #f4f4f5 pill track carrying a white pill on the selected tab.
+ *
+ * Geometry is the frame's own: the pill is 87x32 inset 4px, and the second tab
+ * is 55 wide at x92. The track is 155 wide and clips, so options 3-5 in the
+ * source component sit past the clip and are not represented here.
  *
  * Every mockup on this page is the "before" state; the file has no "after"
  * artwork behind the second tab. Rather than wire a control to nothing, the
@@ -16,6 +20,8 @@
  */
 
 export type BeforeAfter = "before" | "after";
+
+const PILL = "bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]";
 
 export function BeforeAfterTabs({
   value,
@@ -28,33 +34,36 @@ export function BeforeAfterTabs({
   hasAfter?: boolean;
 }) {
   const base =
-    "flex h-[32px] items-center justify-center rounded-[8px] px-[10px] text-[14px] leading-[20px] font-medium transition-colors";
+    "absolute top-[4px] flex h-[32px] items-center justify-center text-[14px] leading-[20px] font-medium transition-colors";
   return (
     <div
       role="tablist"
       aria-label="Before and after"
-      className="absolute left-[462px] top-[2618px] flex h-[40px] w-[155px] items-center gap-[3px] rounded-[10px] border border-[#e4e4e7] bg-white p-[4px]"
+      className="absolute left-[462px] top-[2618px] h-[40px] w-[155px] rounded-full bg-[#f4f4f5]"
     >
       <button
         type="button"
         role="tab"
         aria-selected={value === "before"}
         onClick={() => onChange("before")}
-        className={`${base} ${value === "before" ? "bg-[#f4f4f5] text-[#18181b]" : "text-[#92979d] hover:text-[#18181b]"}`}
+        className={`${base} left-[4px] w-[87px] rounded-full ${
+          value === "before"
+            ? `${PILL} text-[#18181b]`
+            : "text-[#92979d] hover:text-[#18181b]"
+        }`}
       >
         ~ Before
       </button>
-      <span aria-hidden className="h-[20px] w-px bg-[#e4e4e7]" />
       <button
         type="button"
         role="tab"
         aria-selected={value === "after"}
+        aria-disabled={!hasAfter}
         onClick={() => hasAfter && onChange("after")}
-        disabled={!hasAfter}
         title={hasAfter ? undefined : "After states are not in the design file yet"}
-        className={`${base} ${
-          value === "after" ? "bg-[#f4f4f5] text-[#18181b]" : "text-[#92979d]"
-        } ${hasAfter ? "hover:text-[#18181b]" : "cursor-not-allowed opacity-60"}`}
+        className={`${base} left-[92px] w-[55px] rounded-full ${
+          value === "after" ? `${PILL} text-[#18181b]` : "text-[#92979d]"
+        } ${hasAfter ? "hover:text-[#18181b]" : "cursor-not-allowed"}`}
       >
         After
       </button>
