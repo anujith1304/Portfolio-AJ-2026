@@ -12,7 +12,7 @@ import {
   NumberedCard,
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
-import { BeforeAfterTabs } from "@/components/case-study/BeforeAfterTabs";
+import { StateTabs, STATE_TABS_TRACK } from "@/components/case-study/StateTabs";
 import { FloatingStateTabs } from "@/components/case-study/FloatingStateTabs";
 import { canvasSurface } from "@/lib/canvas";
 import {
@@ -185,7 +185,20 @@ export function CaseBody() {
         handoff and maintain consistency between design and implementation.
       </Body>
 
-      <BeforeAfterTabs onChange={setVariant} tabs={s.tabs} />
+      {/*
+        The inline strip — Figma puts it at (462,2618). It renders the same
+        component as the floating bar below, so the two are identical: a reader
+        who learns the control at the top recognises it when it reappears
+        pinned to the viewport. That makes it wider than Figma's 155x40 box,
+        which is the trade for labels that still make sense out of context.
+      */}
+      <div
+        role="tablist"
+        aria-label="Before and after"
+        className={`${STATE_TABS_TRACK} absolute left-[462px] top-[2618px]`}
+      >
+        <StateTabs value={variant} onChange={setVariant} />
+      </div>
 
       {/*
         The inline strip is the only switch in the file, and it sits above the

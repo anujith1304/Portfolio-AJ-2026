@@ -8,7 +8,9 @@
  *
  * They are prototype-linked: the Before frame's second tab navigates to the
  * After frame and vice versa, so the toggle at (462,2618) swaps the whole page
- * rather than one image. Everything above that toggle is identical in both
+ * rather than one image. That toggle's per-state geometry is not modelled here:
+ * both placements of it render one shared component (see StateTabs), which is
+ * what keeps the inline strip and the floating bar identical. Everything above that toggle is identical in both
  * frames and lives in the shell; everything below is per-state and lives here.
  *
  * The tail ("What actually changed" through the Related strip) is the same
@@ -52,16 +54,6 @@ export type Card = {
 
 export type StateContent = {
   height: number;
-  /** Tab strip geometry — the selected pill moves between the two states. */
-  tabs: {
-    leftLabel: string;
-    rightLabel: string;
-    /** Which side carries the white pill. */
-    selected: "left" | "right";
-    left: { x: number; w: number };
-    right: { x: number; w: number };
-    pill: { x: number; w: number };
-  };
   nav: { left: number; width: number; items: NavItem[] };
   heading: { top: number; text: string };
   body: { top: number; width: number; text: string };
@@ -133,10 +125,6 @@ export const TAIL_RULES = [
 /** 5908:21013 — the audited product. */
 export const BEFORE: StateContent = {
   height: 16536,
-  tabs: {
-    leftLabel: "~ Before", rightLabel: "After", selected: "left",
-    left: { x: 8, w: 79 }, right: { x: 92, w: 55 }, pill: { x: 4, w: 87 },
-  },
   nav: {
     left: 240, width: 129,
     items: [
@@ -259,10 +247,6 @@ export const BEFORE: StateContent = {
  */
 export const AFTER: StateContent = {
   height: 16623,
-  tabs: {
-    leftLabel: "Before", rightLabel: "~ After", selected: "right",
-    left: { x: 11, w: 66 }, right: { x: 79, w: 68 }, pill: { x: 75, w: 76 },
-  },
   /*
    * The frame's own list reads Components / Spacing / Drop Shadow, which are
    * leftovers from the design-system case study — this frame has no such
