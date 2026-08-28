@@ -204,6 +204,8 @@ export function NumberedCard({
   impactLabel,
   impact,
   bodyColor = "#494949",
+  left = 521,
+  width = 1046,
 }: {
   top: number;
   eyebrow: string;
@@ -213,9 +215,11 @@ export function NumberedCard({
   impactLabel?: string;
   impact?: string;
   bodyColor?: string;
+  left?: number;
+  width?: number;
 }) {
   return (
-    <div className="absolute left-[521px] w-[1046px]" style={{ top }}>
+    <div className="absolute" style={{ top, left, width }}>
       <p
         className="text-[14px] leading-[24.8px] font-medium"
         style={{ color: eyebrowColor }}

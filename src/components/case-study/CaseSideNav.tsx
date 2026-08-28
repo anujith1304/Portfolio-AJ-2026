@@ -36,11 +36,14 @@ export function CaseSideNav({
   cardFrom,
   /** y of the Related strip — the list is gone before this scrolls in. */
   endAt,
+  /** x of the list text inside the frame; 241 on every case study so far. */
+  sideNavLeft = 241,
 }: {
   items: SideNavItem[];
   startAt: number;
   cardFrom?: number;
   endAt: number;
+  sideNavLeft?: number;
 }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
   const [visible, setVisible] = useState(false);
@@ -89,20 +92,24 @@ export function CaseSideNav({
   return (
     <nav
       aria-label="Sections"
-      className="fixed top-[140px] z-20 hidden w-[200px] flex-col gap-[12px] p-[24.79px] transition-opacity duration-300 xl:flex"
+      className="fixed top-[140px] z-20 hidden flex-col gap-[12px] p-[24.79px] transition-opacity duration-300 xl:flex"
       style={{
         /*
          * The two designs differ only by a surface — container, stroke, shadow.
          * So the element itself never changes: it always carries the card's
-         * 24.79px padding and 200px width, and the surface below fades in and
-         * out underneath. Nothing reflows, so the labels do not shift by the
-         * padding when the design swaps, and the change is a pure crossfade.
+         * 24.79px padding, and the surface below fades in and out underneath.
+         * Nothing reflows, so the labels do not shift by the padding when the
+         * design swaps, and the change is a pure crossfade.
          *
          * Padding is constant, so the box sits 24.79px left of where the text
-         * should land. Text at 241px into the centred 1905 frame means a box
-         * at 216.21px: 50% - 952.5px + 216.21px.
+         * should land, inside a centred 1905 frame whose left edge is
+         * 50% - 952.5px. `sideNavLeft` is where the text belongs: 241 on the
+         * first two case studies, 240 on Translate.video.
          */
-        left: "calc(50% - 736.29px)",
+        // 200px is the card's own width in Figma (5891:6173), which is wider
+        // than list + padding — the card carries slack the list does not.
+        width: 200,
+        left: `calc(50% - ${952.5 - sideNavLeft + 24.79}px)`,
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
       }}

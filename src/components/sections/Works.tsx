@@ -18,6 +18,10 @@ import Link from "next/link";
  * swaps "Property 1=01 50%" for "Property 1=01". Verified against the
  * component set: those variants differ ONLY by root opacity (0.9 vs 1.0), so
  * the hover here is that opacity change and nothing else.
+ *
+ * Card 03 links to the Translate.video case study — the home frame wires it up
+ * (5908:32696 -> 5908:21013) — but it is a plain frame with no hover variant,
+ * so it links without dimming. Card 04 still has no page.
  */
 
 type Work = {
@@ -59,6 +63,7 @@ const WORKS: Work[] = [
     index: "Case Study 03",
     title: "Translate.video V2 (Product)",
     image: "work-03-translatevideo.png",
+    href: "/work/translate-video",
     dims: false,
     left: 0,
     top: 626,
