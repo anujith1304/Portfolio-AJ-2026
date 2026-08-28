@@ -220,13 +220,16 @@ export default function TranslateVideoCaseStudy() {
       <CaseNav />
       <BackLink />
 
-      {/* 5908:21026 — product mark, 294x94 at (192,269) */}
+      {/*
+        5908:21026 — product mark. The node box is 294x94 at (192,269) but the
+        frame does not clip, so the mark's real extent is its render bounds.
+      */}
       <Image
         src="/images/case/tv/logo.webp"
         alt="Translate.video"
-        width={306}
-        height={106}
-        className="absolute left-[186px] top-[263px] h-[106px] w-[306px] max-w-none"
+        width={333}
+        height={133}
+        className="absolute left-[172px] top-[253px] h-[133px] w-[333px] max-w-none"
       />
 
       {/* 5908:21018 — title + intro */}
@@ -424,13 +427,17 @@ export default function TranslateVideoCaseStudy() {
         </div>
       ))}
 
-      {/* 5908:24573 — banner behind the white heading, 1211x122 r24 at (462,15020) */}
+      {/*
+        5908:24573 — banner behind the white heading: a 1211x122 r24 box at
+        (462,15020) with a 0,4 r4 drop shadow, so it renders 1219x130 at
+        (458,15020).
+      */}
       <Image
         src="/images/case/tv/learnings-banner.webp"
         alt=""
-        width={1230}
-        height={138}
-        className="absolute left-[455px] top-[15012px] h-[138px] w-[1230px] max-w-none"
+        width={1219}
+        height={130}
+        className="absolute left-[458px] top-[15020px] h-[130px] w-[1219px] max-w-none"
       />
       {/*
         The heading "What I learned & the principles I took forward" is a CHILD
