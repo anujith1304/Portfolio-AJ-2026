@@ -1,71 +1,70 @@
 "use client";
 
+import type { StateContent, Variant } from "@/app/work/translate-video/content";
+
 /**
- * "~ Before / After" toggle — Figma 5908:24503, 155x40 at (462,2618).
+ * "Before / After" toggle — Figma 5908:24503 (before) and 5908:29768 (after).
  *
- * The node tree and the render disagree here, and the render wins. The tree has
- * a #18181b separator at x89 and a #fafafa fill on option2, but neither appears
- * in Figma's own output: the separator sits under the selected pill, and the
- * option2 fill reads as the track colour. So this draws what actually renders —
- * a #f4f4f5 pill track carrying a white pill on the selected tab.
+ * In the file this is a prototype link: clicking the inactive tab navigates to
+ * the sibling frame that holds the other state of the whole case study. Here it
+ * flips one piece of state and the page re-renders, which is the same idea
+ * without a page load.
  *
- * Geometry is the frame's own: the pill is 87x32 inset 4px, and the second tab
- * is 55 wide at x92. The track is 155 wide and clips, so options 3-5 in the
- * source component sit past the clip and are not represented here.
+ * The node tree and the render disagree on the chrome, and the render wins: the
+ * tree carries a #18181b separator and a #fafafa fill on the inactive option,
+ * but the separator sits under the selected pill and that fill reads as the
+ * track colour. So this draws a #f4f4f5 pill track with a white pill on the
+ * selected tab, and takes the pill's box from whichever state is showing —
+ * Figma moves and resizes it between the two frames.
  *
- * Every mockup on this page is the "before" state; the file has no "after"
- * artwork behind the second tab. Rather than wire a control to nothing, the
- * toggle reports which state is shown and stays honest about the missing half,
- * so the page can be completed later without changing this component.
+ * The tilde marks the active tab, which is why the labels change with state.
  */
 
-export type BeforeAfter = "before" | "after";
-
-const PILL = "bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]";
-
 export function BeforeAfterTabs({
-  value,
   onChange,
-  hasAfter = false,
+  tabs,
 }: {
-  value: BeforeAfter;
-  onChange: (v: BeforeAfter) => void;
-  /** Flip on once "after" artwork exists in the file. */
-  hasAfter?: boolean;
+  onChange: (v: Variant) => void;
+  /** Geometry and labels for the state currently showing. */
+  tabs: StateContent["tabs"];
 }) {
   const base =
-    "absolute top-[4px] flex h-[32px] items-center justify-center text-[14px] leading-[20px] font-medium transition-colors";
+    "absolute top-[4px] flex h-[32px] items-center justify-center text-[14px] leading-[20px] font-medium";
+  const sel = "text-[#18181b]";
+  const idle = "text-[#92979d] transition-colors hover:text-[#18181b]";
+  const leftSelected = tabs.selected === "left";
+
   return (
     <div
       role="tablist"
       aria-label="Before and after"
       className="absolute left-[462px] top-[2618px] h-[40px] w-[155px] rounded-full bg-[#f4f4f5]"
     >
+      {/* The white pill is one element so it slides between the two tabs. */}
+      <span
+        aria-hidden
+        className="absolute top-[4px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out"
+        style={{ left: tabs.pill.x, width: tabs.pill.w }}
+      />
       <button
         type="button"
         role="tab"
-        aria-selected={value === "before"}
+        aria-selected={leftSelected}
         onClick={() => onChange("before")}
-        className={`${base} left-[4px] w-[87px] rounded-full ${
-          value === "before"
-            ? `${PILL} text-[#18181b]`
-            : "text-[#92979d] hover:text-[#18181b]"
-        }`}
+        className={`${base} ${leftSelected ? sel : idle}`}
+        style={{ left: tabs.left.x, width: tabs.left.w }}
       >
-        ~ Before
+        {tabs.leftLabel}
       </button>
       <button
         type="button"
         role="tab"
-        aria-selected={value === "after"}
-        aria-disabled={!hasAfter}
-        onClick={() => hasAfter && onChange("after")}
-        title={hasAfter ? undefined : "After states are not in the design file yet"}
-        className={`${base} left-[92px] w-[55px] rounded-full ${
-          value === "after" ? `${PILL} text-[#18181b]` : "text-[#92979d]"
-        } ${hasAfter ? "hover:text-[#18181b]" : "cursor-not-allowed"}`}
+        aria-selected={!leftSelected}
+        onClick={() => onChange("after")}
+        className={`${base} ${leftSelected ? idle : sel}`}
+        style={{ left: tabs.right.x, width: tabs.right.w }}
       >
-        After
+        {tabs.rightLabel}
       </button>
     </div>
   );

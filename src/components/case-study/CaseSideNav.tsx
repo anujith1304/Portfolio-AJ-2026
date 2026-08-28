@@ -26,7 +26,12 @@ import { useEffect, useState } from "react";
  * is a 25px line box plus the 12px gap, and the current row set in Bold 18/28.
  */
 
-export type SideNavItem = { label: string; id: string; top: number };
+/**
+ * `id`/`top` are optional because a frame can carry a label with no matching
+ * section — the Translate.video "After" state lists Components, Spacing and
+ * Drop Shadow but has none of them. Those render as plain labels.
+ */
+export type SideNavItem = { label: string; id?: string; top?: number };
 
 export function CaseSideNav({
   items,
@@ -45,7 +50,7 @@ export function CaseSideNav({
   endAt: number;
   sideNavLeft?: number;
 }) {
-  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+  const [activeId, setActiveId] = useState(items.find((i) => i.id)?.id ?? "");
   const [visible, setVisible] = useState(false);
   const [carded, setCarded] = useState(false);
 
@@ -65,9 +70,10 @@ export function CaseSideNav({
       // The line sits just below where a clicked section lands (top - 120), so
       // consecutive sections only ~330px apart still resolve to the right one.
       const line = y + 160;
-      let current = items[0];
-      for (const it of items) if (it.top <= line) current = it;
-      setActiveId(current.id);
+      const targets = items.filter((it) => it.top !== undefined);
+      let current = targets[0];
+      for (const it of targets) if ((it.top as number) <= line) current = it;
+      if (current?.id) setActiveId(current.id);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -80,6 +86,7 @@ export function CaseSideNav({
 
   const go = (e: React.MouseEvent, item: SideNavItem) => {
     e.preventDefault();
+    if (item.top === undefined) return;
     window.scrollTo({
       top: item.top - 120,
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -122,18 +129,24 @@ export function CaseSideNav({
       />
 
       {items.map((it) => {
-        const active = it.id === activeId;
+        const active = it.id !== undefined && it.id === activeId;
+        const cls = active
+          ? "relative text-left text-[18px] leading-[28px] font-bold whitespace-nowrap text-[#222227]"
+          : "relative text-left text-[16px] leading-[25px] font-medium whitespace-nowrap text-[#6b6b6b]";
+        if (it.id === undefined || it.top === undefined) {
+          return (
+            <span key={it.label} className={cls}>
+              {it.label}
+            </span>
+          );
+        }
         return (
           <a
-            key={it.id}
+            key={it.label}
             href={`#${it.id}`}
             onClick={(e) => go(e, it)}
             aria-current={active ? "true" : undefined}
-            className={
-              active
-                ? "relative text-left text-[18px] leading-[28px] font-bold whitespace-nowrap text-[#222227]"
-                : "relative text-left text-[16px] leading-[25px] font-medium whitespace-nowrap text-[#6b6b6b] transition-colors hover:text-[#222227]"
-            }
+            className={`${cls} transition-colors hover:text-[#222227]`}
           >
             {it.label}
           </a>
