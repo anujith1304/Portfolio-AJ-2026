@@ -263,16 +263,21 @@ export const AFTER: StateContent = {
     leftLabel: "Before", rightLabel: "~ After", selected: "right",
     left: { x: 11, w: 66 }, right: { x: 79, w: 68 }, pill: { x: 75, w: 76 },
   },
+  /*
+   * The frame's own list reads Components / Spacing / Drop Shadow, which are
+   * leftovers from the design-system case study — this frame has no such
+   * sections. The index carries the same six entries as the Before state, with
+   * Solution in the active slot, and the tail entries shifted by tailOffset.
+   */
   nav: {
     left: 241, width: 124,
     items: [
       { label: "Introduction", id: "introduction", top: 2004 },
       { label: "My Role", id: "my-role", top: 2303 },
       { label: "Solution", id: "solution", top: 2706 },
-      // The frame carries these three labels but has no matching sections.
-      { label: "Components" },
-      { label: "Spacing" },
-      { label: "Drop Shadow" },
+      { label: "What I learned", id: "what-i-learned", top: 15107 },
+      { label: "What it changed", id: "what-it-changed", top: 14015 },
+      { label: "What worked", id: "what-worked", top: 14554 },
     ],
   },
   heading: { top: 2706, text: "Solution" },

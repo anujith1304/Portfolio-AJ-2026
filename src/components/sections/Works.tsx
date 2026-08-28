@@ -21,7 +21,13 @@ import Link from "next/link";
  *
  * Card 03 links to the Translate.video case study — the home frame wires it up
  * (5908:32696 -> 5908:21013) — but it is a plain frame with no hover variant,
- * so it links without dimming. Card 04 still has no page.
+ * so it links without dimming. Its preview is the redesigned dashboard, taken
+ * from the card's own Container (5908:32701) rather than the case study, which
+ * renders a slightly different sidebar.
+ *
+ * Card 04 is "Vitra Universe (Product)": Figma fills its preview with a padlock
+ * placeholder (5908:33741) and gives it no click target, so it reads as locked
+ * and stays inert here too.
  */
 
 type Work = {
@@ -70,8 +76,8 @@ const WORKS: Work[] = [
   },
   {
     index: "Case Study 04",
-    title: "Translate.photo V2 (Product)",
-    image: "work-04-translatephoto.png",
+    title: "Vitra Universe (Product)",
+    image: "work-04-vitra-universe.png",
     dims: false,
     left: 916,
     top: 626,
