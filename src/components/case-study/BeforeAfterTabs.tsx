@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 
 /**
  * "~ Before / After" toggle — Figma 5908:24503, 155x40 at (462,2618).

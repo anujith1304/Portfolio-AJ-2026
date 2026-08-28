@@ -44,13 +44,13 @@ const SIDE_NAV = [
 
 /** Sliced bands: mockup + section label + its callouts. */
 const BANDS = [
-  { src: "hero.webp",      alt: "Translate.video dashboard",      left: 183, top: 675,   w: 1722, h: 848 },
-  { src: "dashboard.webp", alt: "Dashboard, before",              left: 455, top: 2940,  w: 1450, h: 680 },
-  { src: "upload.webp",    alt: "Upload modal, before",           left: 455, top: 4855,  w: 1450, h: 608 },
-  { src: "editor.webp",    alt: "Editor page, before",            left: 455, top: 6672,  w: 1450, h: 676 },
-  { src: "tts.webp",       alt: "Text to speech, before",         left: 455, top: 8556,  w: 1450, h: 624 },
-  { src: "timeline.webp",  alt: "Timeline editor, before",        left: 455, top: 10090, w: 1450, h: 688 },
-  { src: "export.webp",    alt: "Export modal, before",           left: 455, top: 11564, w: 1450, h: 1314 },
+  { src: "hero.webp",      alt: "Translate.video dashboard",      left: 188, top: 681,  w: 1529, h: 848 },
+  { src: "dashboard.webp", alt: "Dashboard, before",              left: 455, top: 3010, w: 1450, h: 610 },
+  { src: "upload.webp",    alt: "Upload modal, before",           left: 455, top: 4925, w: 1450, h: 538 },
+  { src: "editor.webp",    alt: "Editor page, before",            left: 455, top: 6742, w: 1450, h: 606 },
+  { src: "tts.webp",       alt: "Text to speech, before",         left: 455, top: 8626, w: 1450, h: 554 },
+  { src: "timeline.webp",  alt: "Timeline editor, before",        left: 455, top: 10160, w: 1450, h: 618 },
+  { src: "export.webp",    alt: "Export modal, before",           left: 455, top: 11634, w: 1450, h: 1244 },
 ];
 
 type Card = { top: number; eyebrow: string; title: string; body: string; impact: string };
@@ -130,14 +130,18 @@ const PROBLEMS: Card[] = [
     impact: "Users faced uncertainty and were more likely to make mistakes." },
 ];
 
-/** Section labels above each mockup — Recoleta/Satoshi 32 at #b2b2b2. */
+/**
+ * Section labels above each mockup. Every one is a MIXED-font node at 32/#b2b2b2:
+ * the name in Recoleta SemiBold, "(" and "efore)" in Recoleta Regular, and the
+ * "~B" in Satoshi Regular — a quirk of the source file, reproduced as-is.
+ */
 const SCREEN_LABELS = [
-  { top: 2950, text: "Dashboard (~Before)" },
-  { top: 4865, text: "Upload Modal (~Before)" },
-  { top: 6682, text: "Editor page (~Before)", left: 466 },
-  { top: 8566, text: "Text to speech (~Before)" },
-  { top: 10100, text: "Timeline editor (~Before)" },
-  { top: 11574, text: "Export Modal (~Before)" },
+  { top: 2950, name: "Dashboard" },
+  { top: 4865, name: "Upload Modal" },
+  { top: 6682, name: "Editor page", left: 466 },
+  { top: 8566, name: "Text to speech" },
+  { top: 10100, name: "Timeline editor" },
+  { top: 11574, name: "Export Modal" },
 ];
 
 const CHANGED = [
@@ -150,11 +154,11 @@ const CHANGED = [
 ];
 
 const WORKED = [
-  { top: 14588, label: "The Problem", labelLeft: 462, textLeft: 630,
+  { top: 14588, label: "The Problem", labelLeft: 462, labelLh: 24, textLeft: 630, textWidth: 1035, textLh: 28,
     text: "The old editor brought transcript, translation, video, audio controls, and the timeline into one workspace, but the relationships between them were unclear. With weak hierarchy and actions separated from the content they affected, users had to scan across the interface and move between different areas to understand what to edit, what action to take, and how those changes would affect the final video." },
-  { top: 14725, label: "What worked", labelLeft: 462, textLeft: 626,
+  { top: 14725, label: "What worked", labelLeft: 462, labelLh: 20, textLeft: 626, textWidth: 1043, textLh: 24,
     text: "We restructured the experience around a clearer content → action → media → timeline relationship. Editing content now has stronger visual priority, relevant actions such as speaker selection, generation, and lip sync sit directly alongside the content they affect, and the timeline is integrated through clearly defined Video, Dialogue, and Audio tracks." },
-  { top: 14848, label: "Impact", labelLeft: 462, textLeft: 626,
+  { top: 14848, label: "Impact", labelLeft: 462, labelLh: 20, textLeft: 626, textWidth: 1043, textLh: 24,
     text: "The new structure reduces cognitive load and unnecessary navigation, helping users understand the editing workflow faster and see the connection between their changes and the final output. The experience feels more focused and predictable without removing the complexity required for professional video localization." },
 ];
 
@@ -170,6 +174,42 @@ const LEARNINGS = [
   { top: 15722, title: "The best redesigns remove cognitive work, not functionality.",
     body: "The goal wasn’t to make Translate.video less powerful. It was to make the existing power easier to understand, navigate and use." },
 ];
+
+/**
+ * One column of the before/after table (5908:24532-24543). Figma marks every
+ * row as an UNORDERED list item at indent 1, which puts the marker 12.5px into
+ * the 28px text box and starts the copy at 27.6px. Browsers derive marker
+ * metrics from the font, so the dot is drawn explicitly to land where Figma
+ * puts it. Rows are 48px apart: a 28px box plus a 20px gap.
+ */
+function ChangeList({
+  left,
+  width,
+  color,
+  items,
+}: {
+  left: number;
+  width: number;
+  color: string;
+  items: string[];
+}) {
+  return (
+    <ul
+      className="absolute top-[14094px] list-none text-[18px] leading-[28px]"
+      style={{ left, width, color }}
+    >
+      {items.map((t) => (
+        <li key={t} className="relative mb-[20px] pl-[27.6px] last:mb-0">
+          <span
+            aria-hidden
+            className="absolute left-[10.3px] top-[13.95px] h-[4.3px] w-[4.3px] rounded-full bg-current"
+          />
+          {t}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function TranslateVideoCaseStudy() {
   return (
@@ -190,7 +230,7 @@ export default function TranslateVideoCaseStudy() {
       />
 
       {/* 5908:21018 — title + intro */}
-      <h1 className="absolute left-[192px] top-[415px] w-[1072px] font-display text-[64px] leading-[72px] font-medium text-[#060d19]">
+      <h1 className="absolute left-[192px] top-[415px] w-[1072px] font-display text-[64px] leading-[72px] font-medium tracking-[-0.01em] text-[#060d19]">
         Translate.video Product Rethink
       </h1>
       <Body top={507} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -203,6 +243,9 @@ export default function TranslateVideoCaseStudy() {
       </Body>
       <p className="absolute left-[1428px] top-[559px] text-[18px] leading-[24px] text-[#5d6067]">
         Product Designer
+      </p>
+      <p className="absolute left-[1595px] top-[559px] text-[18px] leading-[24px] text-[#5d6067]">
+        2025 — 2026
       </p>
 
       {/* Sliced visual bands */}
@@ -220,12 +263,17 @@ export default function TranslateVideoCaseStudy() {
       ))}
 
       {/* 5908:24487 — standfirst */}
-      <p className="absolute left-[462px] top-[1587px] w-[981px] text-[32px] leading-[43px] font-medium text-[#222227]">
-        Designed the end-to-end experience for Translate.video at Vitra.AI,
-        contributing across problem framing, user flows, wireframes, interaction
-        design, and final UI. The goal was to create a scalable, intuitive
-        product experience for video dubbing, translation, voice cloning, and
-        text-to-speech workflows.
+      {/*
+        5908:24489 is a MIXED-fill node: the body sits at #707581 and only the
+        two product names are lifted to #222227.
+      */}
+      <p className="absolute left-[462px] top-[1587px] w-[981px] text-[32px] leading-[43px] font-medium tracking-[-0.8px] text-[#707581]">
+        Designed the end-to-end experience for{" "}
+        <span className="text-[#222227]">Translate.video</span> at{" "}
+        <span className="text-[#222227]">Vitra.AI,</span> contributing across
+        problem framing, user flows, wireframes, interaction design, and final
+        UI. The goal was to create a scalable, intuitive product experience for
+        video dubbing, translation, voice cloning, and text-to-speech workflows.
       </p>
 
       {/* 5908:22066 — meta row, 981x101 at (462,1839) */}
@@ -240,14 +288,23 @@ export default function TranslateVideoCaseStudy() {
       />
 
       <CaseSideNav items={SIDE_NAV} startAt={2004} endAt={15894} sideNavLeft={240} />
-      {SIDE_NAV.map((i) => (
+      {/*
+        Only the sections whose heading is baked into artwork need a standalone
+        anchor. "What it changed" and "What worked" are live <h2>s that carry
+        the id themselves, and "What I learned" gets its own anchor below the
+        banner it is drawn into — emitting anchors for those too would duplicate
+        the ids.
+      */}
+      {SIDE_NAV.filter((i) =>
+        ["introduction", "my-role", "problem"].includes(i.id),
+      ).map((i) => (
         <Anchor key={i.id} id={i.id} top={i.top} />
       ))}
 
       <TranslateVideoTabs />
 
       <SectionHeading top={2004} left={462} width={1013}>Introduction</SectionHeading>
-      <Body top={2064} left={462} width={1013}>
+      <Body top={2064} left={462} width={1013} lh={32}>
         Translate.video is an AI-powered video localization product by Vitra.AI
         that helps teams translate, dub, subtitle, and adapt video content for
         global audiences. As the product expanded across multiple workflows, the
@@ -284,11 +341,14 @@ export default function TranslateVideoCaseStudy() {
 
       {SCREEN_LABELS.map((l) => (
         <h3
-          key={l.text}
-          className="absolute font-display text-[32px] leading-[36px] font-semibold text-[#b2b2b2]"
+          key={l.name}
+          className="absolute text-[32px] leading-[36px] text-[#b2b2b2]"
           style={{ left: l.left ?? 462, top: l.top, width: 1013 }}
         >
-          {l.text}
+          <span className="font-display font-semibold">{l.name} </span>
+          <span className="font-display font-normal">(</span>
+          <span className="font-sans font-normal">~B</span>
+          <span className="font-display font-normal">efore)</span>
         </h3>
       ))}
 
@@ -307,12 +367,12 @@ export default function TranslateVideoCaseStudy() {
         />
       ))}
 
-      {/* 5908:24607 "Gray 101" — 1104x1 rule at (462,13863) */}
-      <div aria-hidden className="absolute left-[462px] top-[13863px] h-px w-[1104px] bg-[#e0e0e0]" />
+      {/* 5908:24607 "Gray 101" — 1104x1 rule at (462,13863), 1px #dddddd stroke */}
+      <div aria-hidden className="absolute left-[462px] top-[13863px] h-px w-[1104px] bg-[#dddddd]" />
 
       <h2
         id="what-it-changed"
-        className="absolute left-[462px] top-[13933px] font-display text-[32px] leading-[36px] font-semibold text-[#3f3f3f]"
+        className="absolute left-[462px] top-[13933px] font-display text-[32px] leading-[40px] font-semibold text-[#3f3f3f]"
       >
         What actually changed
       </h2>
@@ -322,34 +382,42 @@ export default function TranslateVideoCaseStudy() {
       <p className="absolute left-[1124px] top-[14038px] text-[24px] leading-[32px] font-medium text-[#060d19]">
         After:
       </p>
-      {CHANGED.map(([before, after], i) => {
-        const top = 14094 + i * 48;
-        return (
-          <div key={before}>
-            <p className="absolute left-[462px] w-[620px] text-[18px] leading-[24px] text-[#c50d00]" style={{ top }}>
-              {before}
-            </p>
-            <p className="absolute left-[1112px] w-[640px] text-[18px] leading-[24px] text-[#05b54b]" style={{ top }}>
-              {after}
-            </p>
-          </div>
-        );
-      })}
+      <ChangeList left={462} width={620} color="#c50d00" items={CHANGED.map((r) => r[0])} />
+      <ChangeList left={1112} width={700} color="#05b54b" items={CHANGED.map((r) => r[1])} />
+
+      {/*
+        Rules through the tail — 5908:24547 / 24550 / 24555 / 24563 / 24568.
+        All are 1px #dddddd; the "Gray 101" rectangles carry it as a stroke and
+        the "Line" frames as a fill, but they render identically.
+      */}
+      <div aria-hidden className="absolute left-[462px] top-[14013px] h-px w-[1104px] bg-[#dddddd]" />
+      <div aria-hidden className="absolute left-[1058px] top-[14047px] h-[315px] w-px bg-[#dddddd]" />
+      <div aria-hidden className="absolute left-[462px] top-[14547px] h-px w-[1194px] bg-[#dddddd]" />
+      <div aria-hidden className="absolute left-[462px] top-[14705px] h-px w-[1194px] bg-[#dddddd]" />
+      <div aria-hidden className="absolute left-[462px] top-[14828px] h-px w-[1194px] bg-[#dddddd]" />
 
       <h2
         id="what-worked"
-        className="absolute left-[462px] top-[14467px] w-[1211px] font-display text-[32px] leading-[36px] font-semibold text-[#3f3f3f]"
+        className="absolute left-[462px] top-[14467px] w-[1211px] font-display text-[32px] leading-[40px] font-semibold text-[#3f3f3f]"
       >
         Things that didn&rsquo;t work — And how I solved them
       </h2>
       {WORKED.map((w) => (
         <div key={w.label}>
-          <p className="absolute text-[20px] leading-[28px] font-medium text-[#060d19]" style={{ left: w.labelLeft, top: w.top }}>
+          <p
+            className="absolute text-[20px] font-medium text-[#060d19]"
+            style={{ left: w.labelLeft, top: w.top, lineHeight: `${w.labelLh}px` }}
+          >
             {w.label}
           </p>
           <p
-            className="absolute text-[16px] leading-[24px] text-[#777777]"
-            style={{ left: w.textLeft, top: w.top, width: 1043 }}
+            className="absolute text-[16px] text-[#777777]"
+            style={{
+              left: w.textLeft,
+              top: w.top,
+              width: w.textWidth,
+              lineHeight: `${w.textLh}px`,
+            }}
           >
             {w.text}
           </p>
@@ -364,19 +432,22 @@ export default function TranslateVideoCaseStudy() {
         height={138}
         className="absolute left-[455px] top-[15012px] h-[138px] w-[1230px] max-w-none"
       />
-      <h2
-        id="what-i-learned"
-        className="absolute left-[494px] top-[15052px] font-display text-[32px] leading-[36px] font-semibold text-white"
-      >
-        What I learned &amp; the principles I took forward
-      </h2>
+      {/*
+        The heading "What I learned & the principles I took forward" is a CHILD
+        of the banner frame (5908:24574 inside 5908:24573), so it is already in
+        the image above. Only the scroll anchor is placed here.
+      */}
+      <Anchor id="what-i-learned" top={15052} />
 
       {LEARNINGS.map((l) => (
         <div key={l.title}>
-          <p className="absolute left-[462px] w-[1100px] text-[23px] leading-[32px] font-bold text-[#222227]" style={{ top: l.top }}>
+          <p
+            className="absolute left-[462px] w-[1211px] text-[23px] leading-[35.84px] font-bold text-[#222227]"
+            style={{ top: l.top }}
+          >
             {l.title}
           </p>
-          <p className="absolute left-[462px] w-[1100px] text-[16px] leading-[24px] text-[#777777]" style={{ top: l.top + 48 }}>
+          <p className="absolute left-[462px] w-[1211px] text-[16px] leading-[24px] text-[#777777]" style={{ top: l.top + 48 }}>
             {l.body}
           </p>
         </div>
