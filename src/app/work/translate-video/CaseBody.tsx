@@ -13,6 +13,7 @@ import {
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
 import { BeforeAfterTabs } from "@/components/case-study/BeforeAfterTabs";
+import { FloatingStateTabs } from "@/components/case-study/FloatingStateTabs";
 import { canvasSurface } from "@/lib/canvas";
 import {
   STATES,
@@ -185,6 +186,21 @@ export function CaseBody() {
       </Body>
 
       <BeforeAfterTabs onChange={setVariant} tabs={s.tabs} />
+
+      {/*
+        The inline strip is the only switch in the file, and it sits above the
+        first screen. This pins the same control to the viewport for the length
+        of the problem/solution list so a reader deep in the page can compare a
+        problem with its solution without scrolling back to y2618. It takes over
+        where the inline strip scrolls away (its box ends at 2658) and stands
+        down as "What actually changed" arrives, since the tail is shared.
+      */}
+      <FloatingStateTabs
+        value={variant}
+        onChange={setVariant}
+        showFrom={2658}
+        hideAt={13933 + t}
+      />
 
       {/* ---- per-state ------------------------------------------------- */}
 
