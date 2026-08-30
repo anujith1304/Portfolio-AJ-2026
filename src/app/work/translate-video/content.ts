@@ -20,6 +20,13 @@
 
 export type Variant = "before" | "after";
 
+/**
+ * Entries must stay in ascending `top` order: the active-item lookup takes the
+ * last entry above the reading line, so an out-of-order list highlights the
+ * wrong one. Both frames list the tail sections as learned / changed / worked,
+ * which is neither the page order nor ascending, so the index follows the page:
+ * changed, worked, learned.
+ */
 export type NavItem = {
   label: string;
   /** Scroll target. Omitted for labels the frame carries without a section. */
@@ -131,9 +138,9 @@ export const BEFORE: StateContent = {
       { label: "Introduction", id: "introduction", top: 2004 },
       { label: "My Role", id: "my-role", top: 2303 },
       { label: "Problem", id: "problem", top: 2706 },
-      { label: "What I learned", id: "what-i-learned", top: 15020 },
-      { label: "What it changed", id: "what-it-changed", top: 13928 },
+      { label: "What it changed", id: "what-it-changed", top: 13933 },
       { label: "What worked", id: "what-worked", top: 14467 },
+      { label: "What I learned", id: "what-i-learned", top: 15020 },
     ],
   },
   heading: { top: 2706, text: "Problem" },
@@ -259,9 +266,9 @@ export const AFTER: StateContent = {
       { label: "Introduction", id: "introduction", top: 2004 },
       { label: "My Role", id: "my-role", top: 2303 },
       { label: "Solution", id: "solution", top: 2706 },
-      { label: "What I learned", id: "what-i-learned", top: 15107 },
       { label: "What it changed", id: "what-it-changed", top: 14015 },
       { label: "What worked", id: "what-worked", top: 14554 },
+      { label: "What I learned", id: "what-i-learned", top: 15107 },
     ],
   },
   heading: { top: 2706, text: "Solution" },
@@ -277,7 +284,7 @@ export const AFTER: StateContent = {
     { top: 6779,  name: " Editor Page ",    width: 1046 },
     { top: 8638,  name: "Text to speech ",  width: 1046 },
     { top: 10190, name: "Timeline editor ", width: 1046 },
-    { top: 11694, name: "Timeline editor ", width: 1046 },
+    { top: 11694, name: "Export ",          width: 1046 },
   ],
   bands: [
     { src: "after/a-dashboard.webp", alt: "Dashboard, after",       left: 458, top: 3060,  w: 1054, h: 598 },

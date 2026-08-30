@@ -96,6 +96,16 @@ export function CaseSideNav({
     history.replaceState(null, "", `#${item.id}`);
   };
 
+  /*
+   * The same element carries both states of a case study, so `activeId` can
+   * briefly name a section from the state that just went away — the scroll
+   * effect corrects it, but only after paint. Falling back to the first entry
+   * keeps exactly one item marked on the frame in between.
+   */
+  const currentId = items.some((i) => i.id === activeId)
+    ? activeId
+    : items.find((i) => i.id)?.id;
+
   return (
     <nav
       aria-label="Sections"
@@ -129,7 +139,7 @@ export function CaseSideNav({
       />
 
       {items.map((it) => {
-        const active = it.id !== undefined && it.id === activeId;
+        const active = it.id !== undefined && it.id === currentId;
         const cls = active
           ? "relative text-left text-[18px] leading-[28px] font-bold whitespace-nowrap text-[#222227]"
           : "relative text-left text-[16px] leading-[25px] font-medium whitespace-nowrap text-[#6b6b6b]";

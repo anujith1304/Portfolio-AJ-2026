@@ -148,8 +148,14 @@ export function CaseBody() {
         ]}
       />
 
+      {/*
+        No `key` here. Keying this on `variant` remounted the index on every
+        switch, which reset its visible/active state and replayed the fade-in —
+        the sidebar appeared to reload each time the tab was flipped. Its effect
+        already re-runs when `items` or `endAt` change, so the same element can
+        carry both states.
+      */}
       <CaseSideNav
-        key={variant}
         items={s.nav.items}
         startAt={2004}
         endAt={relatedTop}
