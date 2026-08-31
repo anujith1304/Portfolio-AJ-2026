@@ -126,7 +126,12 @@ const EXPERIENCE = [
   },
 ];
 
-const JAMS = [1014, 1109, 1202, 1296, 1390];
+/*
+ * Album rows, relative to the Jams card — which sits at bento (13,942) and is
+ * itself absolutely positioned, so its contents resolve against it, not the
+ * bento. The file's own bento values are given alongside.
+ */
+const JAMS = [72, 167, 260, 354, 448]; // bento 1014 / 1109 / 1202 / 1296 / 1390
 
 export function About() {
   return (
