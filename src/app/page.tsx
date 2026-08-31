@@ -35,13 +35,28 @@ export default function Home() {
       className="relative mx-auto w-full overflow-x-clip xl:h-[7305px] xl:w-[1904px] xl:overflow-x-visible"
       style={canvasSurface}
     >
-      {/* 5854:49627 — page-level backdrop, behind the section stack */}
+      {/*
+        5854:49627 — page-level backdrop, behind the section stack.
+
+        Masked to fade in over its own top edge. The gradient panel below is
+        only ~89% opaque where the image starts (the image begins 82px into a
+        794px gradient whose first stop is solid), so the artwork appeared at
+        11% strength in a single step against the fully-cream row above it —
+        a hard line across the page. Fading the image itself removes the edge
+        at source and leaves the Figma gradient on its own coordinates.
+      */}
       <Image
         src="/images/footer/footer-bg.png"
         alt=""
         width={3808}
         height={1424}
         className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[6593px] xl:min-w-[1904px]"
+        style={{
+          maskImage:
+            "linear-gradient(180deg, transparent 0px, rgba(0,0,0,0.55) 90px, #000 190px)",
+          WebkitMaskImage:
+            "linear-gradient(180deg, transparent 0px, rgba(0,0,0,0.55) 90px, #000 190px)",
+        }}
       />
 
       {/*
