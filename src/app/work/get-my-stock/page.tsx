@@ -136,7 +136,7 @@ const SOLUTIONS = [
 export default function GetMyStockCaseStudy() {
   return (
     <main
-      className="page-x relative mx-auto w-full overflow-x-clip pt-[92px] pb-[64px] xl:h-[20497px] xl:w-[1905px] xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[64px] xl:h-[20497px] xl:w-[1905px] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
       style={canvasSurface}
     >
       <CaseNav />
@@ -153,7 +153,7 @@ export default function GetMyStockCaseStudy() {
       />
 
       {/* 5854:34785 — title + intro */}
-      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[192px] xl:top-[419px] xl:w-[1072px] xl:mb-0">
+      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[192px] xl:top-[419px] xl:w-[1072px] xl:mb-0" style={{ order: 419 }}>
         Get My Stock, 0→1 B2B Mobile App
       </h1>
       <Body top={511} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -164,10 +164,10 @@ export default function GetMyStockCaseStudy() {
         system and partnered closely with engineer&rsquo;s to deliver a first
         release and a strong foundation for future iterations.
       </Body>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1427px] xl:top-[563px] xl:mb-0">
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1427px] xl:top-[563px] xl:mb-0" style={{ order: 563 }}>
         Product Designer
       </p>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[563px] xl:mb-0">
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[563px] xl:mb-0" style={{ order: 563 }}>
         2024 — 2025
       </p>
 
@@ -179,13 +179,14 @@ export default function GetMyStockCaseStudy() {
         height={1722}
         priority
         className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[647px] xl:h-[861px] xl:w-[1529px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
+        style={{ order: 647 }}
       />
 
       {/*
         5854:34739 — standfirst. A MIXED-fill text node: all Satoshi Medium 32,
         but the two key phrases are #363b45 against #707581 for the rest.
       */}
-      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#707581] xl:absolute xl:left-[521px] xl:top-[1604px] xl:w-[937px] xl:mb-0">
+      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#707581] xl:absolute xl:left-[521px] xl:top-[1604px] xl:w-[937px] xl:mb-0" style={{ order: 1604 }}>
         I was a <span className="text-[#363b45]">Founding product designer</span>{" "}
         at Get My Stock, where I led the design of a complete{" "}
         <span className="text-[#363b45]">B2B App</span> and led the end-to-end
@@ -232,6 +233,7 @@ export default function GetMyStockCaseStudy() {
           style={{
             ["--x" as string]: `${b.left}px`,
             ["--y" as string]: `${b.top}px`,
+        order: Math.round(b.top),
             ["--w" as string]: `${b.w}px`,
             ["--h" as string]: `${b.h}px`,
           }}
@@ -270,7 +272,7 @@ export default function GetMyStockCaseStudy() {
         paragraph as NONE and the four lines after it as UNORDERED. They are
         genuine bullets in the file, so they are marked up as a list.
       */}
-      <div className="mb-[16px] text-[20px] leading-[28px] font-normal text-[#222227] xl:absolute xl:left-[521px] xl:top-[2602px] xl:w-[934px] xl:mb-0">
+      <div className="mb-[16px] text-[20px] leading-[28px] font-normal text-[#222227] xl:absolute xl:left-[521px] xl:top-[2602px] xl:w-[934px] xl:mb-0" style={{ order: 2602 }}>
         <p>
           Small retailers in India still rely heavily on phone calls, WhatsApp
           messages, and in-person visits to reorder stock from their suppliers.
@@ -317,7 +319,10 @@ export default function GetMyStockCaseStudy() {
       */}
       <div
         className="mb-[16px] flex items-center rounded-[24px] px-[64px] xl:absolute xl:left-[521px] xl:top-[5421px] xl:h-[164px] xl:w-[1099px] xl:mb-0"
-        style={{ backgroundImage: "linear-gradient(180deg, #003EAF 0%, #87AFF9 100%)" }}
+        style={{
+          order: 5421,
+          backgroundImage: "linear-gradient(180deg, #003EAF 0%, #87AFF9 100%)",
+        }}
       >
         <p className="font-display text-[32px] leading-[44px] font-medium text-white">
           How might we build a better experience for consumers to{" "}
@@ -327,7 +332,7 @@ export default function GetMyStockCaseStudy() {
       </div>
 
       {/* 5854:34765 — "Defining the problem" grid */}
-      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[521px] xl:top-[5689px] xl:w-[381px] xl:mb-0">
+      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[521px] xl:top-[5689px] xl:w-[381px] xl:mb-0" style={{ order: 5689 }}>
         Defining the problem
       </h2>
       <Body top={5765} left={521} width={383} size={16} lh={22} color="#494949">
@@ -347,7 +352,7 @@ export default function GetMyStockCaseStudy() {
         />
       ))}
 
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5689px] xl:w-[117px] xl:mb-0">
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5689px] xl:w-[117px] xl:mb-0" style={{ order: 5689 }}>
         Business Goals
       </p>
       <Body top={5689} left={1124} width={498} size={16} lh={28} color="#060d19">
@@ -355,7 +360,7 @@ export default function GetMyStockCaseStudy() {
           "Build a scalable B2B procurement platform We created an end-to-end ordering experience that connects retailers directly with distributors  making Get My Stock the default restocking tool for small and medium retailers in India.\nOperational efficiency We built scalable design components across catalogue, ordering, and payment flows reducing friction for both retailers and distributors on the platform."
         }
       </Body>
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5928px] xl:w-[85px] xl:mb-0">
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5928px] xl:w-[85px] xl:mb-0" style={{ order: 5928 }}>
         User Goals
       </p>
       <Body top={5928} left={1120} width={499} size={16} lh={24} color="#060d19">
@@ -363,7 +368,7 @@ export default function GetMyStockCaseStudy() {
           "Faster, easier restocking To give retailers a single place to browse products, check live availability, compare prices, and place orders cutting down the time spent on calls and manual coordination every day.\nA reliable, consistent ordering experience To ensure every part of the app from product discovery to checkout feels trustworthy, predictable, and easy to use, even for first-time digital buyers."
         }
       </Body>
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[6134px] xl:w-[70px] xl:mb-0">
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[6134px] xl:w-[70px] xl:mb-0" style={{ order: 6134 }}>
         Impact
       </p>
       <Body top={6134} left={1120} width={478} size={16} lh={24} color="#060d19">
@@ -408,16 +413,19 @@ export default function GetMyStockCaseStudy() {
         width={3810}
         height={1284}
         className="mb-[16px] left-0 xl:absolute xl:top-[19855px] xl:h-[642px] xl:w-[1905px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
+        style={{ order: 19855 }}
       />
       <Link
         href="/work/design-system"
         aria-label="Aero UI Design System case study"
         className="mb-[16px] rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[191px] xl:top-[19962px] xl:h-[454px] xl:w-[748px] xl:mb-0"
+        style={{ order: 19962 }}
       />
       <Link
         href="/"
         aria-label="Back to portfolio"
         className="mb-[16px] rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[963px] xl:top-[19962px] xl:h-[454px] xl:w-[748px] xl:mb-0"
+        style={{ order: 19962 }}
       />
     </main>
   );

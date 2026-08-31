@@ -25,7 +25,7 @@ import { Nav } from "@/components/Nav";
  */
 export function CaseNav() {
   return (
-    <div className="fixed left-1/2 top-[16px] z-50 w-[min(452px,calc(100vw-32px))] -translate-x-1/2 xl:left-[calc(50%-223.5px)] xl:top-[35px] xl:w-auto xl:translate-x-0">
+    <div className="fixed left-1/2 top-[16px] z-50 w-[min(452px,calc(100vw-32px))] -translate-x-1/2 xl:left-[calc(50%-223.5px)] xl:top-[35px] xl:w-auto xl:translate-x-0" style={{ order: 35 }}>
       <Nav base="/" active="Case Studies" />
     </div>
   );
@@ -41,7 +41,7 @@ export function BackLink() {
     <Link
       href="/#works"
       className="mb-[20px] flex h-[44px] w-[90px] items-center gap-[7px] rounded-[14px] bg-[#fffefc] pl-[12px] transition-colors hover:bg-[#f4f3f0] xl:absolute xl:left-[192px] xl:top-[197px] xl:mb-0"
-      style={{ border: "1.2px solid #e3e3e3" }}
+      style={{ order: 197, border: "1.2px solid #e3e3e3" }}
     >
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path
@@ -127,12 +127,16 @@ export function MetaRow({
         style={{
           ["--x" as string]: `${box.left}px`,
           ["--y" as string]: `${box.top}px`,
+        order: Math.round(box.top),
           ["--w" as string]: `${box.width}px`,
           ["--h" as string]: `${box.height}px`,
           left: "var(--x)", top: "var(--y)", width: "var(--w)", height: "var(--h)",
         }}
       />
-      <div className="grid grid-cols-2 gap-x-[24px] gap-y-[18px] border-t border-b border-[#e0e0e0] py-[20px] sm:grid-cols-4 xl:contents">
+      <div
+        className="grid grid-cols-2 gap-x-[24px] gap-y-[18px] border-t border-b border-[#e0e0e0] py-[20px] sm:grid-cols-4 xl:contents"
+        style={{ order: box.top }}
+      >
       {items.map((m) => (
         <div
           key={m.label}
@@ -140,6 +144,7 @@ export function MetaRow({
           style={{
             ["--x" as string]: `${m.left}px`,
             ["--y" as string]: `${box.top + 22}px`,
+        order: Math.round(box.top + 22),
           }}
         >
           <p className="type-circ-20 text-[#6b6b6b]" style={{ lineHeight: "24.8px" }}>
@@ -173,6 +178,7 @@ export function SectionHeading({
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
+        order: Math.round(top),
         ["--w" as string]: `${width}px`,
       }}
     >
@@ -205,6 +211,7 @@ export function Body({
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
+        order: Math.round(top),
         ["--w" as string]: `${width}px`,
         ["--fs" as string]: `${size}px`,
         ["--lh" as string]: `${lh}px`,
@@ -252,6 +259,7 @@ export function NumberedCard({
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
+        order: Math.round(top),
         ["--w" as string]: `${width}px`,
       }}
     >
@@ -309,6 +317,7 @@ export function StatBlock({
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
+        order: Math.round(top),
         ["--w" as string]: `${width}px`,
       }}
     >
@@ -342,9 +351,10 @@ export function Related({
   return (
     <section
       className="page-x mt-[64px] w-full bg-surface-muted py-[40px] xl:absolute xl:left-0 xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:py-0"
-      style={{ ["--y" as string]: `${top}px`, top: "var(--y)" }}
+      style={{ ["--y" as string]: `${top}px`,
+        order: Math.round(top), top: "var(--y)" }}
     >
-      <div className="flex w-full items-center justify-between xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]">
+      <div className="flex w-full items-center justify-between xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]" style={{ order: 32 }}>
         <h2 className="text-[24px] leading-[35px] font-medium text-[#222227]">
           More case studies
         </h2>
@@ -355,7 +365,7 @@ export function Related({
           All work
         </Link>
       </div>
-      <div className="mt-[24px] flex flex-col gap-[16px] sm:flex-row sm:gap-[24px] xl:absolute xl:left-[191px] xl:top-[107px] xl:mt-0 xl:w-[1520px]">
+      <div className="mt-[24px] flex flex-col gap-[16px] sm:flex-row sm:gap-[24px] xl:absolute xl:left-[191px] xl:top-[107px] xl:mt-0 xl:w-[1520px]" style={{ order: 107 }}>
         {cards.map((c) => (
           <Link
             key={c.href}

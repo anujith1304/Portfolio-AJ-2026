@@ -59,6 +59,7 @@ function ChangeList({
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
+        order: Math.round(top),
         ["--w" as string]: `${width}px`,
         color,
       }}
@@ -99,7 +100,7 @@ export function CaseBody() {
 
   return (
     <main
-      className="page-x relative mx-auto w-full overflow-x-clip pt-[92px] pb-[120px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[120px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
       style={{ ...canvasSurface, ["--frame-h" as string]: `${s.height}px` }}
     >
       <CaseNav />
@@ -115,9 +116,10 @@ export function CaseBody() {
         width={333}
         height={133}
         className="mb-[16px] h-auto w-[240px] max-w-full xl:absolute xl:left-[172px] xl:top-[253px] xl:mb-0 xl:h-[133px] xl:w-[333px] xl:max-w-none"
+        style={{ order: 253 }}
       />
 
-      <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[192px] xl:top-[415px] xl:mb-0 xl:w-[1072px] xl:text-[64px] xl:leading-[72px]">
+      <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[192px] xl:top-[415px] xl:mb-0 xl:w-[1072px] xl:text-[64px] xl:leading-[72px]" style={{ order: 415 }}>
         Translate.video Product Rethink
       </h1>
       <Body top={507} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -128,10 +130,10 @@ export function CaseBody() {
         lip-sync generation, allowing users to create multilingual videos faster
         without relying on complex manual editing processes.
       </Body>
-      <p className="text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1428px] xl:top-[559px] xl:text-[18px]">
+      <p className="text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1428px] xl:top-[559px] xl:text-[18px]" style={{ order: 559 }}>
         Product Designer
       </p>
-      <p className="mb-[24px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[559px] xl:mb-0 xl:text-[18px]">
+      <p className="mb-[24px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[559px] xl:mb-0 xl:text-[18px]" style={{ order: 559 }}>
         2025 — 2026
       </p>
 
@@ -143,13 +145,14 @@ export function CaseBody() {
         height={848}
         priority
         className="mb-[32px] h-auto w-full rounded-[10px] xl:absolute xl:left-[188px] xl:top-[681px] xl:mb-0 xl:h-[848px] xl:w-[1529px] xl:max-w-none xl:rounded-none"
+        style={{ order: 681 }}
       />
 
       {/*
         5908:27009 is a MIXED-fill node: the body sits at #707581 and only the
         two product names are lifted to #222227.
       */}
-      <p className="my-[32px] text-[clamp(19px,2.5vw,32px)] leading-[1.4] font-medium tracking-[-0.8px] text-[#707581] xl:absolute xl:left-[462px] xl:top-[1587px] xl:my-0 xl:w-[981px] xl:text-[32px] xl:leading-[43px]">
+      <p className="my-[32px] text-[clamp(19px,2.5vw,32px)] leading-[1.4] font-medium tracking-[-0.8px] text-[#707581] xl:absolute xl:left-[462px] xl:top-[1587px] xl:my-0 xl:w-[981px] xl:text-[32px] xl:leading-[43px]" style={{ order: 1587 }}>
         Designed the end-to-end experience for{" "}
         <span className="text-[#222227]">Translate.video</span> at{" "}
         <span className="text-[#222227]">Vitra.AI,</span> contributing across
@@ -222,6 +225,7 @@ export function CaseBody() {
         role="tablist"
         aria-label="Before and after"
         className={`${STATE_TABS_TRACK} mt-[40px] w-fit xl:absolute xl:left-[462px] xl:top-[2618px] xl:mt-0`}
+        style={{ order: 2618 }}
       >
         <StateTabs value={variant} onChange={setVariant} />
       </div>
@@ -259,7 +263,7 @@ export function CaseBody() {
         y each one sits at — restores the reading order the design has.
       */}
       {screens.map((screen, i) => (
-        <section key={i} className="contents">
+        <section key={i} className="contents" style={{ order: screen.label.top }}>
           {/*
             Labels are centred in their box in Figma, not left-aligned, and each
             is a single MIXED-font node — see labelTilde/labelSuffix.
@@ -269,6 +273,7 @@ export function CaseBody() {
             style={{
               ["--x" as string]: `${screen.label.left ?? 462}px`,
               ["--y" as string]: `${screen.label.top}px`,
+        order: Math.round(screen.label.top),
               ["--w" as string]: `${screen.label.width}px`,
             }}
           >
@@ -289,6 +294,7 @@ export function CaseBody() {
               style={{
                 ["--x" as string]: `${b.left}px`,
                 ["--y" as string]: `${b.top}px`,
+        order: Math.round(b.top),
                 ["--w" as string]: `${b.w}px`,
                 ["--h" as string]: `${b.h}px`,
               }}
@@ -317,13 +323,13 @@ export function CaseBody() {
       <div
         aria-hidden
         className="mt-[48px] h-px w-full bg-[#dddddd] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1104px]"
-        style={{ ["--y" as string]: `${s.ruleTop}px` }}
+        style={{ ["--y" as string]: `${s.ruleTop}px`, order: Math.round(s.ruleTop) }}
       />
 
       <h2
         id="what-it-changed"
         className="mt-[32px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:text-[32px] xl:leading-[40px]"
-        style={{ ["--y" as string]: `${13933 + t}px` }}
+        style={{ ["--y" as string]: `${13933 + t}px`, order: Math.round(13933 + t) }}
       >
         What actually changed
       </h2>
@@ -333,19 +339,19 @@ export function CaseBody() {
         its list — otherwise both headings land together above both lists. The
         pairing wrapper is flattened at xl so the Figma offsets still resolve.
       */}
-      <div className="xl:contents">
+      <div className="xl:contents" style={{ order: 14038 + t }}>
         <p
           className="mt-[8px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
-          style={{ ["--y" as string]: `${14038 + t}px` }}
+          style={{ ["--y" as string]: `${14038 + t}px`, order: Math.round(14038 + t) }}
         >
           Before:
         </p>
         <ChangeList top={14094 + t} left={462} width={620} color="#c50d00" items={CHANGED.map((r) => r[0])} />
       </div>
-      <div className="xl:contents">
+      <div className="xl:contents" style={{ order: 14039 + t }}>
         <p
           className="mt-[28px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[1124px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
-          style={{ ["--y" as string]: `${14038 + t}px` }}
+          style={{ ["--y" as string]: `${14038 + t}px`, order: Math.round(14038 + t) }}
         >
           After:
         </p>
@@ -361,6 +367,7 @@ export function CaseBody() {
           style={{
             ["--x" as string]: `${r.left}px`,
             ["--y" as string]: `${r.top + t}px`,
+        order: Math.round(r.top + t),
             ["--w" as string]: `${r.w}px`,
             ["--h" as string]: `${r.h}px`,
           }}
@@ -370,16 +377,17 @@ export function CaseBody() {
       <h2
         id="what-worked"
         className="mt-[40px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:w-[1211px] xl:text-[32px] xl:leading-[40px]"
-        style={{ ["--y" as string]: `${14467 + t}px` }}
+        style={{ ["--y" as string]: `${14467 + t}px`, order: Math.round(14467 + t) }}
       >
         Things that didn&rsquo;t work — And how I solved them
       </h2>
       {WORKED.map((w) => (
-        <div key={w.label}>
+        <div key={w.label} className="xl:contents" style={{ order: w.top + t }}>
           <p
             className="mt-[24px] text-[18px] leading-[1.4] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[20px] xl:leading-[var(--lh)]"
             style={{
               ["--y" as string]: `${w.top + t}px`,
+        order: Math.round(w.top + t),
               ["--lh" as string]: `${w.labelLh}px`,
             }}
           >
@@ -390,6 +398,7 @@ export function CaseBody() {
             style={{
               ["--x" as string]: `${w.textLeft}px`,
               ["--y" as string]: `${w.top + t}px`,
+        order: Math.round(w.top + t),
               ["--w" as string]: `${w.textWidth}px`,
               ["--lh" as string]: `${w.textLh}px`,
             }}
@@ -410,21 +419,21 @@ export function CaseBody() {
         width={1219}
         height={130}
         className="mt-[40px] h-auto w-full rounded-[16px] xl:absolute xl:left-[458px] xl:top-[var(--y)] xl:mt-0 xl:h-[130px] xl:w-[1219px] xl:max-w-none xl:rounded-none"
-        style={{ ["--y" as string]: `${15020 + t}px` }}
+        style={{ ["--y" as string]: `${15020 + t}px`, order: Math.round(15020 + t) }}
       />
       <Anchor id="what-i-learned" top={15052 + t} />
 
       {LEARNINGS.map((l) => (
-        <div key={l.title}>
+        <div key={l.title} className="xl:contents" style={{ order: l.top + t }}>
           <p
             className="mt-[28px] text-[19px] leading-[1.35] font-bold text-[#222227] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:text-[23px] xl:leading-[35.84px]"
-            style={{ ["--y" as string]: `${l.top + t}px` }}
+            style={{ ["--y" as string]: `${l.top + t}px`, order: Math.round(l.top + t) }}
           >
             {l.title}
           </p>
           <p
             className="mt-[8px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:leading-[24px]"
-            style={{ ["--y" as string]: `${l.top + 48 + t}px` }}
+            style={{ ["--y" as string]: `${l.top + 48 + t}px`, order: Math.round(l.top + 48 + t) }}
           >
             {l.body}
           </p>
@@ -437,19 +446,19 @@ export function CaseBody() {
         width={1905}
         height={642}
         className="mt-[56px] h-auto w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:max-w-none"
-        style={{ ["--y" as string]: `${relatedTop}px` }}
+        style={{ ["--y" as string]: `${relatedTop}px`, order: Math.round(relatedTop) }}
       />
       <Link
         href="/work/get-my-stock"
         aria-label="Get My Stock case study"
         className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[191px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
-        style={{ ["--y" as string]: `${relatedTop + 107}px` }}
+        style={{ ["--y" as string]: `${relatedTop + 107}px`, order: Math.round(relatedTop + 107) }}
       />
       <Link
         href="/work/design-system"
         aria-label="Aero UI Design System case study"
         className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[963px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
-        style={{ ["--y" as string]: `${relatedTop + 107}px` }}
+        style={{ ["--y" as string]: `${relatedTop + 107}px`, order: Math.round(relatedTop + 107) }}
       />
     </main>
   );
