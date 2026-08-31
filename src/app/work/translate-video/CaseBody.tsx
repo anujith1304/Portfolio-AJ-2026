@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "@/components/Img";
 import { Figure } from "@/components/case-study/Figure";
-import Link from "next/link";
 import {
   CaseNav,
   BackLink,
@@ -11,6 +10,7 @@ import {
   SectionHeading,
   Body,
   NumberedCard,
+  Related,
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
 import { StateTabs, STATE_TABS_TRACK } from "@/components/case-study/StateTabs";
@@ -441,26 +441,7 @@ export function CaseBody() {
         </div>
       ))}
 
-      <Image
-        src="/images/case/tv/related.webp"
-        alt=""
-        width={1905}
-        height={642}
-        className="mt-[56px] h-auto w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:max-w-none"
-        style={{ ["--y" as string]: `${relatedTop}px`, order: Math.round(relatedTop) }}
-      />
-      <Link
-        href="/work/get-my-stock"
-        aria-label="Get My Stock case study"
-        className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[191px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
-        style={{ ["--y" as string]: `${relatedTop + 107}px`, order: Math.round(relatedTop + 107) }}
-      />
-      <Link
-        href="/work/design-system"
-        aria-label="Aero UI Design System case study"
-        className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[963px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
-        style={{ ["--y" as string]: `${relatedTop + 107}px`, order: Math.round(relatedTop + 107) }}
-      />
+      <Related top={relatedTop} current="translate-video" />
     </main>
   );
 }

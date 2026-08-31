@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "@/components/Img";
 import { Figure } from "@/components/case-study/Figure";
-import Link from "next/link";
 import {
   CaseNav,
   BackLink,
@@ -9,6 +8,7 @@ import {
   SectionHeading,
   Body,
   NumberedCard,
+  Related,
 } from "@/components/case-study/CaseShell";
 import { CaseSideNav, Anchor } from "@/components/case-study/CaseSideNav";
 import { canvasSurface } from "@/lib/canvas";
@@ -340,27 +340,7 @@ export default function DesignSystemCaseStudy() {
         already appear in those exports. Drawing them again printed each twice.
       */}
 
-      {/* 5854:40812 "Related", 1905x642 at y=16107 */}
-      <Image
-        src="/images/case/ds-related.png"
-        alt=""
-        width={3810}
-        height={1284}
-        className="mb-[16px] left-0 xl:absolute xl:top-[16107px] xl:h-[642px] xl:w-[1905px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
-        style={{ order: 16107 }}
-      />
-      <Link
-        href="/work/get-my-stock"
-        aria-label="Get My Stock case study"
-        className="mb-[16px] rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[191px] xl:top-[16214px] xl:h-[454px] xl:w-[748px] xl:mb-0"
-        style={{ order: 16214 }}
-      />
-      <Link
-        href="/"
-        aria-label="Back to portfolio"
-        className="mb-[16px] rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[963px] xl:top-[16214px] xl:h-[454px] xl:w-[748px] xl:mb-0"
-        style={{ order: 16214 }}
-      />
+      <Related top={16107} current="design-system" />
     </main>
   );
 }

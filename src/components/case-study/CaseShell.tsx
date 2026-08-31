@@ -344,47 +344,119 @@ export function StatBlock({
 }
 
 /**
- * "Related" strip — 5854:38498 / 5854:40812, 1905x642.
- * This is the only place the Figma prototype actually wires case study to
- * case study, so the links here mirror those reactions and add the home link.
+ * "Explore More" strip — Figma "Related", 1905x642, on every case study.
+ *
+ * Was a flat 1905-wide export with two transparent hit areas over it, which
+ * meant the whole strip — heading, three cards, their titles and copy — scaled
+ * down as one bitmap and turned to mush on anything narrower than a desktop.
+ * It is markup now, so it reflows and the type stays readable.
+ *
+ * Geometry is the file's, relative to the strip top:
+ *   rule          x191  y32   1520x1  #ececec
+ *   "Explore More" x191 y43   Satoshi Medium 19/24 #5d6067
+ *   cards         y107  x191 / 707 / 1223, 496 wide, 20 apart
+ *     thumbnail   496x278 r16 white
+ *     title       +302 from the card top, Recoleta Medium 32/40
+ *     description +351, Satoshi Regular 16/24
+ *
+ * Content note: the file's cards read "Case Study 01/02/03" over lorem ipsum.
+ * Those are placeholders, so the real names and one-line summaries are used
+ * instead — shipping lorem to a live portfolio would be worse than deviating
+ * from the file here. The layout is unchanged.
+ *
+ * The card for the page you are already on is rendered without a link, which
+ * is what the file does with its own first card.
  */
+
+export type RelatedCard = {
+  slug: string;
+  title: string;
+  blurb: string;
+  href: string;
+  image: string;
+};
+
+/** The three case studies, in the order the file lays them out. */
+export const CASE_STUDIES: RelatedCard[] = [
+  {
+    slug: "get-my-stock",
+    title: "Get My Stock",
+    blurb:
+      "A 0 to 1 B2B ordering app for small retailers — problem framing through to a shipped first release.",
+    href: "/work/get-my-stock",
+    image: "/images/works/work-01-getmystock.png",
+  },
+  {
+    slug: "design-system",
+    title: "Aero UI Design System",
+    blurb:
+      "A component library and token system built to keep a fast-moving product visually consistent.",
+    href: "/work/design-system",
+    image: "/images/works/work-02-aero.png",
+  },
+  {
+    slug: "translate-video",
+    title: "Translate.video V2",
+    blurb:
+      "Rethinking an AI video localization platform across dashboard, editor, timeline and export.",
+    href: "/work/translate-video",
+    image: "/images/works/work-03-translatevideo.png",
+  },
+];
+
 export function Related({
   top,
-  cards,
+  /** The case study being viewed; its own card is not linked. */
+  current,
 }: {
   top: number;
-  cards: { index: string; title: string; href: string }[];
+  current: string;
 }) {
   return (
     <section
-      className="page-x mt-[64px] w-full bg-surface-muted py-[40px] xl:absolute xl:left-0 xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:py-0"
-      style={{ ["--y" as string]: `${top}px`,
-        order: Math.round(top), top: "var(--y)" }}
+      aria-label="Explore more case studies"
+      className="page-x mt-[56px] w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[642px] xl:w-[1905px]"
+      style={{ ["--y" as string]: `${top}px`, order: Math.round(top) }}
     >
-      <div className="flex w-full items-center justify-between xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]" style={{ order: 32 }}>
-        <h2 className="text-[24px] leading-[35px] font-medium text-[#222227]">
-          More case studies
-        </h2>
-        <Link
-          href="/#works"
-          className="text-[16px] font-medium text-[#6b6b6b] transition-colors hover:text-black"
-        >
-          All work
-        </Link>
-      </div>
-      <div className="mt-[24px] flex flex-col gap-[16px] sm:flex-row sm:gap-[24px] xl:absolute xl:left-[191px] xl:top-[107px] xl:mt-0 xl:w-[1520px]" style={{ order: 107 }}>
-        {cards.map((c) => (
-          <Link
-            key={c.href}
-            href={c.href}
-            className="flex min-h-[180px] flex-1 flex-col justify-end rounded-[24px] border border-hairline bg-white p-[24px] transition-shadow hover:shadow-lg xl:h-[454px] xl:p-[32px]"
-          >
-            <span className="type-eyebrow-20 text-black/60">{c.index}</span>
-            <span className="mt-[8px] font-display text-[32px] leading-[35.8px] font-semibold text-[#222227]">
-              {c.title}
-            </span>
-          </Link>
-        ))}
+      <div aria-hidden className="h-px w-full bg-[#ececec] xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]" />
+      <h2 className="mt-[20px] text-[19px] leading-[24px] font-medium text-[#5d6067] xl:absolute xl:left-[191px] xl:top-[43px] xl:mt-0">
+        Explore More
+      </h2>
+
+      <div className="mt-[24px] grid grid-cols-1 gap-[32px] sm:grid-cols-2 xl:mt-0 xl:block">
+        {CASE_STUDIES.map((c, i) => {
+          const inner = (
+            <>
+              <div className="overflow-hidden rounded-[16px] bg-white xl:h-[278px] xl:w-[496px]">
+                <Image
+                  src={c.image}
+                  alt=""
+                  width={1748}
+                  height={1028}
+                  className="h-auto w-full object-cover xl:h-[278px] xl:w-[496px]"
+                />
+              </div>
+              <h3 className="mt-[16px] font-display text-[24px] leading-[1.25] font-medium text-[#060d19] xl:absolute xl:left-0 xl:top-[302px] xl:mt-0 xl:text-[32px] xl:leading-[40px]">
+                {c.title}
+              </h3>
+              <p className="mt-[8px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-0 xl:top-[351px] xl:mt-0 xl:w-[488px]">
+                {c.blurb}
+              </p>
+            </>
+          );
+          const cls =
+            "group relative block rounded-[8px] xl:absolute xl:left-[var(--cx)] xl:top-[107px] xl:h-[430px] xl:w-[496px]";
+          const style = { ["--cx" as string]: `${191 + i * 516}px` } as React.CSSProperties;
+          return c.slug === current ? (
+            <div key={c.slug} className={cls} style={style} aria-current="page">
+              {inner}
+            </div>
+          ) : (
+            <Link key={c.slug} href={c.href} className={`${cls} transition-opacity hover:opacity-90`} style={style}>
+              {inner}
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
