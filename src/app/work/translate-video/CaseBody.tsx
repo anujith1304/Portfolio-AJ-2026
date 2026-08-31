@@ -99,7 +99,7 @@ export function CaseBody() {
 
   return (
     <main
-      className="page-x relative mx-auto w-full overflow-x-clip pt-[92px] pb-[64px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      className="page-x relative mx-auto w-full overflow-x-clip pt-[92px] pb-[120px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
       style={{ ...canvasSurface, ["--frame-h" as string]: `${s.height}px` }}
     >
       <CaseNav />
@@ -327,20 +327,30 @@ export function CaseBody() {
       >
         What actually changed
       </h2>
-      <p
-        className="text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:text-[24px]"
-        style={{ ["--y" as string]: `${14038 + t}px` }}
-      >
-        Before:
-      </p>
-      <p
-        className="mt-[24px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[1124px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
-        style={{ ["--y" as string]: `${14038 + t}px` }}
-      >
-        After:
-      </p>
-      <ChangeList top={14094 + t} left={462} width={620} color="#c50d00" items={CHANGED.map((r) => r[0])} />
-      <ChangeList top={14094 + t} left={1112} width={700} color="#05b54b" items={CHANGED.map((r) => r[1])} />
+      {/*
+        Each column's heading is pinned above its own list at xl, where the two
+        sit side by side. In flow they stack, so the heading has to travel with
+        its list — otherwise both headings land together above both lists. The
+        pairing wrapper is flattened at xl so the Figma offsets still resolve.
+      */}
+      <div className="xl:contents">
+        <p
+          className="mt-[8px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
+          style={{ ["--y" as string]: `${14038 + t}px` }}
+        >
+          Before:
+        </p>
+        <ChangeList top={14094 + t} left={462} width={620} color="#c50d00" items={CHANGED.map((r) => r[0])} />
+      </div>
+      <div className="xl:contents">
+        <p
+          className="mt-[28px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[1124px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
+          style={{ ["--y" as string]: `${14038 + t}px` }}
+        >
+          After:
+        </p>
+        <ChangeList top={14094 + t} left={1112} width={700} color="#05b54b" items={CHANGED.map((r) => r[1])} />
+      </div>
 
       {/* 1px #dddddd throughout — a stroke on the rects, a fill on the lines */}
       {TAIL_RULES.map((r) => (
