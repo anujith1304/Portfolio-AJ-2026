@@ -17,19 +17,19 @@ import { canvasSurface } from "@/lib/canvas";
 /** Blocks exported from Figma and placed on their node coordinates. */
 type Block = {
   /** Shown only at xl, where a reflowed alternative takes over below it. */
-  desktopOnly?: boolean; src: string; alt: string; left: number; top: number; w: number; h: number };
+  desktopOnly?: boolean;
+  /** Offer the full-view control — only where the artwork rewards opening. */
+  zoom?: boolean; src: string; alt: string; left: number; top: number; w: number; h: number };
 
 const BLOCKS: Block[] = [
   // 5854:38588 solution grid — export 2108x1260 (2x of 1054x630), box 1046x628
-  { src: "gms-solutions.png", alt: "Four solution screens", left: 517, top: 4068, w: 1054, h: 630 },
+  { src: "gms-solutions.png", alt: "Four solution screens", left: 517, top: 4068, w: 1054, h: 630, zoom: true },
   // Stat visuals; each export covers render bounds, so it is centred on its box.
   { src: "gms-stat-1.png", alt: "", left: 704, top: 6337, w: 637, h: 520 },
   { src: "gms-stat-2.png", alt: "", left: 682, top: 6921, w: 681, h: 520 },
   { src: "gms-stat-3.png", alt: "", left: 686, top: 7504, w: 684, h: 596 },
   { src: "gms-stat-4.png", alt: "", left: 689, top: 8119, w: 673, h: 523 },
   { src: "gms-stat-5.png", alt: "", left: 656, top: 8706, w: 792, h: 570 },
-  // Spacing showcase — 1052x1268 box, export 1060x1270
-  { src: "gms-spacing.png", alt: "Spacing system", left: 517, top: 11141, w: 1060, h: 1270 },
   // 5854:37016 screen grid — 1905x5572 at (0,14243)
   // Desktop only — the per-screen list below replaces it under xl.
   { src: "gms-screens.png", alt: "Full screen set with annotations", left: -1, top: 14243, w: 1907, h: 5572, desktopOnly: true },
@@ -149,6 +149,12 @@ type Captioned = {
   h: number;
   /** Distance from the artwork's render bottom to the caption in Figma. */
   gap: number;
+  /**
+   * Leading page name to set apart from the sentence. The file runs these as
+   * one Regular text run, so "Home Page Consistent 20px grid spacing..." has
+   * no break at all; weight is the only change, the words are the file's.
+   */
+  lead?: string;
   /** Caption box inset from the wrapper's left, and its width, in Figma. */
   capX: number;
   capW: number;
@@ -163,6 +169,20 @@ const CAPTIONED: Captioned[] = [
   { src: "gms-comp-2-art.png", alt: "Typography and colour", left: 517, top: 10209, w: 1032, h: 536, gap: 14, capX: 4, capW: 1024, order: 10211,
     caption: "Satoshi typography ensures clear hierarchy and readability, while the primary color #003EAF strengthens brand identity and highlights key interactions.",
     label: "Design System" },
+
+
+  // Spacing — 5908:12185 / 12190 / 12197 / 12202, captions 12188 / 12194 /
+  // 12200 / 12206. One card per row, same treatment as the micro-interactions:
+  // the caption is a single Regular run in the file, page name included, so it
+  // is reproduced as one paragraph rather than split into a title.
+  { src: "gms-spacing-home.webp", alt: "Home page spacing grid", left: 517, top: 11140, w: 518, h: 538, gap: 10, capX: 4, capW: 510, order: 11142,
+    lead: "Home Page", caption: "Consistent 20px grid spacing keeps content breathable, with aligned card components and clear visual hierarchy guiding users to key actions at a glance." },
+  { src: "gms-spacing-categories.webp", alt: "Categories page spacing grid", left: 1059, top: 11140, w: 518, h: 538, gap: 10, capX: 4, capW: 510, order: 11143,
+    lead: "Categories Page", caption: "A uniform 12px & 24px gap between category tiles ensures a balanced grid layout, with left-aligned labels maintaining readability across all screen sizes." },
+  { src: "gms-spacing-modal.webp", alt: "Change categories modal spacing", left: 517, top: 11790, w: 518, h: 538, gap: 10, capX: 4, capW: 510, order: 11792,
+    lead: "Change Categories Modal", caption: "Centered modal with 20px & 24px internal padding creates focused content areas, while evenly spaced options reduce visual clutter and improve selection clarity." },
+  { src: "gms-spacing-cart.webp", alt: "Cart page spacing grid", left: 1059, top: 11790, w: 518, h: 538, gap: 10, capX: 4, capW: 510, order: 11793,
+    lead: "Cart Page", caption: "Item rows follow a strict 8px baseline grid, with right-aligned pricing and consistent 16px section spacing making the summary easy to scan before checkout." },
 
   // Micro-interactions — 5908:12447 / 12211 / 12664 / 12427 / 12680
   { src: "gms-micro-1-art.png", alt: "Category tap animation", left: 517, top: 12687, w: 513, h: 408, gap: 10, capX: 4, capW: 505, order: 12689,
@@ -245,13 +265,14 @@ export default function GetMyStockCaseStudy() {
       </p>
 
       {/* 5854:34148 — hero mockup, 1521x853 at (192,651); export carries 4px spill */}
-      <Image
+      <Figure
         src="/images/case/gms-hero.png"
         alt="Get My Stock app screens"
         width={3058}
         height={1722}
         priority
-        className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[647px] xl:h-[861px] xl:w-[1529px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
+        zoomable
+        className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[647px] xl:mb-0 xl:h-[861px] xl:w-[1529px]"
         style={{ order: 647 }}
       />
 
@@ -302,6 +323,7 @@ export default function GetMyStockCaseStudy() {
           alt={b.alt}
           width={b.w * 2}
           height={b.h * 2}
+          zoomable={b.zoom}
           className={`mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none ${b.desktopOnly ? "hidden xl:block" : ""}`}
           style={{
             ["--x" as string]: `${b.left}px`,
@@ -493,6 +515,9 @@ export default function GetMyStockCaseStudy() {
             }}
           >
             <p className="text-[17px] leading-[1.6] text-[#6b6b6b] xl:text-[16px] xl:leading-[22px]">
+              {c.lead && (
+                <span className="font-medium text-[#3f3f3f]">{c.lead} </span>
+              )}
               {c.caption}
             </p>
             {c.label && (

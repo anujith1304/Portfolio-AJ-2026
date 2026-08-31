@@ -25,8 +25,13 @@ export function Figure({
   style,
   priority,
   caption,
-  /** Hide the control where the artwork is decorative rather than referenced. */
-  zoomable = true,
+  /**
+   * Off by default. The control is only worth its space on the two figures
+   * dense enough to reward opening: the hero screen set and the solution grid.
+   * Everywhere else the artwork is a single screen that already reads at the
+   * width it is given.
+   */
+  zoomable = false,
 }: {
   src: string;
   alt: string;
