@@ -85,17 +85,24 @@ export function CaseLogo({
   imgH: number;
 }) {
   return (
+    /*
+     * The export covers the node's render bounds, so at xl it is offset by the
+     * spill to land the artwork on the Figma box. In flow it simply sits under
+     * the back control and above the title, at its own size — the offset there
+     * would drag it over the heading.
+     */
     <Image
       src={src}
       alt={alt}
       width={imgW * 2}
       height={imgH * 2}
-      className="absolute max-w-none"
+      className="mb-[20px] h-auto w-auto max-w-[200px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none"
       style={{
-        left: left - (imgW - boxW) / 2,
-        top: top - (imgH - boxH) / 2,
-        width: imgW,
-        height: imgH,
+        ["--x" as string]: `${left - (imgW - boxW) / 2}px`,
+        ["--y" as string]: `${top - (imgH - boxH) / 2}px`,
+        ["--w" as string]: `${imgW}px`,
+        ["--h" as string]: `${imgH}px`,
+        order: Math.round(top),
       }}
     />
   );
@@ -215,8 +222,8 @@ export function Body({
         ["--w" as string]: `${width}px`,
         ["--fs" as string]: `${size}px`,
         ["--lh" as string]: `${lh}px`,
-        fontSize: `clamp(15px, ${(size / 1280) * 100}vw, ${size}px)`,
-        lineHeight: 1.6,
+        fontSize: `clamp(17px, ${(size / 1280) * 100}vw, ${size}px)`,
+        lineHeight: 1.65,
         color,
       }}
     >
@@ -264,27 +271,27 @@ export function NumberedCard({
       }}
     >
       <p
-        className="text-[14px] leading-[24.8px] font-medium"
+        className="text-[14px] leading-[24.8px] font-medium tracking-[0.02em]"
         style={{ color: eyebrowColor }}
       >
         {eyebrow}
       </p>
-      <h3 className="mt-[12px] font-display text-[23.6px] leading-[35.8px] font-semibold text-[#222227]">
+      <h3 className="mt-[10px] font-display text-[21px] leading-[1.3] font-semibold text-[#222227] xl:mt-[12px] xl:text-[23.6px] xl:leading-[35.8px]">
         {title}
       </h3>
       <p
-        className="mt-[12px] text-[16px] leading-[24.8px] font-normal"
+        className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[16px] xl:leading-[24.8px]"
         style={{ color: bodyColor }}
       >
         {body}
       </p>
       {impact && (
         <>
-          <p className="mt-[24px] text-[14px] leading-[24.8px] font-medium text-[#222227]">
+          <p className="mt-[22px] text-[14px] leading-[24.8px] font-medium tracking-[0.02em] text-[#222227]">
             {impactLabel ?? "IMPACT"}
           </p>
           <p
-            className="mt-[12px] text-[16px] leading-[24.8px] font-normal"
+            className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[16px] xl:leading-[24.8px]"
             style={{ color: bodyColor }}
           >
             {impact}
@@ -322,12 +329,12 @@ export function StatBlock({
       }}
     >
       <p className="text-[50px] leading-[68px] font-bold text-[#060d19]">{value}</p>
-      <p className="mt-[0px] text-[18px] leading-[24px] font-medium text-[#707581]">
+      <p className="mt-[0px] text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[18px] xl:leading-[24px]">
         {caption}
       </p>
       <div className="mt-[24px] flex flex-col gap-[8px]">
         {lines.map((l) => (
-          <p key={l} className="text-[18px] leading-[24px] font-medium text-[#707581]">
+          <p key={l} className="text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[18px] xl:leading-[24px]">
             {l}
           </p>
         ))}

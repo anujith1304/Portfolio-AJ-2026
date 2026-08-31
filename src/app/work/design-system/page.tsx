@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "@/components/Img";
+import { Figure } from "@/components/case-study/Figure";
 import Link from "next/link";
 import {
   CaseNav,
@@ -218,13 +219,13 @@ export default function DesignSystemCaseStudy() {
       ))}
 
       {BLOCKS.map((b) => (
-        <Image
+        <Figure
           key={b.src}
           src={`/images/case/${b.src}`}
           alt={b.alt}
           width={b.w * 2}
           height={b.h * 2}
-          className="mb-[24px] h-auto w-full rounded-[10px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
+          className="mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
           style={{
             ["--x" as string]: `${b.left}px`,
             ["--y" as string]: `${b.top}px`,

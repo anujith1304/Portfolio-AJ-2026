@@ -24,7 +24,7 @@ export function Footer() {
   return (
     <section
       id="contact"
-      className="page-x relative flex w-full flex-col items-start pt-[48px] pb-[64px] xl:block xl:h-[712px] xl:w-[1905px] xl:pt-0 xl:pb-0"
+      className="page-x relative flex w-full flex-col items-start pt-[40px] pb-[56px] xl:block xl:h-[712px] xl:w-[1905px] xl:pt-0 xl:pb-0"
     >
       {/*
         5854:51585 — image card above the copy, 348x224 at (400,166).
@@ -42,7 +42,7 @@ export function Footer() {
         alt=""
         width={696}
         height={448}
-        className="h-auto w-full max-w-[348px] xl:absolute xl:left-[400px] xl:top-[166px] xl:h-[224px] xl:w-[348px] xl:max-w-none"
+        className="h-auto w-full max-w-[240px] sm:max-w-[300px] xl:absolute xl:left-[400px] xl:top-[166px] xl:h-[224px] xl:w-[348px] xl:max-w-none"
       />
 
       {/* 5854:51588 — email line at (400,406); copy control at (938,412) */}
@@ -51,17 +51,29 @@ export function Footer() {
         belongs beside the address, so the two share a row and the wrapper is
         flattened at xl (`contents`) to leave both on their Figma offsets.
       */}
-      <div className="mt-[24px] flex w-full flex-wrap items-center gap-x-[10px] xl:contents">
-        <p className="w-auto xl:absolute xl:left-[400px] xl:top-[406px] xl:w-[558px]">
-          <span className="type-circ-24-sm text-black/50">Drop me a text on </span>
+      {/*
+        One line at xl, where there is room for it. Below that the label takes
+        its own line so the address and the copy control stay together on the
+        next — the address alone is most of a phone's width, so keeping the
+        three inline pushed the control onto a third line by itself.
+      */}
+      <div className="mt-[24px] w-full xl:contents">
+        <p className="w-full xl:absolute xl:left-[400px] xl:top-[406px] xl:w-[558px]">
+          <span className="type-circ-24-sm block text-black/50 xl:inline">
+            Drop me a text on{" "}
+          </span>
           <a
             href="mailto:anujithchand2002@gmail.com"
-            className="type-email-24 text-black/70"
+            className="type-email-24 break-all text-black/70 xl:break-normal"
           >
             anujithchand2002@gmail.com
           </a>
+          {/*
+            Inside the paragraph, so it sets on the same line as the address in
+            flow. At xl it is absolutely positioned and the nesting is moot.
+          */}
+          <CopyEmail email="anujithchand2002@gmail.com" />
         </p>
-        <CopyEmail email="anujithchand2002@gmail.com" />
       </div>
 
       {/* 5854:51592 — Recoleta Medium 72/-1.28, no ss02 (plain Recoleta) */}
@@ -70,7 +82,7 @@ export function Footer() {
       </h2>
 
       {/* 5854:51593 — Circular Std Book 24/32/-0.4 */}
-      <p className="type-circ-24-lg mt-[12px] w-full text-black/50 xl:absolute xl:left-[399px] xl:top-[562px] xl:mt-0 xl:w-[945px]">
+      <p className="type-circ-24-lg measure mt-[12px] w-full text-black/50 xl:absolute xl:left-[399px] xl:top-[562px] xl:mt-0 xl:w-[945px] xl:max-w-none">
         Curious about my work? (or) just craving a deep dive into products &amp;
         the rest of life&rsquo;s good stuff?, Let&rsquo;s chat.
       </p>
@@ -90,7 +102,7 @@ export function Footer() {
         alt=""
         width={300}
         height={300}
-        className="mt-[24px] h-[98px] w-[134px] self-end object-cover opacity-80 xl:absolute xl:left-[1739px] xl:top-[587px] xl:mt-0"
+        className="mt-[32px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1739px] xl:top-[587px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
       />
     </section>
   );

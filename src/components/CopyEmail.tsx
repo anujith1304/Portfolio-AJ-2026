@@ -29,7 +29,7 @@ export function CopyEmail({ email }: { email: string }) {
       type="button"
       onClick={copy}
       aria-label={copied ? "Email copied" : "Copy email"}
-      className="relative h-[20px] w-[20px] shrink-0 cursor-pointer opacity-60 transition-opacity hover:opacity-100 xl:absolute xl:left-[938px] xl:top-[412px]"
+      className="relative -mt-[2px] ml-[6px] inline-flex h-[20px] w-[20px] shrink-0 cursor-pointer align-middle opacity-60 transition-opacity hover:opacity-100 xl:absolute xl:ml-0 xl:left-[938px] xl:top-[412px]"
     >
       <Image
         src="/images/footer/copy.svg"
