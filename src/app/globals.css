@@ -292,3 +292,166 @@ body {
     .bulb:hover { transform: none; }
   }
 }
+
+/* =========================================================================
+   Responsive layer
+   -------------------------------------------------------------------------
+   The design is a fixed 1904/1905px canvas with every element placed at its
+   Figma coordinate. That layout is preserved exactly at >= 1280px (Tailwind
+   `xl`), where components carry their absolute positions behind `xl:`
+   variants and flow normally below it.
+
+   Everything in this file's responsive section is therefore scoped to
+   max-width: 1279px. Desktop rendering cannot change as a result of it —
+   which is what keeps the pixel-for-pixel Figma match that was verified
+   against the file.
+
+   Breakpoints:
+     mobile   < 768px    single column, compact rhythm
+     tablet   768-1279   single column, wider measure
+     desktop  >= 1280    the Figma canvas, unchanged
+   ========================================================================= */
+
+@layer utilities {
+  /* The measure for body copy in a reflowed column. */
+  .measure {
+    max-width: 68ch;
+  }
+}
+
+/*
+  Fluid page gutter — matches the Figma inset (48px) where there is room and
+  tightens to 20px on a phone.
+
+  Scoped to below the desktop breakpoint rather than cancelled there with
+  `xl:px-0`: both set padding-inline at the same specificity, and this file is
+  appended after Tailwind's utilities, so it would win the tie and shift every
+  section 48px in on desktop. Not applying at all above 1279 is unambiguous.
+*/
+@media (max-width: 1279px) {
+  .page-x {
+    padding-inline: clamp(20px, 5vw, 48px);
+  }
+}
+
+@media (max-width: 1279px) {
+  /*
+    Fluid display type. Each preferred value is chosen so the utility reaches
+    its Figma size exactly at 1280px (e.g. 72/1280 = 5.625vw), which means the
+    scale meets the desktop layout with no step at the breakpoint.
+  */
+  .type-hero,
+  .type-connect {
+    font-size: clamp(36px, 5.625vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .type-display-72,
+  .type-works-72,
+  .type-quote-72 {
+    font-size: clamp(32px, 5.625vw, 72px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .type-role-32,
+  .type-circ-32 {
+    font-size: clamp(20px, 2.5vw, 32px);
+    line-height: 1.3;
+  }
+
+  .type-lead-28 {
+    font-size: clamp(18px, 2.19vw, 28px);
+    line-height: 1.5;
+  }
+
+  .type-bio-24,
+  .type-circ-24,
+  .type-circ-24-lg,
+  .type-circ-24-sm,
+  .type-email-24 {
+    font-size: clamp(16px, 1.875vw, 24px);
+    line-height: 1.5;
+  }
+
+  .type-eyebrow-20,
+  .type-section-20,
+  .type-date-20,
+  .type-circ-20,
+  .type-circ-20-sm {
+    font-size: clamp(14px, 1.5625vw, 20px);
+    line-height: 1.4;
+  }
+
+  .type-exp-18,
+  .type-exp-18-reg,
+  .type-btn-18,
+  .type-circ-18 {
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.6;
+  }
+
+  /*
+    Utilities whose Figma line-height is far smaller than their size (set that
+    way so a text box hugs its cap height inside an auto-layout frame). In flow
+    those clip descenders, so they get a real line box back.
+  */
+  .type-role-32,
+  .type-email-24,
+  .type-circ-24-sm,
+  .type-circ-20-sm,
+  .type-date-20,
+  .type-section-20,
+  .type-works-72,
+  .type-nav,
+  .type-nav-active {
+    line-height: 1.3;
+  }
+}
+
+/*
+  Wide artwork — annotated product mockups exported from Figma at their design
+  width. Scaled to a phone they become unreadable, so below the desktop
+  breakpoint they keep a legible minimum width and the container scrolls
+  instead. `touch-action` keeps the vertical page swipe working over them.
+*/
+@media (max-width: 1279px) {
+  .figure-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: thin;
+  }
+  .figure-scroll > * {
+    max-width: none;
+  }
+}
+
+/*
+  Fixed-canvas box.
+
+  Some compositions in the file are pure arrangement — images at hand-placed
+  offsets, no text to keep legible and no meaningful way to reflow. Those keep
+  their proportions instead of reflowing: the wrapper reserves the design's
+  aspect ratio, and the children are positioned in percentages of it, so the
+  whole thing scales with the column at any width with no JS.
+
+  Set --fw / --fh to the design size. At the design width every percentage
+  resolves back to its original pixel value, so the desktop rendering is
+  untouched.
+
+  (A transform-scale version of this does not work: scale() takes a unitless
+  number and `100cqw / var(--fw)` is a length, so the declaration is dropped.)
+
+  Only for artwork. Anything carrying type reflows instead, because scaling
+  would take the type below a readable size.
+*/
+@layer utilities {
+  .fit-canvas {
+    position: relative;
+    width: 100%;
+    max-width: calc(var(--fw) * 1px);
+    aspect-ratio: var(--fw) / var(--fh);
+  }
+}

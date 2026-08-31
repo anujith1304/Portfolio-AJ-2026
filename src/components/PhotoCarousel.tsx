@@ -87,7 +87,7 @@ export function PhotoCarousel({ className }: { className?: string }) {
           height={592}
           priority={i === 0}
           aria-hidden={i !== index}
-          className="absolute inset-[-4px] h-[592px] w-[607px] max-w-none object-cover transition-opacity duration-700 ease-out"
+          className="absolute inset-[-4px] h-[calc(100%+8px)] w-[calc(100%+8px)] max-w-none object-cover transition-opacity duration-700 ease-out"
           style={{ opacity: i === index ? 1 : 0 }}
         />
       ))}
@@ -103,7 +103,7 @@ export function PhotoCarousel({ className }: { className?: string }) {
       </div>
 
       {/* dot rail — 5826:26179, 144x20 at (227,540) */}
-      <div className="absolute left-[227px] top-[540px] flex h-[20px] w-[144px] items-center justify-center gap-[6.7px] rounded-[57px] bg-white/30 backdrop-blur-[2px]">
+      <div className="absolute bottom-[24px] left-1/2 flex h-[20px] w-[144px] -translate-x-1/2 items-center justify-center gap-[6.7px] rounded-[57px] bg-white/30 backdrop-blur-[2px] xl:bottom-auto xl:left-[227px] xl:top-[540px] xl:translate-x-0">
         {SLIDES.map((s, i) => (
           <button
             key={s.src}

@@ -19,7 +19,36 @@ import { PhotoCarousel } from "@/components/PhotoCarousel";
  * card is offset by the difference (4px a side) so the artwork lands on the
  * Figma coordinate. Exports whose size already matches the box are placed
  * straight onto it.
+ *
+ * Responsive note: the bento is only a bento at >= xl, where each card keeps
+ * its Figma box and its contents keep their offsets inside it. Below that the
+ * cards are a one- then two-column stack and their contents flow.
+ *
+ * Every Figma coordinate therefore rides on a custom property rather than an
+ * inline style: an inline left/width/height applies at every breakpoint, and in
+ * flow those would re-impose the desktop geometry on a phone. The properties
+ * are only read by the xl rules.
  */
+
+/**
+ * The bento's card shell. In flow it is a padded box; at xl it takes the Figma
+ * rectangle and becomes the positioning context for its own contents.
+ */
+function Card({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={`relative rounded-[20px] border border-hairline bg-white p-[20px] xl:absolute xl:p-0 ${className ?? ""}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 const GRADIENT =
   "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.04) 100%)";
@@ -94,99 +123,113 @@ const JAMS = [1014, 1109, 1202, 1296, 1390];
 
 export function About() {
   return (
-    <section id="about" className="flex w-[1808px] flex-col gap-[24px]">
+    <section
+      id="about"
+      className="page-x flex w-full flex-col gap-[24px] xl:w-[1808px]"
+    >
       {/* 5854:50991 */}
-      <div className="flex h-[90px] w-[1808px] items-center">
+      <div className="flex w-full items-center xl:h-[90px] xl:w-[1808px]">
         <h2
-          className="type-works-72 flex h-[90px] w-[911px] items-center bg-clip-text text-transparent"
+          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[90px] xl:w-[911px]"
           style={{ backgroundImage: GRADIENT }}
         >
           What I&rsquo;m about
         </h2>
       </div>
 
-      {/* 5854:50993 */}
-      <div className="relative h-[1500px] w-[1808px]">
+      {/*
+        5854:50993 — the bento. At xl every card keeps its Figma box and its
+        children keep their offsets inside it. Below xl the same cards are a
+        one- then two-column stack, and each card's content flows.
+      */}
+      <div className="grid grid-cols-1 gap-[16px] md:grid-cols-2 xl:relative xl:block xl:h-[1500px] xl:w-[1808px]">
         {/* ---- Bio card — 5854:50994, 563x301 at (13,21) ---- */}
-        <div className="absolute left-[13px] top-[21px] h-[301px] w-[563px] rounded-[20px] border border-hairline bg-white" />
-        <p className="type-lead-28 absolute left-[32px] top-[60px] w-[522px] text-[#616161]">
-          Product Designer with 2+years of experience, focused on creating
-          functional and user-centered digital products with visually stunning
-          designs.
-        </p>
-        <Image
-          src="/images/about/social-links.png"
-          alt="Copy email, LinkedIn, Dribbble, Twitter"
-          width={725}
-          height={147}
-          className="absolute left-[34px] top-[265px] h-[37px] w-[181px]"
-        />
-        <a
-          href="#"
-          className="absolute left-[445px] top-[264px] flex h-[38px] w-[111px] items-center justify-center rounded-[57px] bg-black/4"
-        >
-          <span className="font-figtree text-[16.04px] leading-[16.04px] font-medium text-black">
-            Resume
-          </span>
-        </a>
+        <Card className="xl:left-[13px] xl:top-[21px] xl:h-[301px] xl:w-[563px]">
+          <p className="type-lead-28 text-[#616161] xl:absolute xl:left-[19px] xl:top-[39px] xl:w-[522px]">
+            Product Designer with 2+years of experience, focused on creating
+            functional and user-centered digital products with visually stunning
+            designs.
+          </p>
+          <div className="mt-[20px] flex items-center justify-between gap-[16px] xl:mt-0 xl:block">
+            <Image
+              src="/images/about/social-links.png"
+              alt="Copy email, LinkedIn, Dribbble, Twitter"
+              width={725}
+              height={147}
+              className="h-[37px] w-[181px] xl:absolute xl:left-[21px] xl:top-[244px]"
+            />
+            <a
+              href="#"
+              className="flex h-[38px] w-[111px] shrink-0 items-center justify-center rounded-[57px] bg-black/4 xl:absolute xl:left-[432px] xl:top-[243px]"
+            >
+              <span className="font-figtree text-[16.04px] leading-[16.04px] font-medium text-black">
+                Resume
+              </span>
+            </a>
+          </div>
+        </Card>
 
         {/* ---- "Good design is balanced." — 5854:51092, 563x572 at (13,346) ---- */}
-        <div className="absolute left-[13px] top-[346px] h-[572px] w-[563px] rounded-[20px] border border-hairline bg-white" />
-        {/*
-          5854:51095 is a MIXED-fill text node, not one gradient:
-            "Good design is" -> SOLID #000000 at full opacity
-            "balanced."      -> linear gradient black@41% -> black@15%
-          Painting the section-heading gradient (50% -> 4%) across both, as
-          this previously did, washed the first line out to near-invisible.
-        */}
-        <h3 className="type-quote-72 absolute left-[37px] top-[370px] w-[515px]">
-          <span className="text-black">Good design is</span>
-          <br />
-          <span
-            className="bg-clip-text text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(180deg, rgba(0,0,0,0.41) 0%, rgba(0,0,0,0.15) 100%)",
-            }}
-          >
-            balanced.
-          </span>
-        </h3>
-        <p className="absolute left-[37px] top-[540px] w-[485px] text-[14px] leading-[20px] text-[#6b6b6b]">
-          Strategic thinker crafting clean, effective designs that seamlessly
-          blend user delight with business success.
-        </p>
-        {/*
-          Animated yin-yang supplied by the user, replacing the still export.
-          Converted from a 14.2MB / 180-frame GIF to animated WebP at half the
-          frame count with doubled durations — same motion and timing, 1.7MB.
-          `unoptimized` keeps Next from collapsing it to a single frame.
-        */}
-        <Image
-          src="/images/about/balanced.webp"
-          alt=""
-          width={620}
-          height={503}
-          unoptimized
-          className="absolute left-[120px] top-[612px] h-[269px] w-[348px] rounded-[20px] object-contain"
-        />
+        <Card className="xl:left-[13px] xl:top-[346px] xl:h-[572px] xl:w-[563px]">
+          {/*
+            5854:51095 is a MIXED-fill text node, not one gradient:
+              "Good design is" -> SOLID #000000 at full opacity
+              "balanced."      -> linear gradient black@41% -> black@15%
+            Painting the section-heading gradient (50% -> 4%) across both, as
+            this previously did, washed the first line out to near-invisible.
+          */}
+          <h3 className="type-quote-72 xl:absolute xl:left-[24px] xl:top-[24px] xl:w-[515px]">
+            <span className="text-black">Good design is</span>
+            <br />
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(0,0,0,0.41) 0%, rgba(0,0,0,0.15) 100%)",
+              }}
+            >
+              balanced.
+            </span>
+          </h3>
+          <p className="mt-[16px] text-[14px] leading-[20px] text-[#6b6b6b] xl:absolute xl:left-[24px] xl:top-[194px] xl:mt-0 xl:w-[485px]">
+            Strategic thinker crafting clean, effective designs that seamlessly
+            blend user delight with business success.
+          </p>
+          {/*
+            Animated yin-yang supplied by the user, replacing the still export.
+            Converted from a 14.2MB / 180-frame GIF to animated WebP at half the
+            frame count with doubled durations — same motion and timing, 1.7MB.
+            `unoptimized` keeps Next from collapsing it to a single frame.
+          */}
+          <Image
+            src="/images/about/balanced.webp"
+            alt=""
+            width={620}
+            height={503}
+            unoptimized
+            className="mx-auto mt-[20px] h-auto w-full max-w-[348px] rounded-[20px] object-contain xl:absolute xl:left-[107px] xl:top-[266px] xl:mt-0 xl:h-[269px] xl:w-[348px]"
+          />
+        </Card>
 
         {/* ---- Favorite Jams — border 5854:51099, 563x542 at (13,942) ---- */}
-        <div className="absolute left-[13px] top-[942px] h-[542px] w-[563px] rounded-[20px] border border-hairline bg-white" />
-        <h3 className="absolute left-[29px] top-[966px] text-[20px] leading-[18px] font-medium text-black">
-          Jams I Keep Coming Back To
-        </h3>
-        {JAMS.map((top, i) => (
-          <Image
-            key={top}
-            src={`/images/about/jam-${i + 1}.png`}
-            alt=""
-            width={1078}
-            height={164}
-            className="absolute left-[25px] h-[82px] w-[539px]"
-            style={{ top }}
-          />
-        ))}
+        <Card className="xl:left-[13px] xl:top-[942px] xl:h-[542px] xl:w-[563px]">
+          <h3 className="text-[20px] leading-[18px] font-medium text-black xl:absolute xl:left-[16px] xl:top-[24px]">
+            Jams I Keep Coming Back To
+          </h3>
+          <div className="mt-[16px] flex flex-col gap-[10px] xl:mt-0 xl:block">
+            {JAMS.map((top, i) => (
+              <Image
+                key={top}
+                src={`/images/about/jam-${i + 1}.png`}
+                alt=""
+                width={1078}
+                height={164}
+                className="h-auto w-full xl:absolute xl:left-[12px] xl:top-[var(--y)] xl:h-[82px] xl:w-[539px]"
+                style={{ ["--y" as string]: `${top}px` }}
+              />
+            ))}
+          </div>
+        </Card>
 
         {/* ---- Column 2 — exports carry 4px shadow spill a side ---- */}
         <Image
@@ -194,92 +237,112 @@ export function About() {
           alt="Hey, Anujith here"
           width={1214}
           height={1151}
-          className="absolute left-[596px] top-[17px] h-[575.5px] w-[607px] max-w-none"
+          className="h-auto w-full rounded-[20px] xl:absolute xl:left-[596px] xl:top-[17px] xl:h-[575.5px] xl:w-[607px] xl:max-w-none xl:rounded-none"
         />
         <Image
           src="/images/about/design-stack.png"
           alt="Design stack"
           width={1214}
           height={544}
-          className="absolute left-[596px] top-[608px] h-[272px] w-[607px] max-w-none"
+          className="h-auto w-full rounded-[20px] xl:absolute xl:left-[596px] xl:top-[608px] xl:h-[272px] xl:w-[607px] xl:max-w-none xl:rounded-none"
         />
         {/*
           5854:51257 — a Photos component instance, not a still. Ten variants
           with an AFTER_TIMEOUT of 3s between them, each carrying its own
           caption, plus a pagination rail. Rendered as a live carousel.
         */}
-        <PhotoCarousel className="absolute left-[600px] top-[900px] h-[584px] w-[599px]" />
+        <div
+          className="fit-canvas md:col-span-2 xl:absolute xl:left-[600px] xl:top-[900px] xl:h-[584px] xl:w-[599px] xl:max-w-none"
+          style={{ ["--fw" as string]: 599, ["--fh" as string]: 584 }}
+        >
+          <PhotoCarousel className="absolute inset-0 h-full w-full" />
+        </div>
 
         {/* ---- Education — 5854:51100, 572x228 at (1223,21) ---- */}
-        <div className="absolute left-[1223px] top-[21px] h-[228px] w-[572px] rounded-[20px] border border-hairline bg-white" />
-        <h3 className="absolute left-[1255px] top-[53px] text-[20px] leading-[20.62px] font-medium text-black">
-          Education
-        </h3>
-        {EDUCATION.map((e) => (
-          <div key={e.years}>
-            <span
-              className="absolute left-[1255px] text-[18px] leading-[25.66px] font-normal text-black"
-              style={{ top: e.top }}
-            >
-              {e.years}
-            </span>
-            <span
-              className="absolute left-[1422px] w-[322px] text-[18px] leading-[22.46px] font-medium text-black"
-              style={{ top: e.top }}
-            >
-              {e.degree}
-            </span>
-            <span
-              className="absolute left-[1422px] w-[322px] text-[16px] leading-[22.46px] font-medium text-black/40"
-              style={{ top: e.top + 28 }}
-            >
-              {e.school}
-            </span>
+        <Card className="xl:left-[1223px] xl:top-[21px] xl:h-[228px] xl:w-[572px]">
+          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[32px] xl:top-[32px]">
+            Education
+          </h3>
+          <div className="mt-[18px] flex flex-col gap-[16px] xl:mt-0 xl:block">
+            {EDUCATION.map((e) => (
+              <div
+                key={e.years}
+                className="flex flex-col gap-[2px] sm:flex-row sm:gap-[24px] xl:block"
+              >
+                <span
+                  className="shrink-0 text-[18px] leading-[25.66px] font-normal text-black xl:absolute xl:left-[32px] xl:top-[var(--y)]"
+                  style={{ ["--y" as string]: `${e.top}px` }}
+                >
+                  {e.years}
+                </span>
+                <span className="xl:contents">
+                  <span
+                    className="block text-[18px] leading-[22.46px] font-medium text-black xl:absolute xl:left-[199px] xl:top-[var(--y)] xl:w-[322px]"
+                    style={{ ["--y" as string]: `${e.top}px` }}
+                  >
+                    {e.degree}
+                  </span>
+                  <span
+                    className="block text-[16px] leading-[22.46px] font-medium text-black/40 xl:absolute xl:left-[199px] xl:top-[var(--y)] xl:w-[322px]"
+                    style={{ ["--y" as string]: `${e.top + 28}px` }}
+                  >
+                    {e.school}
+                  </span>
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </Card>
 
         {/* ---- Experience — 5854:51122, 572x1211 at (1223,273) ---- */}
-        <div className="absolute left-[1223px] top-[273px] h-[1211px] w-[572px] rounded-[20px] border border-hairline bg-white" />
-        <h3 className="absolute left-[1247px] top-[297px] text-[20px] leading-[20.62px] font-medium text-black">
-          My Experience so far
-        </h3>
-        {EXPERIENCE.map((x) => (
-          <div key={x.company}>
-            <Image
-              src={`/images/about/${x.logo}`}
-              alt=""
-              width={216}
-              height={216}
-              className="absolute left-[1247px] h-[42px] w-[42px] rounded-[8px] object-contain"
-              style={{ top: x.logoTop }}
-            />
-            <span
-              className="absolute left-[1301px] text-[18px] leading-[28.8px] font-medium text-[#0f0f0f]"
-              style={{ top: x.logoTop + 7 }}
-            >
-              {x.company}
-            </span>
-            <span
-              className="absolute text-right text-[18px] leading-[28.8px] font-normal text-[#0f0f0f]"
-              style={{ top: x.logoTop + 1, left: x.datesLeft, width: x.datesWidth }}
-            >
-              {x.dates}
-            </span>
-            <p
-              className="absolute left-[1247px] text-[18px] leading-[28.8px]"
-              style={{ top: x.logoTop + 66 }}
-            >
-              <span className="font-medium text-[#0f0f0f]">{x.role}</span>
-              <span className="font-normal text-[#616161]">{x.mode}</span>
-            </p>
-            <p
-              className="absolute left-[1247px] w-[521px] text-[18px] leading-[28.8px] font-normal text-[#616161]"
-              style={{ top: x.logoTop + 102, height: x.bodyHeight }}
-            >
-              {x.body}
-            </p>
+        <Card className="md:col-span-2 xl:left-[1223px] xl:top-[273px] xl:h-[1211px] xl:w-[572px]">
+          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[24px] xl:top-[24px]">
+            My Experience so far
+          </h3>
+          <div className="mt-[20px] flex flex-col gap-[28px] xl:mt-0 xl:block">
+            {EXPERIENCE.map((x) => (
+              <div key={x.company} className="xl:contents">
+                <div className="flex items-start gap-[12px] xl:contents">
+                  <Image
+                    src={`/images/about/${x.logo}`}
+                    alt=""
+                    width={216}
+                    height={216}
+                    className="h-[42px] w-[42px] shrink-0 rounded-[8px] object-contain xl:absolute xl:left-[24px] xl:top-[var(--y)]"
+                    style={{ ["--y" as string]: `${x.logoTop}px` }}
+                  />
+                  <div className="flex min-w-0 flex-1 flex-wrap items-baseline justify-between gap-x-[12px] xl:contents">
+                    <span
+                      className="text-[18px] leading-[28.8px] font-medium text-[#0f0f0f] xl:absolute xl:left-[78px] xl:top-[var(--y)]"
+                      style={{ ["--y" as string]: `${x.logoTop + 7}px` }}
+                    >
+                      {x.company}
+                    </span>
+                    <span
+                      className="text-[16px] leading-[28.8px] font-normal text-[#0f0f0f] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:w-[var(--w)] xl:text-right xl:text-[18px]"
+                      style={{ ["--y" as string]: `${x.logoTop + 1}px`, ["--x" as string]: `${x.datesLeft}px`, ["--w" as string]: `${x.datesWidth}px` }}
+                    >
+                      {x.dates}
+                    </span>
+                  </div>
+                </div>
+                <p
+                  className="mt-[10px] text-[17px] leading-[26px] xl:absolute xl:left-[24px] xl:top-[var(--y)] xl:mt-0 xl:text-[18px] xl:leading-[28.8px]"
+                  style={{ ["--y" as string]: `${x.logoTop + 66}px` }}
+                >
+                  <span className="font-medium text-[#0f0f0f]">{x.role}</span>
+                  <span className="font-normal text-[#616161]">{x.mode}</span>
+                </p>
+                <p
+                  className="mt-[6px] text-[16px] leading-[26px] font-normal text-[#616161] xl:absolute xl:left-[24px] xl:top-[var(--y)] xl:mt-0 xl:h-[var(--h)] xl:w-[521px] xl:text-[18px] xl:leading-[28.8px]"
+                  style={{ ["--y" as string]: `${x.logoTop + 102}px`, ["--h" as string]: `${x.bodyHeight}px` }}
+                >
+                  {x.body}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
+        </Card>
       </div>
     </section>
   );

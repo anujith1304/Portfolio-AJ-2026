@@ -24,7 +24,7 @@ export function Footer() {
   return (
     <section
       id="contact"
-      className="relative h-[712px] w-[1905px]"
+      className="page-x relative flex w-full flex-col items-start pt-[48px] pb-[64px] xl:block xl:h-[712px] xl:w-[1905px] xl:pt-0 xl:pb-0"
     >
       {/*
         5854:51585 — image card above the copy, 348x224 at (400,166).
@@ -42,28 +42,35 @@ export function Footer() {
         alt=""
         width={696}
         height={448}
-        className="absolute left-[400px] top-[166px] h-[224px] w-[348px] max-w-none"
+        className="h-auto w-full max-w-[348px] xl:absolute xl:left-[400px] xl:top-[166px] xl:h-[224px] xl:w-[348px] xl:max-w-none"
       />
 
       {/* 5854:51588 — email line at (400,406); copy control at (938,412) */}
-      <p className="absolute left-[400px] top-[406px] w-[558px]">
-        <span className="type-circ-24-sm text-black/50">Drop me a text on </span>
-        <a
-          href="mailto:anujithchand2002@gmail.com"
-          className="type-email-24 text-black/70"
-        >
-          anujithchand2002@gmail.com
-        </a>
-      </p>
-      <CopyEmail email="anujithchand2002@gmail.com" />
+      {/*
+        The copy control sits at its own frame coordinate at xl. In flow it
+        belongs beside the address, so the two share a row and the wrapper is
+        flattened at xl (`contents`) to leave both on their Figma offsets.
+      */}
+      <div className="mt-[24px] flex w-full flex-wrap items-center gap-x-[10px] xl:contents">
+        <p className="w-auto xl:absolute xl:left-[400px] xl:top-[406px] xl:w-[558px]">
+          <span className="type-circ-24-sm text-black/50">Drop me a text on </span>
+          <a
+            href="mailto:anujithchand2002@gmail.com"
+            className="type-email-24 text-black/70"
+          >
+            anujithchand2002@gmail.com
+          </a>
+        </p>
+        <CopyEmail email="anujithchand2002@gmail.com" />
+      </div>
 
       {/* 5854:51592 — Recoleta Medium 72/-1.28, no ss02 (plain Recoleta) */}
-      <h2 className="type-connect absolute left-[399px] top-[462px] w-[945px] text-black/70">
+      <h2 className="type-connect mt-[16px] w-full text-black/70 xl:absolute xl:left-[399px] xl:top-[462px] xl:mt-0 xl:w-[945px]">
         Let&rsquo;s Connect - or collaborate
       </h2>
 
       {/* 5854:51593 — Circular Std Book 24/32/-0.4 */}
-      <p className="type-circ-24-lg absolute left-[399px] top-[562px] w-[945px] text-black/50">
+      <p className="type-circ-24-lg mt-[12px] w-full text-black/50 xl:absolute xl:left-[399px] xl:top-[562px] xl:mt-0 xl:w-[945px]">
         Curious about my work? (or) just craving a deep dive into products &amp;
         the rest of life&rsquo;s good stuff?, Let&rsquo;s chat.
       </p>
@@ -74,7 +81,7 @@ export function Footer() {
         alt="Email, LinkedIn, Dribbble, Twitter"
         width={184}
         height={40}
-        className="absolute left-[400px] top-[642px] h-[40px] w-[184px]"
+        className="mt-[28px] h-[40px] w-[184px] xl:absolute xl:left-[400px] xl:top-[642px] xl:mt-0"
       />
 
       {/* 5854:51685 — "image 166", image fill at 80% opacity */}
@@ -83,7 +90,7 @@ export function Footer() {
         alt=""
         width={300}
         height={300}
-        className="absolute left-[1739px] top-[587px] h-[98px] w-[134px] object-cover opacity-80"
+        className="mt-[24px] h-[98px] w-[134px] self-end object-cover opacity-80 xl:absolute xl:left-[1739px] xl:top-[587px] xl:mt-0"
       />
     </section>
   );

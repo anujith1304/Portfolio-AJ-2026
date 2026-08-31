@@ -8,12 +8,17 @@ import { LocalTime } from "@/components/LocalTime";
  *  - Variant 2  (0,0)     218x56 — location + local time
  *  - Frame …451 (887,9)   87x38  — scroll cue, VERTICAL gap 15
  *  - Variant 1  (1643,11) 158x34 — availability
+ *
+ * Those offsets only hold at the 1801px width, so they sit behind `xl:`. Below
+ * it the three groups are a flex row: location and availability at the ends,
+ * and the scroll cue — a pointer affordance with little meaning on touch —
+ * only from tablet up.
  */
 export function StatusBar() {
   return (
-    <div className="relative h-[56px] w-[1801px]">
+    <div className="relative flex w-full items-start justify-between gap-x-[16px] xl:h-[56px] xl:w-[1801px]">
       {/* Variant 2 — location */}
-      <div className="absolute left-0 top-0 w-[219px]">
+      <div className="w-auto shrink-0 xl:absolute xl:left-0 xl:top-0 xl:w-[219px]">
         <p className="type-status text-black/60">Based in Tamil nadu</p>
         <span className="mt-[4px] flex items-center gap-[6px]">
           <LocalTime className="type-meta-12 text-black/40" />
@@ -26,7 +31,7 @@ export function StatusBar() {
       {/* Scroll cue */}
       <a
         href="#works"
-        className="absolute left-[887px] top-[9px] flex w-[87px] flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50"
+        className="hidden shrink-0 flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50 md:flex xl:absolute xl:left-[887px] xl:top-[9px] xl:w-[87px]"
       >
         <span className="type-scroll-16">
           Scroll down
@@ -43,7 +48,7 @@ export function StatusBar() {
       </a>
 
       {/* Variant 1 — availability */}
-      <div className="absolute left-[1643px] top-[11px] h-[34px] w-[158px]">
+      <div className="relative h-[34px] w-[158px] shrink-0 xl:absolute xl:left-[1643px] xl:top-[11px]">
         <span className="absolute left-[11px] top-0 type-avail-16 text-black/60">
           Freelance Availibility
         </span>

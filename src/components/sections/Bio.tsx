@@ -44,13 +44,17 @@ const CARDS: Card[] = [
   { src: "bio-manga.png",        alt: "",  left: 320, top: 492, w: 482, h: 322 },
 ];
 
+/** The collage's design canvas — every card is placed as a share of this. */
+const CANVAS_W = 797;
+const CANVAS_H = 808;
+
 export function Bio() {
   return (
-    <section className="flex h-[808px] w-[1808px] items-center justify-between">
+    <section className="page-x flex w-full flex-col items-start gap-[40px] xl:h-[808px] xl:w-[1808px] xl:flex-row xl:items-center xl:justify-between xl:gap-0">
       {/* 5854:49705 — copy column */}
-      <div className="flex w-[960px] flex-col gap-[54px]">
+      <div className="flex w-full flex-col gap-[28px] xl:w-[960px] xl:gap-[54px]">
         {/* 5854:49706 — Satoshi Medium 72/86/-2.4, base black@30, accents black@80 */}
-        <div className="flex h-[684px] flex-col justify-center">
+        <div className="flex flex-col justify-center xl:h-[684px]">
           <p className="type-display-72 whitespace-pre-wrap text-black/30">
             {"I’m a Product Designer who focuses on crafting intuitive digital experiences. Previously    a founding designer at "}
             <span className="text-black/80">{"Get My Stock "}</span>
@@ -67,14 +71,14 @@ export function Bio() {
         </div>
 
         {/* 5854:49707 — role + dates, gap 8 */}
-        <div className="flex h-[70px] w-[344px] flex-col gap-[8px]">
-          <div className="flex h-[38px] flex-col justify-center">
+        <div className="flex w-full flex-col gap-[8px] xl:h-[70px] xl:w-[344px]">
+          <div className="flex flex-col justify-center xl:h-[38px]">
             <p className="type-role-32 text-black">
               {"Role ~ "}
               <span className="type-circ-32">Product Designer</span>
             </p>
           </div>
-          <div className="flex h-[24px] flex-col justify-center">
+          <div className="flex flex-col justify-center xl:h-[24px]">
             <p className="type-date-20 text-black/40">
               {"April 2025 - "}
               <span className="type-circ-20-sm">Present</span>
@@ -84,18 +88,30 @@ export function Bio() {
       </div>
 
       {/* 5854:49710 — collage */}
-      <div className="relative h-[808px] w-[797px]">
-        {CARDS.map((c) =>
-          c.card ? (
+      {/*
+        Artwork only — hand-placed offsets with no text — so the collage keeps
+        its proportions instead of reflowing. Each card's Figma rectangle is
+        expressed as a percentage of the 797x808 canvas, which resolves back to
+        the exact pixel values at the design width.
+      */}
+      <div
+        className="fit-canvas mx-auto xl:mx-0"
+        style={{ ["--fw" as string]: 797, ["--fh" as string]: 808 }}
+      >
+        {CARDS.map((c) => {
+          const box = {
+            left: `${(c.left / CANVAS_W) * 100}%`,
+            top: `${(c.top / CANVAS_H) * 100}%`,
+            width: `${(c.w / CANVAS_W) * 100}%`,
+            height: `${(c.h / CANVAS_H) * 100}%`,
+          };
+          return c.card ? (
             /* Figma card chrome: white, r16, and the collage drop shadow. */
             <div
               key={c.src}
               className="absolute flex items-center justify-center rounded-[16px] bg-white"
               style={{
-                left: c.left,
-                top: c.top,
-                width: c.w,
-                height: c.h,
+                ...box,
                 boxShadow:
                   "0.5px 0.5px 2px 0px rgba(103,109,124,0.12), 0px 2px 4px 0px rgba(103,109,124,0.1)",
               }}
@@ -105,7 +121,7 @@ export function Bio() {
                 alt={c.alt}
                 width={c.w * 4}
                 height={c.h * 4}
-                className="h-[104px] w-[104px] object-contain"
+                className="h-[62%] w-[33%] object-contain"
               />
             </div>
           ) : (
@@ -115,11 +131,11 @@ export function Bio() {
               alt={c.alt}
               width={c.w * 2}
               height={c.h * 2}
-              className="absolute max-w-none"
-              style={{ left: c.left, top: c.top, width: c.w, height: c.h }}
+              className="absolute max-w-none object-contain"
+              style={box}
             />
-          ),
-        )}
+          );
+        })}
       </div>
     </section>
   );

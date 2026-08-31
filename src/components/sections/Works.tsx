@@ -88,11 +88,11 @@ function Card({ work }: { work: Work }) {
   const inner = (
     <>
       {/* Overlay — 877x64 at (8,8), #f8f8f8, r16 */}
-      <div className="absolute left-[8px] top-[8px] flex h-[64px] w-[877px] items-center rounded-[16px] border border-hairline-soft bg-surface-muted">
-        <span className="type-eyebrow-20 absolute left-[20px] text-black/60">
+      <div className="m-[8px] flex h-[56px] items-center justify-between gap-[12px] rounded-[16px] border border-hairline-soft bg-surface-muted px-[16px] xl:absolute xl:left-[8px] xl:top-[8px] xl:m-0 xl:h-[64px] xl:w-[877px] xl:justify-start">
+        <span className="type-eyebrow-20 truncate text-black/60 xl:absolute xl:left-[20px]">
           {work.title}
         </span>
-        <span className="type-eyebrow-20 absolute right-[18px] text-black/60">
+        <span className="type-eyebrow-20 shrink-0 text-black/60 xl:absolute xl:right-[18px]">
           {work.index}
         </span>
       </div>
@@ -104,13 +104,13 @@ function Card({ work }: { work: Work }) {
         shipped and cross-faded. Fading a single 70% export up to full instead
         would wash the mockup out, because the dimming is baked into it.
       */}
-      <div className="absolute left-[8px] top-[80px] h-[514px] w-[874px] overflow-hidden rounded-[16px]">
+      <div className="relative mx-[8px] mb-[8px] overflow-hidden rounded-[16px] xl:absolute xl:left-[8px] xl:top-[80px] xl:mx-0 xl:mb-0 xl:h-[514px] xl:w-[874px]">
         <Image
           src={`/images/works/${work.image}`}
           alt={work.title}
           width={1748}
           height={1028}
-          className="h-[514px] w-[874px] max-w-none"
+          className="block h-auto w-full xl:h-[514px] xl:w-[874px] xl:max-w-none"
         />
         {work.hoverImage && (
           <Image
@@ -119,7 +119,7 @@ function Card({ work }: { work: Work }) {
             aria-hidden
             width={1748}
             height={1028}
-            className="absolute inset-0 h-[514px] w-[874px] max-w-none opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="absolute inset-0 block h-full w-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 xl:h-[514px] xl:w-[874px] xl:max-w-none"
           />
         )}
       </div>
@@ -136,21 +136,34 @@ function Card({ work }: { work: Work }) {
    * are plain frames with no hover reaction, so they stay inert.
    */
   const shell =
-    "group absolute h-[602px] w-[893px] rounded-[24px] bg-white transition-opacity duration-300 ease-out" +
+    "group relative block h-auto w-full rounded-[24px] bg-white transition-opacity duration-300 ease-out " +
+    "xl:absolute xl:left-[var(--card-x)] xl:top-[var(--card-y)] xl:h-[602px] xl:w-[893px] " +
     (work.dims
       ? " opacity-90 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30"
       : "");
 
+  /*
+   * Below xl the grid is a flow column, so the card drops its Figma offsets and
+   * sizes to the column. Its inner chrome is a fixed 893x602 composition, which
+   * scales to fit — the card is artwork plus a two-line header, and the header
+   * is re-drawn in flow above it rather than scaled down with the mockup.
+   */
+  /*
+   * The Figma offsets ride on custom properties rather than inline left/top:
+   * an inline style applies at every width, and below xl the card is in flow,
+   * where a left/top would shove it out of its column. The properties are only
+   * read by the xl rule.
+   */
+  const pos = {
+    ["--card-x" as string]: `${work.left}px`,
+    ["--card-y" as string]: `${work.top}px`,
+  } as React.CSSProperties;
   return work.href ? (
-    <Link
-      href={work.href}
-      className={shell}
-      style={{ left: work.left, top: work.top }}
-    >
+    <Link href={work.href} className={shell} style={pos}>
       {inner}
     </Link>
   ) : (
-    <div className={shell} style={{ left: work.left, top: work.top }}>
+    <div className={shell} style={pos}>
       {inner}
     </div>
   );
@@ -158,15 +171,15 @@ function Card({ work }: { work: Work }) {
 
 export function Works() {
   return (
-    <section id="works" className="flex w-[1808px] flex-col gap-[48px]">
+    <section id="works" className="page-x flex w-full flex-col gap-[28px] xl:w-[1808px] xl:gap-[48px]">
       {/* 5854:49862 */}
-      <div className="flex h-[90px] w-[1808px] items-center justify-between">
+      <div className="flex w-full items-center justify-between gap-[16px] xl:h-[90px] xl:w-[1808px]">
         {/*
           5854:49863 — Satoshi Medium 72/45.6/-2.5, filled with a vertical
           linear gradient (black@50% -> black@4%), not a solid colour.
         */}
         <h2
-          className="type-works-72 flex h-[90px] w-[898px] items-center bg-clip-text text-transparent"
+          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[90px] xl:w-[898px]"
           style={{
             backgroundImage:
               "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.04) 100%)",
@@ -181,12 +194,12 @@ export function Works() {
           alt="Two column layout"
           width={240}
           height={120}
-          className="h-[60px] w-[120px]"
+          className="hidden h-[60px] w-[120px] md:block"
         />
       </div>
 
       {/* 5854:49876 */}
-      <div className="relative h-[1228px] w-[1808px]">
+      <div className="flex flex-col gap-[24px] md:grid md:grid-cols-2 md:gap-[24px] xl:relative xl:block xl:h-[1228px] xl:w-[1808px]">
         {WORKS.map((w) => (
           <Card key={w.index} work={w} />
         ))}

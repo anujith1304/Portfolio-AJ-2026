@@ -25,7 +25,7 @@ import { Nav } from "@/components/Nav";
  */
 export function CaseNav() {
   return (
-    <div className="fixed left-[calc(50%-223.5px)] top-[35px] z-50">
+    <div className="fixed left-1/2 top-[16px] z-50 w-[min(452px,calc(100vw-32px))] -translate-x-1/2 xl:left-[calc(50%-223.5px)] xl:top-[35px] xl:w-auto xl:translate-x-0">
       <Nav base="/" active="Case Studies" />
     </div>
   );

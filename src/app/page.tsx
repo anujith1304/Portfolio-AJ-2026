@@ -32,7 +32,7 @@ import { canvasSurface } from "@/lib/canvas";
 export default function Home() {
   return (
     <main
-      className="relative mx-auto h-[7305px] w-[1904px]"
+      className="relative mx-auto w-full overflow-x-clip xl:h-[7305px] xl:w-[1904px] xl:overflow-x-visible"
       style={canvasSurface}
     >
       {/* 5854:49627 — page-level backdrop, behind the section stack */}
@@ -41,7 +41,7 @@ export default function Home() {
         alt=""
         width={3808}
         height={1424}
-        className="absolute left-1/2 top-[6593px] h-[712px] w-screen min-w-[1904px] max-w-none -translate-x-1/2 object-cover"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[6593px] xl:min-w-[1904px]"
       />
 
       {/*
@@ -54,25 +54,25 @@ export default function Home() {
       */}
       <div
         aria-hidden
-        className="absolute left-1/2 top-[6578px] h-[794px] w-screen min-w-[1904px] -translate-x-1/2"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[6578px] xl:bottom-auto xl:min-w-[1904px]"
         style={{
           backgroundImage:
             "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",
         }}
       />
 
-      <div className="relative flex flex-col items-start gap-[120px]">
+      <div className="relative flex flex-col items-stretch gap-[64px] md:gap-[88px] xl:items-start xl:gap-[120px]">
         <Hero />
-        <div className="ml-[49px]">
+        <div className="xl:ml-[49px]">
           <Bio />
         </div>
-        <div className="ml-[49px]">
+        <div className="xl:ml-[49px]">
           <Works />
         </div>
-        <div className="ml-[49px]">
+        <div className="xl:ml-[49px]">
           <About />
         </div>
-        <div className="ml-[399px]">
+        <div className="xl:ml-[399px]">
           <Testimonials />
         </div>
         <Footer />
