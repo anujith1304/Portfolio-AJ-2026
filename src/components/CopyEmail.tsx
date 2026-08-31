@@ -12,9 +12,10 @@ import { useState } from "react";
  * short confirmation after copying rather than as always-visible text.
  */
 /*
- * At xl this sits inside the (absolutely positioned) email paragraph, so its
- * offsets are relative to that box rather than the section: the file puts the
- * control at (938,6923) and the paragraph at (400,6917), hence 538/6.
+ * Sits inline at the end of the address, which is display type in the current
+ * footer, so it scales with the line rather than sitting on a fixed offset.
+ * No absolute positioning: it followed a coordinate in the previous layout and
+ * ended up in the corner when the address moved.
  */
 export function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
@@ -34,18 +35,18 @@ export function CopyEmail({ email }: { email: string }) {
       type="button"
       onClick={copy}
       aria-label={copied ? "Email copied" : "Copy email"}
-      className="relative -mt-[2px] ml-[6px] inline-flex h-[20px] w-[20px] shrink-0 cursor-pointer align-middle opacity-60 transition-opacity hover:opacity-100 xl:absolute xl:left-[538px] xl:top-[6px] xl:ml-0"
+      className="relative ml-[10px] inline-flex h-[0.32em] w-[0.32em] min-h-[18px] min-w-[18px] shrink-0 translate-y-[-0.06em] cursor-pointer items-center justify-center opacity-45 transition-opacity hover:opacity-90"
     >
       <Image
         src="/images/footer/copy.svg"
         alt=""
         width={20}
         height={20}
-        className="h-[20px] w-[20px]"
+        className="h-full w-full"
       />
       <span
         aria-hidden
-        className={`pointer-events-none absolute left-[26px] top-[1px] whitespace-nowrap text-[12px] leading-[18px] text-black/50 transition-opacity ${
+        className={`pointer-events-none absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 whitespace-nowrap text-[12px] leading-[18px] font-medium text-black/50 transition-opacity ${
           copied ? "opacity-100" : "opacity-0"
         }`}
       >
