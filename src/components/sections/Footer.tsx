@@ -2,8 +2,19 @@ import Image from "@/components/Img";
 import { CopyEmail } from "@/components/CopyEmail";
 
 /**
- * Footer / Contact — Figma 5854:51580 "Frame 2147228584".
- * 1905x712 at page y=6578, VERTICAL, gap 10, padding 27/32.
+ * Footer / Contact — Figma home frame 5908:32522, page y 6578.
+ *
+ * Rebuilt against the current frame. The offsets here previously came from
+ * 5854:49620, the home frame Figma has since replaced, and every element was
+ * 67px low as a result — that frame's footer group started at 6578 where this
+ * one starts at 6511. Coordinates are now taken from the live nodes:
+ *
+ *   connect card  5908:34495  (400,6677) 348x224 r24
+ *   email row     5908:34496  (400,6917) 558x32, copy control at 938
+ *   heading       5908:34401  (399,6973) 945x80  Recoleta Medium 72 @70%
+ *   body          5908:34402  (399,7073) 945x64  Circular Std Book 24/32 @50%
+ *   socials       5908:34403  (400,7153) 184x40  four 40x40 discs, gap 8
+ *   badge         5908:34500  (1738,7180) 134x98
  *
  * Panel 5854:51581 (the 1904x794 gradient that fades the artwork in) is NOT
  * rendered here. The artwork it sits over ("image 163", 5854:49627) is a
@@ -37,13 +48,21 @@ export function Footer() {
         since it is black line art; the fill only reaches what connects to the
         edge, so the linework is untouched.
       */}
-      <Image
-        src="/images/footer/connect-card.png"
-        alt=""
-        width={696}
-        height={448}
-        className="h-auto w-full max-w-[240px] sm:max-w-[300px] xl:absolute xl:left-[400px] xl:top-[166px] xl:h-[224px] xl:w-[348px] xl:max-w-none"
-      />
+      {/*
+        The card has a #f5f5f5 ground and a 24px radius in the file. The bitmap
+        keeps its transparency — the opaque block baked into the export was what
+        made it read as a white rectangle — and the ground is painted here, so
+        the artwork sits on a card rather than floating over the backdrop.
+      */}
+      <div className="w-full max-w-[300px] overflow-hidden rounded-[24px] bg-[#f5f5f5] sm:max-w-[348px] xl:absolute xl:left-[400px] xl:top-[99px] xl:h-[224px] xl:w-[348px] xl:max-w-none">
+        <Image
+          src="/images/footer/connect-card.png"
+          alt=""
+          width={696}
+          height={448}
+          className="h-auto w-full xl:h-[224px] xl:w-[348px]"
+        />
+      </div>
 
       {/* 5854:51588 — email line at (400,406); copy control at (938,412) */}
       {/*
@@ -58,7 +77,7 @@ export function Footer() {
         three inline pushed the control onto a third line by itself.
       */}
       <div className="mt-[24px] w-full xl:contents">
-        <p className="w-full xl:absolute xl:left-[400px] xl:top-[406px] xl:w-[558px]">
+        <p className="w-full xl:absolute xl:left-[400px] xl:top-[339px] xl:w-[558px]">
           <span className="type-circ-24-sm block text-black/50 xl:inline">
             Drop me a text on{" "}
           </span>
@@ -77,12 +96,12 @@ export function Footer() {
       </div>
 
       {/* 5854:51592 — Recoleta Medium 72/-1.28, no ss02 (plain Recoleta) */}
-      <h2 className="type-connect mt-[16px] w-full text-black/70 xl:absolute xl:left-[399px] xl:top-[462px] xl:mt-0 xl:w-[945px]">
+      <h2 className="type-connect mt-[20px] w-full text-black/70 xl:absolute xl:left-[399px] xl:top-[395px] xl:mt-0 xl:w-[945px]">
         Let&rsquo;s Connect - or collaborate
       </h2>
 
       {/* 5854:51593 — Circular Std Book 24/32/-0.4 */}
-      <p className="type-circ-24-lg measure mt-[12px] w-full text-black/50 xl:absolute xl:left-[399px] xl:top-[562px] xl:mt-0 xl:w-[945px] xl:max-w-none">
+      <p className="type-circ-24-lg measure mt-[14px] w-full text-black/50 xl:absolute xl:left-[399px] xl:top-[495px] xl:mt-0 xl:w-[945px] xl:max-w-none">
         Curious about my work? (or) just craving a deep dive into products &amp;
         the rest of life&rsquo;s good stuff?, Let&rsquo;s chat.
       </p>
@@ -93,7 +112,7 @@ export function Footer() {
         alt="Email, LinkedIn, Dribbble, Twitter"
         width={184}
         height={40}
-        className="mt-[28px] h-[40px] w-[184px] xl:absolute xl:left-[400px] xl:top-[642px] xl:mt-0"
+        className="mt-[28px] h-[40px] w-[184px] xl:absolute xl:left-[400px] xl:top-[575px] xl:mt-0"
       />
 
       {/* 5854:51685 — "image 166", image fill at 80% opacity */}
@@ -102,7 +121,7 @@ export function Footer() {
         alt=""
         width={300}
         height={300}
-        className="mt-[32px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1739px] xl:top-[587px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
+        className="mt-[28px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1738px] xl:top-[602px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
       />
     </section>
   );

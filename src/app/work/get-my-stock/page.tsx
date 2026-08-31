@@ -22,8 +22,6 @@ type Block = {
   zoom?: boolean; src: string; alt: string; left: number; top: number; w: number; h: number };
 
 const BLOCKS: Block[] = [
-  // 5854:38588 solution grid — export 2108x1260 (2x of 1054x630), box 1046x628
-  { src: "gms-solutions.png", alt: "Four solution screens", left: 517, top: 4068, w: 1054, h: 630, zoom: true },
   // Stat visuals; each export covers render bounds, so it is centred on its box.
   { src: "gms-stat-1.png", alt: "", left: 704, top: 6337, w: 637, h: 520 },
   { src: "gms-stat-2.png", alt: "", left: 682, top: 6921, w: 681, h: 520 },
@@ -149,6 +147,8 @@ type Captioned = {
   h: number;
   /** Distance from the artwork's render bottom to the caption in Figma. */
   gap: number;
+  /** Offer the full-view control — only where the artwork rewards opening. */
+  zoom?: boolean;
   /**
    * Leading page name to set apart from the sentence. The file runs these as
    * one Regular text run, so "Home Page Consistent 20px grid spacing..." has
@@ -162,6 +162,12 @@ type Captioned = {
 };
 
 const CAPTIONED: Captioned[] = [
+  // Solution grid — 5908:15629, caption 5908:16409. Exported without the
+  // caption, which the file carries as a real 16px text node; baked in it was
+  // the tiny grey line under the artwork.
+  { src: "gms-solutions-art.png", alt: "Four solution screens", left: 517, top: 4067, w: 1054, h: 568, gap: 10, capX: 4, capW: 1024, order: 4069, zoom: true,
+    caption: "A structured design system that maintains visual consistency and improves the collaboration by standardizing UI components and design guidelines." },
+
   // Components — 5908:10849 / 5908:10863, caption 5908:10856 / 5908:12173
   { src: "gms-comp-1-art.png", alt: "Component library", left: 517, top: 9553, w: 1032, h: 536, gap: 14, capX: 4, capW: 1024, order: 9555,
     caption: "A structured design system that maintains visual consistency and improves the collaboration by standardizing UI components and design guidelines.",
@@ -496,6 +502,7 @@ export default function GetMyStockCaseStudy() {
             alt={c.alt}
             width={c.w * 2}
             height={c.h * 2}
+            zoomable={c.zoom}
             className="xl:h-[var(--fh)] xl:w-full"
             style={{ ["--fh" as string]: `${c.h}px` } as React.CSSProperties}
           />

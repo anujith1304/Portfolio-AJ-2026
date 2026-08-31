@@ -54,7 +54,7 @@ export default function Home() {
       */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[6578px] xl:bottom-auto xl:min-w-[1904px]"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[6511px] xl:bottom-auto xl:min-w-[1904px]"
         style={{
           backgroundImage:
             "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",

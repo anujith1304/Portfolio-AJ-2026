@@ -11,6 +11,11 @@ import { useState } from "react";
  * a hover state, so the label here is exposed as the accessible name and as a
  * short confirmation after copying rather than as always-visible text.
  */
+/*
+ * At xl this sits inside the (absolutely positioned) email paragraph, so its
+ * offsets are relative to that box rather than the section: the file puts the
+ * control at (938,6923) and the paragraph at (400,6917), hence 538/6.
+ */
 export function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -29,7 +34,7 @@ export function CopyEmail({ email }: { email: string }) {
       type="button"
       onClick={copy}
       aria-label={copied ? "Email copied" : "Copy email"}
-      className="relative -mt-[2px] ml-[6px] inline-flex h-[20px] w-[20px] shrink-0 cursor-pointer align-middle opacity-60 transition-opacity hover:opacity-100 xl:absolute xl:ml-0 xl:left-[938px] xl:top-[412px]"
+      className="relative -mt-[2px] ml-[6px] inline-flex h-[20px] w-[20px] shrink-0 cursor-pointer align-middle opacity-60 transition-opacity hover:opacity-100 xl:absolute xl:left-[538px] xl:top-[6px] xl:ml-0"
     >
       <Image
         src="/images/footer/copy.svg"
