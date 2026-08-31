@@ -6,7 +6,9 @@ import { LocalTime } from "@/components/LocalTime";
  *
  * Three groups, matching the frame's absolute offsets:
  *  - Variant 2  (0,0)     218x56 — location + local time
- *  - Frame …451 (887,9)   87x38  — scroll cue, VERTICAL gap 15
+ *  - Frame …451 (887,9)   87x38  — scroll cue, VERTICAL gap 15.
+ *    Centred on the bar rather than left at 887: the file's own offset puts it
+ *    ~43px right of centre, which reads as a misalignment on a bar this wide.
  *  - Variant 1  (1643,11) 158x34 — availability
  *
  * Those offsets only hold at the 1801px width, so they sit behind `xl:`. Below
@@ -31,7 +33,7 @@ export function StatusBar() {
       {/* Scroll cue */}
       <a
         href="#works"
-        className="hidden shrink-0 flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50 md:flex xl:absolute xl:left-[887px] xl:top-[9px] xl:w-[87px]"
+        className="hidden shrink-0 flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50 md:flex xl:absolute xl:left-1/2 xl:top-[9px] xl:w-[87px] xl:-translate-x-1/2"
       >
         <span className="type-scroll-16">
           Scroll down

@@ -214,7 +214,15 @@ export function Body({
 }) {
   return (
     <p
-      className="mb-[16px] whitespace-pre-line font-normal xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)] xl:text-[length:var(--fs)] xl:leading-[var(--lh)]"
+      /*
+       * Size and leading are classes, not inline style. Inline style beats a
+       * class at any width, so putting them there meant the xl variants never
+       * applied and every body rendered at the reflowed size on desktop too.
+       * The clamp was also malformed for the 16px bodies — its 17px floor was
+       * above its own ceiling, which CSS resolves to the floor — so those set
+       * at 17/1.65 instead of 16/24 and ran into the rules below them.
+       */
+      className="mb-[16px] whitespace-pre-line text-[17px] leading-[1.65] font-normal xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)] xl:text-[length:var(--fs)] xl:leading-[var(--lh)]"
       style={{
         ["--x" as string]: `${left}px`,
         ["--y" as string]: `${top}px`,
@@ -222,8 +230,6 @@ export function Body({
         ["--w" as string]: `${width}px`,
         ["--fs" as string]: `${size}px`,
         ["--lh" as string]: `${lh}px`,
-        fontSize: `clamp(17px, ${(size / 1280) * 100}vw, ${size}px)`,
-        lineHeight: 1.65,
         color,
       }}
     >

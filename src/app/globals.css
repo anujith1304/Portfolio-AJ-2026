@@ -46,6 +46,16 @@
   --font-display: var(--font-recoleta), Georgia, serif;
   --font-circular: var(--font-circular-std), ui-sans-serif, system-ui, sans-serif;
 
+  /*
+    The desktop layout is a fixed 1904/1905px canvas, so it only fits once the
+    viewport is that wide. Tailwind's default xl (1280) meant that between 1280
+    and 1904 the canvas was wider than the window and got clipped — the left
+    margin disappeared and content ran off the right. Redefining the breakpoint
+    moves every existing `xl:` variant to the width the layout actually needs,
+    with no markup changes.
+  */
+  --breakpoint-xl: 1905px;
+
   /* ---- Layout ---- */
   --spacing-frame: 1904px; /* frame width */
   --spacing-gutter: 48px; /* section inset: content starts at x=49 */
@@ -302,14 +312,14 @@ body {
    variants and flow normally below it.
 
    Everything in this file's responsive section is therefore scoped to
-   max-width: 1279px. Desktop rendering cannot change as a result of it —
+   max-width: 1904px. Desktop rendering cannot change as a result of it —
    which is what keeps the pixel-for-pixel Figma match that was verified
    against the file.
 
    Breakpoints:
      mobile   < 768px    single column, compact rhythm
-     tablet   768-1279   single column, wider measure
-     desktop  >= 1280    the Figma canvas, unchanged
+     tablet   768-1904   single column, wider measure
+     desktop  >= 1905    the Figma canvas, unchanged
    ========================================================================= */
 
 @layer utilities {
@@ -326,15 +336,15 @@ body {
   Scoped to below the desktop breakpoint rather than cancelled there with
   `xl:px-0`: both set padding-inline at the same specificity, and this file is
   appended after Tailwind's utilities, so it would win the tie and shift every
-  section 48px in on desktop. Not applying at all above 1279 is unambiguous.
+  section 48px in on desktop. Not applying at all above 1904 is unambiguous.
 */
-@media (max-width: 1279px) {
+@media (max-width: 1904px) {
   .page-x {
     padding-inline: clamp(20px, 5vw, 48px);
   }
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1904px) {
   /*
     Fluid display type. Each preferred value is chosen so the utility reaches
     its Figma size exactly at 1280px (e.g. 72/1280 = 5.625vw), which means the
@@ -416,7 +426,7 @@ body {
   breakpoint they keep a legible minimum width and the container scrolls
   instead. `touch-action` keeps the vertical page swipe working over them.
 */
-@media (max-width: 1279px) {
+@media (max-width: 1904px) {
   .figure-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;

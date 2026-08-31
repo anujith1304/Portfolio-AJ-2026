@@ -432,18 +432,20 @@ export default function GetMyStockCaseStudy() {
       </div>
 
       {/* 5854:34765 — "Defining the problem" grid */}
-      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[521px] xl:top-[5689px] xl:w-[381px] xl:mb-0" style={{ order: 5689 }}>
+      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[521px] xl:top-[5678px] xl:w-[381px] xl:mb-0" style={{ order: 5678 }}>
         Defining the problem
       </h2>
-      <Body top={5765} left={521} width={383} size={16} lh={22} color="#494949">
+      <Body top={5754} left={521} width={383} size={16} lh={22} color="#494949">
         How might we build a better experience for retailers to restock faster
         and run their business more efficiently?
       </Body>
       {/*
-        5854:34768 / 34775 / 34780 — "Line" frames, 630x1, #b5b5b5, sitting
-        above each row of the grid at x=466 within it (absolute x 987).
+        5854:34775 / 34780 — "Line" frames, 630x1, #b5b5b5, dividing the rows
+        of the grid at x=466 within it (absolute x 987). The file also has one
+        at 5648, above the first row; it reads as a stray edge with nothing
+        above it to divide, so it is not drawn.
       */}
-      {[5648, 5907, 6113].map((top) => (
+      {[5907, 6113].map((top) => (
         <div
           key={top}
           aria-hidden

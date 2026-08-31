@@ -66,10 +66,17 @@ export function CaseSideNav({
       setVisible(y > startAt - 400 && y + window.innerHeight < endAt);
       setCarded(cardFrom !== undefined && y > cardFrom - 300);
 
-      // The entry whose section top is the last one above the reading line.
-      // The line sits just below where a clicked section lands (top - 120), so
-      // consecutive sections only ~330px apart still resolve to the right one.
-      const line = y + 160;
+      /*
+       * The entry whose section top is the last one above the reading line.
+       *
+       * The line was a flat 160px, which put the switch almost exactly where a
+       * heading lands after a click — so a heading could sit well inside the
+       * viewport while the index still named the section above it. It now sits
+       * around a quarter of the way down, clamped so it never exceeds the
+       * tightest gap between two sections on these pages (299px, Introduction
+       * to My Role); going past that would skip an entry.
+       */
+      const line = y + Math.min(260, Math.max(140, window.innerHeight * 0.25));
       const targets = items.filter((it) => it.top !== undefined);
       let current = targets[0];
       for (const it of targets) if ((it.top as number) <= line) current = it;
