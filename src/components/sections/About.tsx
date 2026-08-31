@@ -43,7 +43,7 @@ function Card({
 }) {
   return (
     <div
-      className={`relative rounded-[20px] border border-hairline bg-white p-[20px] xl:absolute xl:p-0 ${className ?? ""}`}
+      className={`relative mb-[16px] break-inside-avoid rounded-[20px] border border-hairline bg-white p-[20px] xl:absolute xl:mb-0 xl:p-0 ${className ?? ""}`}
     >
       {children}
     </div>
@@ -53,18 +53,25 @@ function Card({
 const GRADIENT =
   "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.04) 100%)";
 
+/*
+ * Education and Experience offsets are relative to their own card, not to the
+ * bento. Both cards are absolutely positioned at xl, so their contents resolve
+ * against the card box: Education sits at bento (1223,21) and Experience at
+ * (1223,273), and those origins are already subtracted from the values below.
+ * The file's own numbers are given alongside for reference.
+ */
 const EDUCATION = [
   {
     years: "2022 — 2024",
     degree: "Master of Computer Application",
     school: "Acharya Institues, Bangalore",
-    top: 97,
+    top: 76, // bento 97
   },
   {
     years: "2019 — 2022",
     degree: "Bachelor of Computer Science",
     school: "South Travancore Hindu College, Nagercoil",
-    top: 168,
+    top: 147, // bento 168
   },
 ];
 
@@ -73,48 +80,48 @@ const EXPERIENCE = [
     logo: "logo-vitra.png",
     company: "Vitra.AI",
     dates: "Apr 2025 - Present",
-    datesLeft: 1616,
+    datesLeft: 393, // bento 1616
     datesWidth: 154,
     role: "UX/UI Designer - ",
     mode: "On site",
     body: "DesignLed end-to-end UX across 4 AI products at a B2B content translation platform, designing scalable interfaces for enterprise users from concept to launch. Drove product adoption from 2% to 18% in two quarters by identifying and resolving 8+ critical usability gaps through research and testing.",
-    logoTop: 361,
+    logoTop: 88, // bento 361
     bodyHeight: 144,
   },
   {
     logo: "logo-gms.png",
     company: "Get My Strock",
     dates: "Oct 2024 - Mar 2025",
-    datesLeft: 1597,
+    datesLeft: 374, // bento 1597
     datesWidth: 174,
     role: "Founding Product Designer - ",
     mode: "Hybrid",
     body: "Led end-to-end design of a B2B stock management app from 0 to 1, shipping the MVP in 3 months with a 92% usability success rate. Ran 15+ user interviews and 3 rounds of testing across 20+ iterations, while partnering with engineering to cut post-launch design bugs by 30%.",
-    logoTop: 656,
+    logoTop: 383, // bento 656
     bodyHeight: 143,
   },
   {
     logo: "logo-parkqwik.png",
     company: "Parkqwik",
     dates: "Jul 2024 - Sep 2024",
-    datesLeft: 1597,
+    datesLeft: 374, // bento 1597
     datesWidth: 174,
     role: "Product Designer Intern - ",
     mode: "Remote",
     body: "Collaborated with the design team on live product projects while independently conceptualising and delivering a website redesign that was selected and shipped. Redesigned the core application to improve performance and ease of use, and contributed to UI improvements across the product backed by user research.",
-    logoTop: 950,
+    logoTop: 677, // bento 950
     bodyHeight: 143,
   },
   {
     logo: "logo-freelance.png",
     company: "Freelance Product Designer",
     dates: "Apr 2024 - Present",
-    datesLeft: 1615,
+    datesLeft: 392, // bento 1615
     datesWidth: 156,
     role: "Product Designer - ",
     mode: "Remote",
     body: "Design and improve end-to-end user experiences for a range of digital products, crafting interfaces that balance usability, accessibility, and visual appeal. Work closely with stakeholders to understand user needs, translate them into intuitive designs",
-    logoTop: 1244,
+    logoTop: 971, // bento 1244
     bodyHeight: 114,
   },
 ];
@@ -142,7 +149,7 @@ export function About() {
         children keep their offsets inside it. Below xl the same cards are a
         one- then two-column stack, and each card's content flows.
       */}
-      <div className="grid grid-cols-1 gap-[16px] md:grid-cols-2 xl:relative xl:block xl:h-[1500px] xl:w-[1808px]">
+      <div className="columns-1 gap-[16px] md:columns-2 xl:relative xl:block xl:columns-1 xl:h-[1500px] xl:w-[1808px]">
         {/* ---- Bio card — 5854:50994, 563x301 at (13,21) ---- */}
         <Card className="xl:left-[13px] xl:top-[21px] xl:h-[301px] xl:w-[563px]">
           <p className="type-lead-28 text-[#616161] xl:absolute xl:left-[19px] xl:top-[39px] xl:w-[522px]">
@@ -237,14 +244,14 @@ export function About() {
           alt="Hey, Anujith here"
           width={1214}
           height={1151}
-          className="h-auto w-full rounded-[20px] xl:absolute xl:left-[596px] xl:top-[17px] xl:h-[575.5px] xl:w-[607px] xl:max-w-none xl:rounded-none"
+          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[596px] xl:top-[17px] xl:mb-0 xl:h-[575.5px] xl:w-[607px] xl:max-w-none xl:rounded-none"
         />
         <Image
           src="/images/about/design-stack.png"
           alt="Design stack"
           width={1214}
           height={544}
-          className="h-auto w-full rounded-[20px] xl:absolute xl:left-[596px] xl:top-[608px] xl:h-[272px] xl:w-[607px] xl:max-w-none xl:rounded-none"
+          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[596px] xl:top-[608px] xl:mb-0 xl:h-[272px] xl:w-[607px] xl:max-w-none xl:rounded-none"
         />
         {/*
           5854:51257 — a Photos component instance, not a still. Ten variants
@@ -252,7 +259,7 @@ export function About() {
           caption, plus a pagination rail. Rendered as a live carousel.
         */}
         <div
-          className="fit-canvas md:col-span-2 xl:absolute xl:left-[600px] xl:top-[900px] xl:h-[584px] xl:w-[599px] xl:max-w-none"
+          className="fit-canvas mb-[16px] break-inside-avoid xl:absolute xl:left-[600px] xl:top-[900px] xl:mb-0 xl:h-[584px] xl:w-[599px] xl:max-w-none"
           style={{ ["--fw" as string]: 599, ["--fh" as string]: 584 }}
         >
           <PhotoCarousel className="absolute inset-0 h-full w-full" />
@@ -295,7 +302,7 @@ export function About() {
         </Card>
 
         {/* ---- Experience — 5854:51122, 572x1211 at (1223,273) ---- */}
-        <Card className="md:col-span-2 xl:left-[1223px] xl:top-[273px] xl:h-[1211px] xl:w-[572px]">
+        <Card className="xl:left-[1223px] xl:top-[273px] xl:h-[1211px] xl:w-[572px]">
           <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[24px] xl:top-[24px]">
             My Experience so far
           </h3>
