@@ -40,7 +40,7 @@ export function BackLink() {
   return (
     <Link
       href="/#works"
-      className="absolute left-[192px] top-[197px] flex h-[44px] w-[90px] items-center gap-[7px] rounded-[14px] bg-[#fffefc] pl-[12px] transition-colors hover:bg-[#f4f3f0]"
+      className="mb-[20px] flex h-[44px] w-[90px] items-center gap-[7px] rounded-[14px] bg-[#fffefc] pl-[12px] transition-colors hover:bg-[#f4f3f0] xl:absolute xl:left-[192px] xl:top-[197px] xl:mb-0"
       style={{ border: "1.2px solid #e3e3e3" }}
     >
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -116,26 +116,41 @@ export function MetaRow({
 }) {
   return (
     <>
+      {/*
+        The rule is drawn as a bordered box on the Figma rectangle at xl. In
+        flow it becomes a bordered wrapper around the items, which is the same
+        thing once the items are no longer placed by x.
+      */}
       <div
         aria-hidden
-        className="absolute border-t border-b border-[#e0e0e0]"
+        className="hidden xl:absolute xl:block xl:border-t xl:border-b xl:border-[#e0e0e0]"
         style={{
-          left: box.left,
-          top: box.top,
-          width: box.width,
-          height: box.height,
+          ["--x" as string]: `${box.left}px`,
+          ["--y" as string]: `${box.top}px`,
+          ["--w" as string]: `${box.width}px`,
+          ["--h" as string]: `${box.height}px`,
+          left: "var(--x)", top: "var(--y)", width: "var(--w)", height: "var(--h)",
         }}
       />
+      <div className="grid grid-cols-2 gap-x-[24px] gap-y-[18px] border-t border-b border-[#e0e0e0] py-[20px] sm:grid-cols-4 xl:contents">
       {items.map((m) => (
-        <div key={m.label} className="absolute" style={{ left: m.left, top: box.top + 22 }}>
+        <div
+          key={m.label}
+          className="xl:absolute xl:left-[var(--x)] xl:top-[var(--y)]"
+          style={{
+            ["--x" as string]: `${m.left}px`,
+            ["--y" as string]: `${box.top + 22}px`,
+          }}
+        >
           <p className="type-circ-20 text-[#6b6b6b]" style={{ lineHeight: "24.8px" }}>
             {m.label}
           </p>
-          <p className="mt-[15px] text-[20px] leading-[24.8px] font-normal text-[#222227]">
+          <p className="mt-[6px] text-[18px] leading-[24.8px] font-normal text-[#222227] xl:mt-[15px] xl:text-[20px]">
             {m.value}
           </p>
         </div>
       ))}
+      </div>
     </>
   );
 }
@@ -154,8 +169,12 @@ export function SectionHeading({
 }) {
   return (
     <h2
-      className="absolute font-display text-[32px] leading-[35.8px] font-semibold text-[#222227]"
-      style={{ left, top, width }}
+      className="mt-[48px] mb-[16px] font-display text-[26px] leading-[1.25] font-semibold text-[#222227] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[32px] xl:leading-[35.8px]"
+      style={{
+        ["--x" as string]: `${left}px`,
+        ["--y" as string]: `${top}px`,
+        ["--w" as string]: `${width}px`,
+      }}
     >
       {children}
     </h2>
@@ -182,8 +201,17 @@ export function Body({
 }) {
   return (
     <p
-      className="absolute whitespace-pre-line font-normal"
-      style={{ left, top, width, fontSize: size, lineHeight: `${lh}px`, color }}
+      className="mb-[16px] whitespace-pre-line font-normal xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)] xl:text-[length:var(--fs)] xl:leading-[var(--lh)]"
+      style={{
+        ["--x" as string]: `${left}px`,
+        ["--y" as string]: `${top}px`,
+        ["--w" as string]: `${width}px`,
+        ["--fs" as string]: `${size}px`,
+        ["--lh" as string]: `${lh}px`,
+        fontSize: `clamp(15px, ${(size / 1280) * 100}vw, ${size}px)`,
+        lineHeight: 1.6,
+        color,
+      }}
     >
       {children}
     </p>
@@ -219,7 +247,14 @@ export function NumberedCard({
   width?: number;
 }) {
   return (
-    <div className="absolute" style={{ top, left, width }}>
+    <div
+      className="mb-[36px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)]"
+      style={{
+        ["--x" as string]: `${left}px`,
+        ["--y" as string]: `${top}px`,
+        ["--w" as string]: `${width}px`,
+      }}
+    >
       <p
         className="text-[14px] leading-[24.8px] font-medium"
         style={{ color: eyebrowColor }}
@@ -269,7 +304,14 @@ export function StatBlock({
   lines: string[];
 }) {
   return (
-    <div className="absolute" style={{ top, left, width }}>
+    <div
+      className="mb-[36px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)]"
+      style={{
+        ["--x" as string]: `${left}px`,
+        ["--y" as string]: `${top}px`,
+        ["--w" as string]: `${width}px`,
+      }}
+    >
       <p className="text-[50px] leading-[68px] font-bold text-[#060d19]">{value}</p>
       <p className="mt-[0px] text-[18px] leading-[24px] font-medium text-[#707581]">
         {caption}
@@ -299,10 +341,10 @@ export function Related({
 }) {
   return (
     <section
-      className="absolute left-0 w-[1905px] bg-surface-muted"
-      style={{ top, height: 642 }}
+      className="page-x mt-[64px] w-full bg-surface-muted py-[40px] xl:absolute xl:left-0 xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:py-0"
+      style={{ ["--y" as string]: `${top}px`, top: "var(--y)" }}
     >
-      <div className="absolute left-[191px] top-[32px] flex w-[1520px] items-center justify-between">
+      <div className="flex w-full items-center justify-between xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]">
         <h2 className="text-[24px] leading-[35px] font-medium text-[#222227]">
           More case studies
         </h2>
@@ -313,12 +355,12 @@ export function Related({
           All work
         </Link>
       </div>
-      <div className="absolute left-[191px] top-[107px] flex w-[1520px] gap-[24px]">
+      <div className="mt-[24px] flex flex-col gap-[16px] sm:flex-row sm:gap-[24px] xl:absolute xl:left-[191px] xl:top-[107px] xl:mt-0 xl:w-[1520px]">
         {cards.map((c) => (
           <Link
             key={c.href}
             href={c.href}
-            className="flex h-[454px] flex-1 flex-col justify-end rounded-[24px] border border-hairline bg-white p-[32px] transition-shadow hover:shadow-lg"
+            className="flex min-h-[180px] flex-1 flex-col justify-end rounded-[24px] border border-hairline bg-white p-[24px] transition-shadow hover:shadow-lg xl:h-[454px] xl:p-[32px]"
           >
             <span className="type-eyebrow-20 text-black/60">{c.index}</span>
             <span className="mt-[8px] font-display text-[32px] leading-[35.8px] font-semibold text-[#222227]">

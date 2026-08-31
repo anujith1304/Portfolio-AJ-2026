@@ -55,14 +55,19 @@ function ChangeList({
 }) {
   return (
     <ul
-      className="absolute list-none text-[18px] leading-[28px]"
-      style={{ left, top, width, color }}
+      className="mt-[10px] list-none text-[16px] leading-[26px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:text-[18px] xl:leading-[28px]"
+      style={{
+        ["--x" as string]: `${left}px`,
+        ["--y" as string]: `${top}px`,
+        ["--w" as string]: `${width}px`,
+        color,
+      }}
     >
       {items.map((t) => (
-        <li key={t} className="relative mb-[20px] pl-[27.6px] last:mb-0">
+        <li key={t} className="relative mb-[12px] pl-[22px] last:mb-0 xl:mb-[20px] xl:pl-[27.6px]">
           <span
             aria-hidden
-            className="absolute left-[10.3px] top-[13.95px] h-[4.3px] w-[4.3px] rounded-full bg-current"
+            className="absolute left-[7px] top-[10px] h-[4.3px] w-[4.3px] rounded-full bg-current xl:left-[10.3px] xl:top-[13.95px]"
           />
           {t}
         </li>
@@ -77,10 +82,25 @@ export function CaseBody() {
   const t = s.tailOffset;
   const relatedTop = 15894 + t;
 
+  /*
+   * Each labelled screen owns the artwork and cards that sit between its label
+   * and the next one. The y coordinates already encode that grouping, so it is
+   * derived rather than duplicated in the content file.
+   */
+  const screens = s.labels.map((label, i) => {
+    const from = label.top;
+    const to = s.labels[i + 1]?.top ?? Number.POSITIVE_INFINITY;
+    return {
+      label,
+      bands: s.bands.filter((b) => b.top >= from && b.top < to),
+      cards: s.cards.filter((c) => c.top >= from && c.top < to),
+    };
+  });
+
   return (
     <main
-      className="relative mx-auto w-[1905px]"
-      style={{ ...canvasSurface, height: s.height }}
+      className="page-x relative mx-auto w-full overflow-x-clip pt-[92px] pb-[64px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      style={{ ...canvasSurface, ["--frame-h" as string]: `${s.height}px` }}
     >
       <CaseNav />
       <BackLink />
@@ -94,10 +114,10 @@ export function CaseBody() {
         alt="Translate.video"
         width={333}
         height={133}
-        className="absolute left-[172px] top-[253px] h-[133px] w-[333px] max-w-none"
+        className="mb-[16px] h-auto w-[240px] max-w-full xl:absolute xl:left-[172px] xl:top-[253px] xl:mb-0 xl:h-[133px] xl:w-[333px] xl:max-w-none"
       />
 
-      <h1 className="absolute left-[192px] top-[415px] w-[1072px] font-display text-[64px] leading-[72px] font-medium tracking-[-0.01em] text-[#060d19]">
+      <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[192px] xl:top-[415px] xl:mb-0 xl:w-[1072px] xl:text-[64px] xl:leading-[72px]">
         Translate.video Product Rethink
       </h1>
       <Body top={507} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -108,10 +128,10 @@ export function CaseBody() {
         lip-sync generation, allowing users to create multilingual videos faster
         without relying on complex manual editing processes.
       </Body>
-      <p className="absolute left-[1428px] top-[559px] text-[18px] leading-[24px] text-[#5d6067]">
+      <p className="text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1428px] xl:top-[559px] xl:text-[18px]">
         Product Designer
       </p>
-      <p className="absolute left-[1595px] top-[559px] text-[18px] leading-[24px] text-[#5d6067]">
+      <p className="mb-[24px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[559px] xl:mb-0 xl:text-[18px]">
         2025 — 2026
       </p>
 
@@ -122,14 +142,14 @@ export function CaseBody() {
         width={1529}
         height={848}
         priority
-        className="absolute left-[188px] top-[681px] h-[848px] w-[1529px] max-w-none"
+        className="mb-[32px] h-auto w-full rounded-[10px] xl:absolute xl:left-[188px] xl:top-[681px] xl:mb-0 xl:h-[848px] xl:w-[1529px] xl:max-w-none xl:rounded-none"
       />
 
       {/*
         5908:27009 is a MIXED-fill node: the body sits at #707581 and only the
         two product names are lifted to #222227.
       */}
-      <p className="absolute left-[462px] top-[1587px] w-[981px] text-[32px] leading-[43px] font-medium tracking-[-0.8px] text-[#707581]">
+      <p className="my-[32px] text-[clamp(19px,2.5vw,32px)] leading-[1.4] font-medium tracking-[-0.8px] text-[#707581] xl:absolute xl:left-[462px] xl:top-[1587px] xl:my-0 xl:w-[981px] xl:text-[32px] xl:leading-[43px]">
         Designed the end-to-end experience for{" "}
         <span className="text-[#222227]">Translate.video</span> at{" "}
         <span className="text-[#222227]">Vitra.AI,</span> contributing across
@@ -201,7 +221,7 @@ export function CaseBody() {
       <div
         role="tablist"
         aria-label="Before and after"
-        className={`${STATE_TABS_TRACK} absolute left-[462px] top-[2618px]`}
+        className={`${STATE_TABS_TRACK} mt-[40px] w-fit xl:absolute xl:left-[462px] xl:top-[2618px] xl:mt-0`}
       >
         <StateTabs value={variant} onChange={setVariant} />
       </div>
@@ -232,73 +252,90 @@ export function CaseBody() {
       </Body>
 
       {/*
-        Section labels are centred in their box in Figma, not left-aligned, and
-        each is a single MIXED-font node — see labelTilde/labelSuffix.
+        At xl every piece is placed by its Figma coordinate, so source order is
+        irrelevant. In flow it is the only thing that matters, and the labels,
+        artwork and cards are three separate lists that would otherwise stack as
+        three blocks. Grouping them back into the screens they describe — by the
+        y each one sits at — restores the reading order the design has.
       */}
-      {s.labels.map((l, i) => (
-        <h3
-          key={`${l.top}-${i}`}
-          className="absolute text-[32px] leading-[35.84px] text-[#b2b2b2]"
-          style={{ left: l.left ?? 462, top: l.top, width: l.width, textAlign: "center" }}
-        >
-          <span className="font-display font-semibold">{l.name}</span>
-          <span className="font-display font-normal">(</span>
-          <span className="font-sans font-normal">{s.labelTilde}</span>
-          <span className="font-display font-normal">{s.labelSuffix}</span>
-        </h3>
-      ))}
+      {screens.map((screen, i) => (
+        <section key={i} className="contents">
+          {/*
+            Labels are centred in their box in Figma, not left-aligned, and each
+            is a single MIXED-font node — see labelTilde/labelSuffix.
+          */}
+          <h3
+            className="mt-[40px] mb-[16px] text-center text-[22px] leading-[1.25] text-[#b2b2b2] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[32px] xl:leading-[35.84px]"
+            style={{
+              ["--x" as string]: `${screen.label.left ?? 462}px`,
+              ["--y" as string]: `${screen.label.top}px`,
+              ["--w" as string]: `${screen.label.width}px`,
+            }}
+          >
+            <span className="font-display font-semibold">{screen.label.name}</span>
+            <span className="font-display font-normal">(</span>
+            <span className="font-sans font-normal">{s.labelTilde}</span>
+            <span className="font-display font-normal">{s.labelSuffix}</span>
+          </h3>
 
-      {s.bands.map((b) => (
-        <Image
-          key={b.src}
-          src={`/images/case/tv/${b.src}`}
-          alt={b.alt}
-          width={b.w}
-          height={b.h}
-          className="absolute max-w-none"
-          style={{ left: b.left, top: b.top, width: b.w, height: b.h }}
-        />
-      ))}
+          {screen.bands.map((b) => (
+            <Image
+              key={b.src}
+              src={`/images/case/tv/${b.src}`}
+              alt={b.alt}
+              width={b.w}
+              height={b.h}
+              className="mb-[24px] h-auto w-full rounded-[10px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
+              style={{
+                ["--x" as string]: `${b.left}px`,
+                ["--y" as string]: `${b.top}px`,
+                ["--w" as string]: `${b.w}px`,
+                ["--h" as string]: `${b.h}px`,
+              }}
+            />
+          ))}
 
-      {s.cards.map((c, i) => (
-        <NumberedCard
-          key={`${c.top}-${i}`}
-          top={c.top}
-          left={462}
-          width={1046}
-          eyebrow={c.eyebrow}
-          eyebrowColor={s.eyebrowColor}
-          title={c.title}
-          body={c.body}
-          impact={c.impact}
-          bodyColor="#777777"
-        />
+          {screen.cards.map((c, j) => (
+            <NumberedCard
+              key={`${c.top}-${j}`}
+              top={c.top}
+              left={462}
+              width={1046}
+              eyebrow={c.eyebrow}
+              eyebrowColor={s.eyebrowColor}
+              title={c.title}
+              body={c.body}
+              impact={c.impact}
+              bodyColor="#777777"
+            />
+          ))}
+        </section>
       ))}
 
       {/* ---- tail: same content in both frames, 87px lower in "after" --- */}
 
       <div
         aria-hidden
-        className="absolute left-[462px] h-px w-[1104px] bg-[#dddddd]"
-        style={{ top: s.ruleTop }}
+        className="mt-[48px] h-px w-full bg-[#dddddd] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1104px]"
+        style={{ ["--y" as string]: `${s.ruleTop}px` }}
       />
 
       <h2
         id="what-it-changed"
-        className="absolute left-[462px] font-display text-[32px] leading-[40px] font-semibold text-[#3f3f3f]"
-        style={{ top: 13933 + t }}
+        className="mt-[32px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:text-[32px] xl:leading-[40px]"
+        style={{ ["--y" as string]: `${13933 + t}px` }}
       >
         What actually changed
       </h2>
       <p
-        className="absolute left-[462px] text-[24px] leading-[32px] font-medium text-[#060d19]"
-        style={{ top: 14038 + t }}
+        className="text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:text-[24px]"
+        style={{ ["--y" as string]: `${14038 + t}px` }}
       >
         Before:
       </p>
       <p
-        className="absolute left-[1124px] text-[24px] leading-[32px] font-medium text-[#060d19]"
-        style={{ top: 14038 + t }}
+        className="mt-[24px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[1124px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
+        style={{ ["--y" as string]: `${14038 + t}px` }}
       >
         After:
       </p>
@@ -310,33 +347,41 @@ export function CaseBody() {
         <div
           key={`${r.top}-${r.left}`}
           aria-hidden
-          className="absolute bg-[#dddddd]"
-          style={{ left: r.left, top: r.top + t, width: r.w, height: r.h }}
+          className="hidden bg-[#dddddd] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:block xl:h-[var(--h)] xl:w-[var(--w)]"
+          style={{
+            ["--x" as string]: `${r.left}px`,
+            ["--y" as string]: `${r.top + t}px`,
+            ["--w" as string]: `${r.w}px`,
+            ["--h" as string]: `${r.h}px`,
+          }}
         />
       ))}
 
       <h2
         id="what-worked"
-        className="absolute left-[462px] w-[1211px] font-display text-[32px] leading-[40px] font-semibold text-[#3f3f3f]"
-        style={{ top: 14467 + t }}
+        className="mt-[40px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:w-[1211px] xl:text-[32px] xl:leading-[40px]"
+        style={{ ["--y" as string]: `${14467 + t}px` }}
       >
         Things that didn&rsquo;t work — And how I solved them
       </h2>
       {WORKED.map((w) => (
         <div key={w.label}>
           <p
-            className="absolute left-[462px] text-[20px] font-medium text-[#060d19]"
-            style={{ top: w.top + t, lineHeight: `${w.labelLh}px` }}
+            className="mt-[24px] text-[18px] leading-[1.4] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[20px] xl:leading-[var(--lh)]"
+            style={{
+              ["--y" as string]: `${w.top + t}px`,
+              ["--lh" as string]: `${w.labelLh}px`,
+            }}
           >
             {w.label}
           </p>
           <p
-            className="absolute text-[16px] text-[#777777]"
+            className="mt-[6px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:leading-[var(--lh)]"
             style={{
-              left: w.textLeft,
-              top: w.top + t,
-              width: w.textWidth,
-              lineHeight: `${w.textLh}px`,
+              ["--x" as string]: `${w.textLeft}px`,
+              ["--y" as string]: `${w.top + t}px`,
+              ["--w" as string]: `${w.textWidth}px`,
+              ["--lh" as string]: `${w.textLh}px`,
             }}
           >
             {w.text}
@@ -354,22 +399,22 @@ export function CaseBody() {
         alt=""
         width={1219}
         height={130}
-        className="absolute left-[458px] h-[130px] w-[1219px] max-w-none"
-        style={{ top: 15020 + t }}
+        className="mt-[40px] h-auto w-full rounded-[16px] xl:absolute xl:left-[458px] xl:top-[var(--y)] xl:mt-0 xl:h-[130px] xl:w-[1219px] xl:max-w-none xl:rounded-none"
+        style={{ ["--y" as string]: `${15020 + t}px` }}
       />
       <Anchor id="what-i-learned" top={15052 + t} />
 
       {LEARNINGS.map((l) => (
         <div key={l.title}>
           <p
-            className="absolute left-[462px] w-[1211px] text-[23px] leading-[35.84px] font-bold text-[#222227]"
-            style={{ top: l.top + t }}
+            className="mt-[28px] text-[19px] leading-[1.35] font-bold text-[#222227] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:text-[23px] xl:leading-[35.84px]"
+            style={{ ["--y" as string]: `${l.top + t}px` }}
           >
             {l.title}
           </p>
           <p
-            className="absolute left-[462px] w-[1211px] text-[16px] leading-[24px] text-[#777777]"
-            style={{ top: l.top + 48 + t }}
+            className="mt-[8px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:leading-[24px]"
+            style={{ ["--y" as string]: `${l.top + 48 + t}px` }}
           >
             {l.body}
           </p>
@@ -381,20 +426,20 @@ export function CaseBody() {
         alt=""
         width={1905}
         height={642}
-        className="absolute left-0 h-[642px] w-[1905px] max-w-none"
-        style={{ top: relatedTop }}
+        className="mt-[56px] h-auto w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[642px] xl:w-[1905px] xl:max-w-none"
+        style={{ ["--y" as string]: `${relatedTop}px` }}
       />
       <Link
         href="/work/get-my-stock"
         aria-label="Get My Stock case study"
-        className="absolute left-[191px] h-[454px] w-[748px] rounded-[24px] transition-colors hover:bg-black/[0.03]"
-        style={{ top: relatedTop + 107 }}
+        className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[191px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
+        style={{ ["--y" as string]: `${relatedTop + 107}px` }}
       />
       <Link
         href="/work/design-system"
         aria-label="Aero UI Design System case study"
-        className="absolute left-[963px] h-[454px] w-[748px] rounded-[24px] transition-colors hover:bg-black/[0.03]"
-        style={{ top: relatedTop + 107 }}
+        className="hidden rounded-[24px] transition-colors hover:bg-black/[0.03] xl:absolute xl:left-[963px] xl:top-[var(--y)] xl:block xl:h-[454px] xl:w-[748px]"
+        style={{ ["--y" as string]: `${relatedTop + 107}px` }}
       />
     </main>
   );
