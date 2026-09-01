@@ -430,6 +430,40 @@ body {
   }
 
   /*
+    The remaining utilities. Every .type-* is sized in --u so it scales with the
+    desktop canvas, which means every one of them also needs a value here —
+    without it they inherit the canvas scale below 1024 and collapse (16px
+    became 3.3px at 390, which is what the nav, the "View Resume" label and the
+    whole status row were doing).
+  */
+  .type-nav,
+  .type-nav-active,
+  .type-btn-16,
+  .type-status {
+    font-size: 15px;
+  }
+
+  .type-scroll-16 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .type-avail-16 {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .type-meta-12 {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .type-meta-12-up {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /*
     Utilities whose Figma line-height is far smaller than their size (set that
     way so a text box hugs its cap height inside an auto-layout frame). In flow
     those clip descenders, so they get a real line box back.

@@ -49,17 +49,27 @@ export function StatusBar() {
         </svg>
       </a>
 
-      {/* Variant 1 — availability */}
-      <div className="relative h-[34px] w-[158px] shrink-0 xl:absolute xl:left-[calc(1643*var(--u))] xl:top-[calc(11*var(--u))] xl:h-[calc(34*var(--u))] xl:w-[calc(158*var(--u))]">
-        <span className="absolute left-[11px] top-0 type-avail-16 whitespace-nowrap text-black/60">
+      {/*
+        Variant 1 — availability.
+
+        The three parts sit on hand-placed offsets inside a 158px box in the
+        file, which only reads correctly at that width: reflowed, the marker and
+        its label were left stranded mid-block instead of lining up under the
+        heading. Below xl they stack and align to the right edge, and the marker
+        sits inline with its label; at xl the Figma offsets are restored.
+      */}
+      <div className="relative flex shrink-0 flex-col items-end gap-[3px] xl:absolute xl:left-[calc(1643*var(--u))] xl:top-[calc(11*var(--u))] xl:block xl:h-[calc(34*var(--u))] xl:w-[calc(158*var(--u))]">
+        <span className="type-avail-16 whitespace-nowrap text-black/60 xl:absolute xl:left-[calc(11*var(--u))] xl:top-0">
           Freelance Availibility
         </span>
-        <span
-          className="absolute left-[55px] top-[20px] h-[14px] w-[10px] rounded-full bg-brand-orange"
-          aria-hidden="true"
-        />
-        <span className="absolute left-[70px] top-[21px] type-meta-12-up whitespace-nowrap text-black/40">
-          Limited Hours
+        <span className="flex items-center gap-[6px] xl:contents">
+          <span
+            className="h-[12px] w-[9px] shrink-0 rounded-full bg-brand-orange xl:absolute xl:left-[calc(55*var(--u))] xl:top-[calc(20*var(--u))] xl:h-[calc(14*var(--u))] xl:w-[calc(10*var(--u))]"
+            aria-hidden="true"
+          />
+          <span className="type-meta-12-up whitespace-nowrap text-black/40 xl:absolute xl:left-[calc(70*var(--u))] xl:top-[calc(21*var(--u))]">
+            Limited Hours
+          </span>
         </span>
       </div>
     </div>
