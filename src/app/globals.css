@@ -54,7 +54,15 @@
     moves every existing `xl:` variant to the width the layout actually needs,
     with no markup changes.
   */
-  --breakpoint-xl: 1905px;
+  /*
+    Declared in rem, not px. Tailwind's own breakpoints are rem, and it orders
+    the generated media blocks by this value — a px value does not sort against
+    them, so the xl block was emitted before md and every `md:` utility beat its
+    `xl:` counterpart at desktop. That silently cost the section stack its
+    120px gap (it fell back to md's 88) and pulled the footer 160px off its
+    backdrop. 119.0625rem = 1905px.
+  */
+  --breakpoint-xl: 119.0625rem;
 
   /* ---- Layout ---- */
   --spacing-frame: 1904px; /* frame width */

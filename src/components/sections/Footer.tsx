@@ -87,12 +87,17 @@ export function Footer() {
         className="mt-[26px] h-[40px] w-[184px] xl:absolute xl:left-[400px] xl:top-[608px] xl:mt-0"
       />
 
+      {/*
+        Corner ornament on the backdrop. Sat at the file's y602, which left it
+        27px above the artwork's bottom edge against 32px to the frame's right —
+        close, but visibly unequal. y597 makes both insets 32.
+      */}
       <Image
         src="/images/footer/badge.png"
         alt=""
         width={300}
         height={300}
-        className="mt-[28px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1738px] xl:top-[602px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
+        className="mt-[28px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1738px] xl:top-[597px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
       />
     </section>
   );

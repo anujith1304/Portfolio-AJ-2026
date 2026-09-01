@@ -8,6 +8,11 @@ import { useEffect, useRef, useState } from "react";
  * fill #FFFFFF, 1px stroke #F3F3F3.
  * Type: Satoshi 16 / lh 10 / ls -0.4 — Home Bold, the rest Medium.
  *
+ * The pill is a fixed 452px at xl, per the file, but our text sets a little
+ * narrower than Figma's, leaving ~17px of slack. Centring the row splits that
+ * evenly instead of letting it all pile up after "Contact", which read as a
+ * lopsided bar.
+ *
  * Those metrics are the desktop (>= xl) rendering and are untouched. Below it
  * the bar has to earn its width back: at tablet the pill keeps every link but
  * tightens its type and padding, and on a phone five links cannot fit at a
@@ -68,7 +73,7 @@ export function Nav({ base = "", active = "Home" }: { base?: string; active?: st
   return (
     <div ref={wrap} className="relative">
       <nav
-        className="flex h-[48px] items-center gap-[12px] rounded-[66px] border border-[#F3F3F3] bg-white px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[452px] xl:gap-[16px] xl:px-[24px] xl:py-[18px]"
+        className="flex h-[48px] items-center justify-center gap-[12px] rounded-[66px] border border-[#F3F3F3] bg-white px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[452px] xl:gap-[16px] xl:px-[24px] xl:py-[18px]"
         style={{
           boxShadow:
             "0px 8px 10px 0px rgba(0,0,0,0.10), inset 0px 0px 8px 0px rgba(255,255,255,0.45)",

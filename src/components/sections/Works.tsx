@@ -188,14 +188,10 @@ export function Works() {
           Behind the pixels (My works)
         </h2>
 
-        {/* 5854:49864 — "2 Columns" layout toggle, 120x60 r16 */}
-        <Image
-          src="/images/works/works-toggle.png"
-          alt="Two column layout"
-          width={240}
-          height={120}
-          className="hidden h-[60px] w-[120px] md:block"
-        />
+        {/*
+          The file has a "2 Columns" grid/list toggle here (5854:49864). It was
+          decoration — there is only one layout — so it is not drawn.
+        */}
       </div>
 
       {/* 5854:49876 */}
