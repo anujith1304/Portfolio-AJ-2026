@@ -51,14 +51,14 @@ export function StatusBar() {
 
       {/* Variant 1 — availability */}
       <div className="relative h-[34px] w-[158px] shrink-0 xl:absolute xl:left-[calc(1643*var(--u))] xl:top-[calc(11*var(--u))] xl:h-[calc(34*var(--u))] xl:w-[calc(158*var(--u))]">
-        <span className="absolute left-[11px] top-0 type-avail-16 text-black/60">
+        <span className="absolute left-[11px] top-0 type-avail-16 whitespace-nowrap text-black/60">
           Freelance Availibility
         </span>
         <span
           className="absolute left-[55px] top-[20px] h-[14px] w-[10px] rounded-full bg-brand-orange"
           aria-hidden="true"
         />
-        <span className="absolute left-[70px] top-[21px] type-meta-12-up text-black/40">
+        <span className="absolute left-[70px] top-[21px] type-meta-12-up whitespace-nowrap text-black/40">
           Limited Hours
         </span>
       </div>
