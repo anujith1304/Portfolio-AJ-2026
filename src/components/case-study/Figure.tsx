@@ -26,12 +26,16 @@ export function Figure({
   priority,
   caption,
   /**
-   * Off by default. The control is only worth its space on the two figures
-   * dense enough to reward opening: the hero screen set and the solution grid.
-   * Everywhere else the artwork is a single screen that already reads at the
+   * Off by default — most artwork is a single screen that reads fine at the
    * width it is given.
+   *
+   *   "always"  hover-revealed at desktop, always shown below it. For figures
+   *             dense enough to reward opening at any size.
+   *   "small"   only below the desktop breakpoint, where the artwork has been
+   *             scaled into a narrow column. At desktop it is already full
+   *             size, so the control would be noise.
    */
-  zoomable = false,
+  zoom = false,
 }: {
   src: string;
   alt: string;
@@ -41,7 +45,7 @@ export function Figure({
   style?: React.CSSProperties;
   priority?: boolean;
   caption?: string;
-  zoomable?: boolean;
+  zoom?: false | "always" | "small";
 }) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -72,11 +76,15 @@ export function Figure({
         className="block h-auto w-full rounded-[10px] xl:h-full xl:w-full xl:rounded-none"
       />
 
-      {zoomable && (
+      {zoom && (
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="absolute right-[8px] top-[8px] z-10 rounded-full border border-black/10 bg-white/85 px-[9px] py-[4px] text-[11px] leading-[15px] font-medium text-[#222227] shadow-[0_1px_5px_rgba(0,0,0,0.10)] backdrop-blur-[2px] transition-opacity hover:bg-white xl:right-[10px] xl:top-[10px] xl:px-[12px] xl:py-[6px] xl:text-[12px] xl:leading-[16px] xl:opacity-0 xl:group-hover:opacity-100 xl:group-focus-within:opacity-100"
+          className={`absolute right-[8px] top-[8px] z-10 rounded-full border border-black/10 bg-white/85 px-[9px] py-[4px] text-[11px] leading-[15px] font-medium text-[#222227] shadow-[0_1px_5px_rgba(0,0,0,0.10)] backdrop-blur-[2px] transition-opacity hover:bg-white ${
+            zoom === "small"
+              ? "xl:hidden"
+              : "xl:right-[10px] xl:top-[10px] xl:px-[12px] xl:py-[6px] xl:text-[12px] xl:leading-[16px] xl:opacity-0 xl:group-hover:opacity-100 xl:group-focus-within:opacity-100"
+          }`}
         >
           View Full Component
         </button>

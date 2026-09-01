@@ -116,7 +116,7 @@ export function CaseBody() {
         alt="Translate.video"
         width={333}
         height={133}
-        className="mb-[16px] h-auto w-[240px] max-w-full xl:absolute xl:left-[172px] xl:top-[253px] xl:mb-0 xl:h-[133px] xl:w-[333px] xl:max-w-none"
+        className="mx-auto mb-[16px] h-auto w-[240px] max-w-full xl:mx-0 xl:absolute xl:left-[172px] xl:top-[253px] xl:mb-0 xl:h-[133px] xl:w-[333px] xl:max-w-none"
         style={{ order: 253 }}
       />
 
@@ -291,6 +291,13 @@ export function CaseBody() {
               alt={b.alt}
               width={b.w}
               height={b.h}
+              /*
+               * These are wide annotated screens. At desktop they are drawn at
+               * their own size and need no help; scaled into a phone column the
+               * callouts stop being readable, so the control is offered there
+               * and only there.
+               */
+              zoom="small"
               className="mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
               style={{
                 ["--x" as string]: `${b.left}px`,

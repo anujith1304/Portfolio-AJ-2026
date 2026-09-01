@@ -276,7 +276,7 @@ export default function GetMyStockCaseStudy() {
         width={3058}
         height={1722}
         priority
-        zoomable
+        zoom="always"
         className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[647px] xl:mb-0 xl:h-[861px] xl:w-[1529px]"
         style={{ order: 647 }}
       />
@@ -328,7 +328,7 @@ export default function GetMyStockCaseStudy() {
           alt={b.alt}
           width={b.w * 2}
           height={b.h * 2}
-          zoomable={b.zoom}
+          zoom={b.zoom ? "always" : false}
           className={`mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none ${b.desktopOnly ? "hidden xl:block" : ""}`}
           style={{
             ["--x" as string]: `${b.left}px`,
@@ -503,7 +503,7 @@ export default function GetMyStockCaseStudy() {
             alt={c.alt}
             width={c.w * 2}
             height={c.h * 2}
-            zoomable={c.zoom}
+            zoom={c.zoom ? "always" : false}
             className="xl:h-[var(--fh)] xl:w-full"
             style={{ ["--fh" as string]: `${c.h}px` } as React.CSSProperties}
           />

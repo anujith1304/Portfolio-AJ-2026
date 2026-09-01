@@ -96,7 +96,7 @@ export function CaseLogo({
       alt={alt}
       width={imgW * 2}
       height={imgH * 2}
-      className="mb-[20px] h-auto w-auto max-w-[200px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none"
+      className="mx-auto mb-[20px] h-auto w-auto max-w-[200px] xl:mx-0 xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none"
       style={{
         ["--x" as string]: `${left - (imgW - boxW) / 2}px`,
         ["--y" as string]: `${top - (imgH - boxH) / 2}px`,
