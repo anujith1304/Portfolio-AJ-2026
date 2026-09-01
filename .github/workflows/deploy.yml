@@ -27,8 +27,8 @@ jobs:
 
       - run: npm ci
 
-      # next.config.ts sets output:"export" and basePath:"/Portfolio-AJ-2026",
-      # so this writes a fully static site to ./out
+      # next.config.ts sets output:"export" (no basePath — the site serves from
+      # the apex domain anujiths.in), so this writes a static site to ./out
       - name: Build static export
         run: npm run build
 

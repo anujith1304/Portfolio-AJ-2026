@@ -1,32 +1,19 @@
 import NextImage, { type ImageProps } from "next/image";
 
 /**
- * Drop-in replacement for next/image that resolves `/public` paths against
- * the deploy's basePath.
+ * Thin wrapper over next/image.
  *
- * Next prefixes basePath onto next/link hrefs and onto everything it serves
- * from /_next/ — JS, CSS, fonts — but not onto a plain string `src` given to
- * next/image. With `unoptimized: true` (required by `output: "export"`) that
- * src is written to the HTML verbatim, so "/images/hero-bg.png" stays
- * absolute and resolves to the domain root. Locally that is correct and
- * everything renders; on GitHub Pages the site lives under
- * /Portfolio-AJ-2026/, so every one of those requests 404s while the files
- * themselves sit there perfectly intact one level down.
+ * It used to prefix root-relative `src` strings with the deploy's basePath:
+ * Next prefixes basePath onto next/link hrefs and onto everything under
+ * /_next/, but not onto a plain string src given to next/image, and with
+ * `unoptimized: true` that src is written to the HTML verbatim. Under the old
+ * /Portfolio-AJ-2026/ deploy every one of those requests 404d.
  *
- * Prefixing here rather than at each call site keeps the ~30 usages honest
- * and means any image added later inherits the fix.
- *
- * Only root-relative strings are touched. Absolute URLs and static imports
- * (StaticImageData) already carry the right prefix and are passed through.
+ * The site now serves from the apex domain, so there is no prefix to apply and
+ * a root-relative src is already correct. The wrapper is kept so the ~30 call
+ * sites stay on one import — and so a future basePath deploy has one place to
+ * reintroduce the prefix rather than thirty.
  */
-
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-export default function Img({ src, ...rest }: ImageProps) {
-  const resolved =
-    typeof src === "string" && src.startsWith("/") && !src.startsWith(BASE)
-      ? `${BASE}${src}`
-      : src;
-
-  return <NextImage src={resolved} {...rest} />;
+export default function Img(props: ImageProps) {
+  return <NextImage {...props} />;
 }

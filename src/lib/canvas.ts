@@ -8,17 +8,16 @@
  * fine grain over the canvas colour rather than a picture. Tiling it at its
  * natural 1440x949 reproduces the frame fill.
  *
- * This is an inline style rather than a CSS class because a `url()` written in
- * a stylesheet is not rewritten for `basePath`. It would resolve to the domain
- * root and 404 on GitHub Pages — the same failure the images hit — so the
- * prefix is applied here, from the same value <Img> uses.
+ * Kept as an inline style rather than a CSS class: a `url()` written in a
+ * stylesheet is not rewritten for `basePath`, so this needed the prefix applied
+ * by hand under the old /Portfolio-AJ-2026/ deploy. The site now serves from
+ * the apex domain and the path is correct as written, but leaving it here keeps
+ * the one place that would need the prefix back if that ever changes.
  */
-
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const canvasSurface = {
   backgroundColor: "#FDFCF9",
-  backgroundImage: `url("${BASE}/images/canvas-texture.webp")`,
+  backgroundImage: 'url("/images/canvas-texture.webp")',
   backgroundRepeat: "repeat",
   backgroundSize: "1440px 949px",
 } as const;
