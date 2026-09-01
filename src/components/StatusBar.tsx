@@ -18,9 +18,9 @@ import { LocalTime } from "@/components/LocalTime";
  */
 export function StatusBar() {
   return (
-    <div className="relative flex w-full items-start justify-between gap-x-[16px] xl:h-[56px] xl:w-[1801px]">
+    <div className="relative flex w-full items-start justify-between gap-x-[16px] xl:h-[calc(56*var(--u))] xl:w-[calc(1801*var(--u))] xl:gap-x-[calc(16*var(--u))]">
       {/* Variant 2 — location */}
-      <div className="w-auto shrink-0 xl:absolute xl:left-0 xl:top-0 xl:w-[219px]">
+      <div className="w-auto shrink-0 xl:absolute xl:left-0 xl:top-0 xl:w-[calc(219*var(--u))]">
         <p className="type-status text-black/60">Based in Tamil nadu</p>
         <span className="mt-[4px] flex items-center gap-[6px]">
           <LocalTime className="type-meta-12 text-black/40" />
@@ -33,7 +33,7 @@ export function StatusBar() {
       {/* Scroll cue */}
       <a
         href="#works"
-        className="hidden shrink-0 flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50 md:flex xl:absolute xl:left-1/2 xl:top-[9px] xl:w-[87px] xl:-translate-x-1/2"
+        className="hidden shrink-0 flex-col items-center gap-[15px] text-black/30 transition-colors hover:text-black/50 md:flex xl:absolute xl:left-1/2 xl:top-[calc(9*var(--u))] xl:w-[calc(87*var(--u))] xl:-translate-x-1/2 xl:gap-[calc(15*var(--u))]"
       >
         <span className="type-scroll-16">
           Scroll down
@@ -50,7 +50,7 @@ export function StatusBar() {
       </a>
 
       {/* Variant 1 — availability */}
-      <div className="relative h-[34px] w-[158px] shrink-0 xl:absolute xl:left-[1643px] xl:top-[11px]">
+      <div className="relative h-[34px] w-[158px] shrink-0 xl:absolute xl:left-[calc(1643*var(--u))] xl:top-[calc(11*var(--u))] xl:h-[calc(34*var(--u))] xl:w-[calc(158*var(--u))]">
         <span className="absolute left-[11px] top-0 type-avail-16 text-black/60">
           Freelance Availibility
         </span>

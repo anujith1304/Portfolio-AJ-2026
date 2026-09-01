@@ -14,12 +14,12 @@ import Image from "@/components/Img";
  */
 export function Testimonials() {
   return (
-    <section className="page-x flex w-full flex-col gap-[28px] xl:w-[1107px] xl:gap-[48px]">
+    <section className="page-x flex w-full flex-col gap-[28px] xl:w-[calc(1107*var(--u))] xl:gap-[calc(48*var(--u))]">
       {/* 5854:51421 */}
-      <div className="flex w-full flex-col gap-[8px] xl:w-[1107px]">
-        <div className="flex w-full items-center xl:h-[90px] xl:w-[1107px]">
+      <div className="flex w-full flex-col gap-[8px] xl:w-[calc(1107*var(--u))] xl:gap-[calc(8*var(--u))]">
+        <div className="flex w-full items-center xl:h-[calc(90*var(--u))] xl:w-[calc(1107*var(--u))]">
           <h2
-            className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[90px] xl:w-[958px]"
+            className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[calc(90*var(--u))] xl:w-[calc(958*var(--u))]"
             style={{
               backgroundImage:
                 "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.04) 100%)",
@@ -29,7 +29,7 @@ export function Testimonials() {
           </h2>
         </div>
         {/* 5854:51424 — Circular Std Book 20/29.13 */}
-        <p className="type-circ-20 w-full text-[#565656] xl:h-[30px] xl:w-[1107px]">
+        <p className="type-circ-20 w-full text-[#565656] xl:h-[calc(30*var(--u))] xl:w-[calc(1107*var(--u))]">
           Words from those who&rsquo;ve worked alongside me
         </p>
       </div>
@@ -39,20 +39,20 @@ export function Testimonials() {
         Two exported columns of testimonial screenshots. Artwork, so they keep
         their proportions: one column on a phone, two from tablet up.
       */}
-      <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 xl:relative xl:block xl:h-[1272px] xl:w-[1107px]">
+      <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 xl:relative xl:block xl:h-[calc(1272*var(--u))] xl:w-[calc(1107*var(--u))] xl:gap-[calc(16*var(--u))]">
         <Image
           src="/images/testimonials/col-1.png"
           alt="Testimonials from Product Hunt and Threads"
           width={1074}
           height={2546}
-          className="h-auto w-full xl:absolute xl:left-[-1px] xl:top-[-1px] xl:h-[1273px] xl:w-[537px] xl:max-w-none"
+          className="h-auto w-full xl:absolute xl:left-[calc(-1*var(--u))] xl:top-[calc(-1*var(--u))] xl:h-[calc(1273*var(--u))] xl:w-[calc(537*var(--u))] xl:max-w-none"
         />
         <Image
           src="/images/testimonials/col-2.png"
           alt="Testimonials from Product Hunt and Twitter"
           width={1073}
           height={2395}
-          className="h-auto w-full xl:absolute xl:left-[571px] xl:top-0 xl:h-[1197.5px] xl:w-[536.5px] xl:max-w-none"
+          className="h-auto w-full xl:absolute xl:left-[calc(571*var(--u))] xl:top-0 xl:h-[calc(1197.5*var(--u))] xl:w-[calc(536.5*var(--u))] xl:max-w-none"
         />
       </div>
     </section>

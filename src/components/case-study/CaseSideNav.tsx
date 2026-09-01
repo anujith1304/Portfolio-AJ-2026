@@ -116,7 +116,7 @@ export function CaseSideNav({
   return (
     <nav
       aria-label="Sections"
-      className="fixed top-[140px] z-20 hidden flex-col gap-[12px] p-[24.79px] transition-opacity duration-300 xl:flex"
+      className="fixed top-[140px] z-20 hidden flex-col gap-[12px] p-[24.79px] transition-opacity duration-300 xl:flex xl:top-[calc(140*var(--u))] xl:gap-[calc(12*var(--u))] xl:p-[calc(24.79*var(--u))]"
       style={{
         /*
          * The two designs differ only by a surface — container, stroke, shadow.

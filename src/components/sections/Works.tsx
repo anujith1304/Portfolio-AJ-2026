@@ -88,11 +88,11 @@ function Card({ work }: { work: Work }) {
   const inner = (
     <>
       {/* Overlay — 877x64 at (8,8), #f8f8f8, r16 */}
-      <div className="m-[8px] flex h-[56px] items-center justify-between gap-[12px] rounded-[16px] border border-hairline-soft bg-surface-muted px-[16px] xl:absolute xl:left-[8px] xl:top-[8px] xl:m-0 xl:h-[64px] xl:w-[877px] xl:justify-start">
-        <span className="type-eyebrow-20 truncate text-black/60 xl:absolute xl:left-[20px]">
+      <div className="m-[8px] flex h-[56px] items-center justify-between gap-[12px] rounded-[16px] border border-hairline-soft bg-surface-muted px-[16px] xl:absolute xl:left-[calc(8*var(--u))] xl:top-[calc(8*var(--u))] xl:m-0 xl:h-[calc(64*var(--u))] xl:w-[calc(877*var(--u))] xl:justify-start xl:gap-[calc(12*var(--u))] xl:rounded-[calc(16*var(--u))] xl:px-[calc(16*var(--u))]">
+        <span className="type-eyebrow-20 truncate text-black/60 xl:absolute xl:left-[calc(20*var(--u))]">
           {work.title}
         </span>
-        <span className="type-eyebrow-20 shrink-0 text-black/60 xl:absolute xl:right-[18px]">
+        <span className="type-eyebrow-20 shrink-0 text-black/60 xl:absolute xl:right-[calc(18*var(--u))]">
           {work.index}
         </span>
       </div>
@@ -104,13 +104,13 @@ function Card({ work }: { work: Work }) {
         shipped and cross-faded. Fading a single 70% export up to full instead
         would wash the mockup out, because the dimming is baked into it.
       */}
-      <div className="relative mx-[8px] mb-[8px] overflow-hidden rounded-[16px] xl:absolute xl:left-[8px] xl:top-[80px] xl:mx-0 xl:mb-0 xl:h-[514px] xl:w-[874px]">
+      <div className="relative mx-[8px] mb-[8px] overflow-hidden rounded-[16px] xl:absolute xl:left-[calc(8*var(--u))] xl:top-[calc(80*var(--u))] xl:mx-0 xl:mb-0 xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:rounded-[calc(16*var(--u))]">
         <Image
           src={`/images/works/${work.image}`}
           alt={work.title}
           width={1748}
           height={1028}
-          className="block h-auto w-full xl:h-[514px] xl:w-[874px] xl:max-w-none"
+          className="block h-auto w-full xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:max-w-none"
         />
         {work.hoverImage && (
           <Image
@@ -119,7 +119,7 @@ function Card({ work }: { work: Work }) {
             aria-hidden
             width={1748}
             height={1028}
-            className="absolute inset-0 block h-full w-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 xl:h-[514px] xl:w-[874px] xl:max-w-none"
+            className="absolute inset-0 block h-full w-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:max-w-none"
           />
         )}
       </div>
@@ -137,7 +137,7 @@ function Card({ work }: { work: Work }) {
    */
   const shell =
     "group relative block h-auto w-full rounded-[24px] bg-white transition-opacity duration-300 ease-out " +
-    "xl:absolute xl:left-[var(--card-x)] xl:top-[var(--card-y)] xl:h-[602px] xl:w-[893px] " +
+    "xl:absolute xl:left-[var(--card-x)] xl:top-[var(--card-y)] xl:h-[calc(602*var(--u))] xl:w-[calc(893*var(--u))] " +
     (work.dims
       ? " opacity-90 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30"
       : "");
@@ -155,8 +155,8 @@ function Card({ work }: { work: Work }) {
    * read by the xl rule.
    */
   const pos = {
-    ["--card-x" as string]: `${work.left}px`,
-    ["--card-y" as string]: `${work.top}px`,
+    ["--card-x" as string]: `calc(${work.left}*var(--u))`,
+    ["--card-y" as string]: `calc(${work.top}*var(--u))`,
   } as React.CSSProperties;
   return work.href ? (
     <Link href={work.href} className={shell} style={pos}>
@@ -171,15 +171,15 @@ function Card({ work }: { work: Work }) {
 
 export function Works() {
   return (
-    <section id="works" className="page-x flex w-full flex-col gap-[28px] xl:w-[1808px] xl:gap-[48px]">
+    <section id="works" className="page-x flex w-full flex-col gap-[28px] xl:w-[calc(1808*var(--u))] xl:gap-[calc(48*var(--u))]">
       {/* 5854:49862 */}
-      <div className="flex w-full items-center justify-between gap-[16px] xl:h-[90px] xl:w-[1808px]">
+      <div className="flex w-full items-center justify-between gap-[16px] xl:h-[calc(90*var(--u))] xl:w-[calc(1808*var(--u))] xl:gap-[calc(16*var(--u))]">
         {/*
           5854:49863 — Satoshi Medium 72/45.6/-2.5, filled with a vertical
           linear gradient (black@50% -> black@4%), not a solid colour.
         */}
         <h2
-          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[90px] xl:w-[898px]"
+          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[calc(90*var(--u))] xl:w-[calc(898*var(--u))]"
           style={{
             backgroundImage:
               "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.04) 100%)",
@@ -195,7 +195,7 @@ export function Works() {
       </div>
 
       {/* 5854:49876 */}
-      <div className="flex flex-col gap-[24px] md:grid md:grid-cols-2 md:gap-[24px] xl:relative xl:block xl:h-[1228px] xl:w-[1808px]">
+      <div className="flex flex-col gap-[24px] md:grid md:grid-cols-2 md:gap-[24px] xl:relative xl:block xl:h-[calc(1228*var(--u))] xl:w-[calc(1808*var(--u))] xl:gap-[calc(24*var(--u))]">
         {WORKS.map((w) => (
           <Card key={w.index} work={w} />
         ))}

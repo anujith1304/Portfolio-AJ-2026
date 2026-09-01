@@ -234,7 +234,7 @@ const NAV_SCREENS = [
 export default function GetMyStockCaseStudy() {
   return (
     <main
-      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[64px] xl:h-[20497px] xl:w-[1905px] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[64px] xl:h-[calc(20497*var(--u))] xl:w-[calc(1905*var(--u))] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
       style={canvasSurface}
     >
       <CaseNav />
@@ -251,7 +251,7 @@ export default function GetMyStockCaseStudy() {
       />
 
       {/* 5854:34785 — title + intro */}
-      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[192px] xl:top-[419px] xl:w-[1072px] xl:mb-0" style={{ order: 419 }}>
+      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[calc(192*var(--u))] xl:top-[calc(419*var(--u))] xl:w-[calc(1072*var(--u))] xl:mb-0 xl:text-[calc(64*var(--u))] xl:leading-[calc(72*var(--u))]" style={{ order: 419 }}>
         Get My Stock, 0→1 B2B Mobile App
       </h1>
       <Body top={511} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -262,10 +262,10 @@ export default function GetMyStockCaseStudy() {
         system and partnered closely with engineer&rsquo;s to deliver a first
         release and a strong foundation for future iterations.
       </Body>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1427px] xl:top-[563px] xl:mb-0" style={{ order: 563 }}>
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1427*var(--u))] xl:top-[calc(563*var(--u))] xl:mb-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 563 }}>
         Product Designer
       </p>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[563px] xl:mb-0" style={{ order: 563 }}>
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1595*var(--u))] xl:top-[calc(563*var(--u))] xl:mb-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 563 }}>
         2024 — 2025
       </p>
 
@@ -277,7 +277,7 @@ export default function GetMyStockCaseStudy() {
         height={1722}
         priority
         zoom="always"
-        className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[647px] xl:mb-0 xl:h-[861px] xl:w-[1529px]"
+        className="mb-[16px] xl:absolute xl:left-[calc(188*var(--u))] xl:top-[calc(647*var(--u))] xl:mb-0 xl:h-[calc(861*var(--u))] xl:w-[calc(1529*var(--u))]"
         style={{ order: 647 }}
       />
 
@@ -285,7 +285,7 @@ export default function GetMyStockCaseStudy() {
         5854:34739 — standfirst. A MIXED-fill text node: all Satoshi Medium 32,
         but the two key phrases are #363b45 against #707581 for the rest.
       */}
-      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#707581] xl:absolute xl:left-[521px] xl:top-[1604px] xl:w-[937px] xl:mb-0" style={{ order: 1604 }}>
+      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#707581] xl:absolute xl:left-[calc(521*var(--u))] xl:top-[calc(1604*var(--u))] xl:w-[calc(937*var(--u))] xl:mb-0 xl:text-[calc(32*var(--u))] xl:leading-[calc(43*var(--u))]" style={{ order: 1604 }}>
         I was a <span className="text-[#363b45]">Founding product designer</span>{" "}
         at Get My Stock, where I led the design of a complete{" "}
         <span className="text-[#363b45]">B2B App</span> and led the end-to-end
@@ -331,11 +331,11 @@ export default function GetMyStockCaseStudy() {
           zoom={b.zoom ? "always" : false}
           className={`mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none ${b.desktopOnly ? "hidden xl:block" : ""}`}
           style={{
-            ["--x" as string]: `${b.left}px`,
-            ["--y" as string]: `${b.top}px`,
+            ["--x" as string]: `calc(${b.left}*var(--u))`,
+            ["--y" as string]: `calc(${b.top}*var(--u))`,
         order: Math.round(b.top),
-            ["--w" as string]: `${b.w}px`,
-            ["--h" as string]: `${b.h}px`,
+            ["--w" as string]: `calc(${b.w}*var(--u))`,
+            ["--h" as string]: `calc(${b.h}*var(--u))`,
           }}
         />
       ))}
@@ -372,7 +372,7 @@ export default function GetMyStockCaseStudy() {
         paragraph as NONE and the four lines after it as UNORDERED. They are
         genuine bullets in the file, so they are marked up as a list.
       */}
-      <div className="mb-[16px] text-[20px] leading-[28px] font-normal text-[#222227] xl:absolute xl:left-[521px] xl:top-[2602px] xl:w-[934px] xl:mb-0" style={{ order: 2602 }}>
+      <div className="mb-[16px] text-[20px] leading-[28px] font-normal text-[#222227] xl:absolute xl:left-[calc(521*var(--u))] xl:top-[calc(2602*var(--u))] xl:w-[calc(934*var(--u))] xl:mb-0 xl:text-[calc(20*var(--u))] xl:leading-[calc(28*var(--u))]" style={{ order: 2602 }}>
         <p>
           Small retailers in India still rely heavily on phone calls, WhatsApp
           messages, and in-person visits to reorder stock from their suppliers.
@@ -418,13 +418,13 @@ export default function GetMyStockCaseStudy() {
         Recoleta 32 in white with "save more" set Bold rather than Medium.
       */}
       <div
-        className="mb-[16px] flex items-center rounded-[20px] px-[24px] py-[28px] xl:absolute xl:left-[521px] xl:top-[5421px] xl:mb-0 xl:h-[164px] xl:w-[1099px] xl:rounded-[24px] xl:px-[64px] xl:py-0"
+        className="mb-[16px] flex items-center rounded-[20px] px-[24px] py-[28px] xl:absolute xl:left-[calc(521*var(--u))] xl:top-[calc(5421*var(--u))] xl:mb-0 xl:h-[calc(164*var(--u))] xl:w-[calc(1099*var(--u))] xl:rounded-[calc(24*var(--u))] xl:px-[calc(64*var(--u))] xl:py-0"
         style={{
           order: 5421,
           backgroundImage: "linear-gradient(180deg, #003EAF 0%, #87AFF9 100%)",
         }}
       >
-        <p className="font-display text-[21px] leading-[1.35] font-medium text-white xl:text-[32px] xl:leading-[44px]">
+        <p className="font-display text-[21px] leading-[1.35] font-medium text-white xl:text-[calc(32*var(--u))] xl:leading-[calc(44*var(--u))]">
           How might we build a better experience for consumers to{" "}
           <span className="font-bold">save more</span> on their daily life
           style?
@@ -432,7 +432,7 @@ export default function GetMyStockCaseStudy() {
       </div>
 
       {/* 5854:34765 — "Defining the problem" grid */}
-      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[521px] xl:top-[5678px] xl:w-[381px] xl:mb-0" style={{ order: 5678 }}>
+      <h2 className="mb-[16px] font-display text-[40px] leading-[53px] font-medium text-[#060d19] xl:absolute xl:left-[calc(521*var(--u))] xl:top-[calc(5678*var(--u))] xl:w-[calc(381*var(--u))] xl:mb-0 xl:text-[calc(40*var(--u))] xl:leading-[calc(53*var(--u))]" style={{ order: 5678 }}>
         Defining the problem
       </h2>
       <Body top={5754} left={521} width={383} size={16} lh={22} color="#494949">
@@ -449,12 +449,12 @@ export default function GetMyStockCaseStudy() {
         <div
           key={top}
           aria-hidden
-          className="hidden h-px bg-[#b5b5b5] xl:absolute xl:left-[987px] xl:top-[var(--y)] xl:block xl:w-[630px]"
-          style={{ ["--y" as string]: `${top}px` }}
+          className="hidden h-px bg-[#b5b5b5] xl:absolute xl:left-[calc(987*var(--u))] xl:top-[var(--y)] xl:block xl:w-[calc(630*var(--u))]"
+          style={{ ["--y" as string]: `calc(${top}*var(--u))` }}
         />
       ))}
 
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5689px] xl:w-[117px] xl:mb-0" style={{ order: 5689 }}>
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[calc(987*var(--u))] xl:top-[calc(5689*var(--u))] xl:w-[calc(117*var(--u))] xl:mb-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 5689 }}>
         Business Goals
       </p>
       <Body top={5689} left={1124} width={498} size={16} lh={28} color="#060d19">
@@ -462,7 +462,7 @@ export default function GetMyStockCaseStudy() {
           "Build a scalable B2B procurement platform We created an end-to-end ordering experience that connects retailers directly with distributors  making Get My Stock the default restocking tool for small and medium retailers in India.\nOperational efficiency We built scalable design components across catalogue, ordering, and payment flows reducing friction for both retailers and distributors on the platform."
         }
       </Body>
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[5928px] xl:w-[85px] xl:mb-0" style={{ order: 5928 }}>
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[calc(987*var(--u))] xl:top-[calc(5928*var(--u))] xl:w-[calc(85*var(--u))] xl:mb-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 5928 }}>
         User Goals
       </p>
       <Body top={5928} left={1120} width={499} size={16} lh={24} color="#060d19">
@@ -470,7 +470,7 @@ export default function GetMyStockCaseStudy() {
           "Faster, easier restocking To give retailers a single place to browse products, check live availability, compare prices, and place orders cutting down the time spent on calls and manual coordination every day.\nA reliable, consistent ordering experience To ensure every part of the app from product discovery to checkout feels trustworthy, predictable, and easy to use, even for first-time digital buyers."
         }
       </Body>
-      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[987px] xl:top-[6134px] xl:w-[70px] xl:mb-0" style={{ order: 6134 }}>
+      <p className="mb-[16px] text-[16px] leading-[24px] font-medium text-[#060d19] xl:absolute xl:left-[calc(987*var(--u))] xl:top-[calc(6134*var(--u))] xl:w-[calc(70*var(--u))] xl:mb-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 6134 }}>
         Impact
       </p>
       <Body top={6134} left={1120} width={478} size={16} lh={24} color="#060d19">
@@ -492,9 +492,9 @@ export default function GetMyStockCaseStudy() {
           key={c.src}
           className="mb-[36px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)]"
           style={{
-            ["--x" as string]: `${c.left}px`,
-            ["--y" as string]: `${c.top}px`,
-            ["--w" as string]: `${c.w}px`,
+            ["--x" as string]: `calc(${c.left}*var(--u))`,
+            ["--y" as string]: `calc(${c.top}*var(--u))`,
+            ["--w" as string]: `calc(${c.w}*var(--u))`,
             order: c.order,
           }}
         >
@@ -505,7 +505,7 @@ export default function GetMyStockCaseStudy() {
             height={c.h * 2}
             zoom={c.zoom ? "always" : false}
             className="xl:h-[var(--fh)] xl:w-full"
-            style={{ ["--fh" as string]: `${c.h}px` } as React.CSSProperties}
+            style={{ ["--fh" as string]: `calc(${c.h}*var(--u))` } as React.CSSProperties}
           />
           {/*
             The wrapper sits on the artwork's render box, which is a few px
@@ -515,21 +515,21 @@ export default function GetMyStockCaseStudy() {
           <div
             className="mt-[12px] xl:mt-[var(--gap)] xl:ml-[var(--cx)] xl:w-[var(--cw)]"
             style={{
-              ["--cx" as string]: `${c.capX}px`,
-              ["--cw" as string]: `${c.capW}px`,
+              ["--cx" as string]: `calc(${c.capX}*var(--u))`,
+              ["--cw" as string]: `calc(${c.capW}*var(--u))`,
               // Figma's own gap at xl; in flow a 12px minimum keeps the caption
               // off the artwork where the design has it flush.
-              ["--gap" as string]: `${c.gap}px`,
+              ["--gap" as string]: `calc(${c.gap}*var(--u))`,
             }}
           >
-            <p className="text-[17px] leading-[1.6] text-[#6b6b6b] xl:text-[16px] xl:leading-[22px]">
+            <p className="text-[17px] leading-[1.6] text-[#6b6b6b] xl:text-[calc(16*var(--u))] xl:leading-[calc(22*var(--u))]">
               {c.lead && (
                 <span className="font-medium text-[#3f3f3f]">{c.lead} </span>
               )}
               {c.caption}
             </p>
             {c.label && (
-              <p className="mt-[8px] text-[14px] leading-[20px] text-[#9a9a9a] xl:mt-[11px]">
+              <p className="mt-[8px] text-[14px] leading-[20px] text-[#9a9a9a] xl:mt-[calc(11*var(--u))] xl:text-[calc(14*var(--u))] xl:leading-[calc(20*var(--u))]">
                 {c.label}
               </p>
             )}
@@ -566,7 +566,7 @@ export default function GetMyStockCaseStudy() {
         width the file's own annotated grid is shown instead.
       */}
       <section
-        className="mb-[8px] flex flex-col gap-[44px] xl:hidden"
+        className="mb-[8px] flex flex-col gap-[44px] xl:hidden xl:mb-[calc(8*var(--u))] xl:gap-[calc(44*var(--u))]"
         style={{ order: 14320 }}
         aria-label="Navigation walkthrough"
       >

@@ -25,7 +25,7 @@ import { Nav } from "@/components/Nav";
  */
 export function CaseNav() {
   return (
-    <div className="fixed left-1/2 top-[16px] z-50 w-[min(452px,calc(100vw-32px))] -translate-x-1/2 xl:left-[calc(50%-223.5px)] xl:top-[35px] xl:w-auto xl:translate-x-0" style={{ order: 35 }}>
+    <div className="fixed left-1/2 top-[16px] z-50 w-[min(452px,calc(100vw-32px))] -translate-x-1/2 xl:left-[calc(50%-223.5px)] xl:top-[calc(35*var(--u))] xl:w-auto xl:translate-x-0" style={{ order: 35 }}>
       <Nav base="/" active="Case Studies" />
     </div>
   );
@@ -40,7 +40,7 @@ export function BackLink() {
   return (
     <Link
       href="/#works"
-      className="mb-[20px] flex h-[44px] w-[90px] items-center gap-[7px] rounded-[14px] bg-[#fffefc] pl-[12px] transition-colors hover:bg-[#f4f3f0] xl:absolute xl:left-[192px] xl:top-[197px] xl:mb-0"
+      className="mb-[20px] flex h-[44px] w-[90px] items-center gap-[7px] rounded-[14px] bg-[#fffefc] pl-[12px] transition-colors hover:bg-[#f4f3f0] xl:absolute xl:left-[calc(192*var(--u))] xl:top-[calc(197*var(--u))] xl:mb-0 xl:h-[calc(44*var(--u))] xl:w-[calc(90*var(--u))] xl:gap-[calc(7*var(--u))] xl:rounded-[calc(14*var(--u))] xl:pl-[calc(12*var(--u))]"
       style={{ order: 197, border: "1.2px solid #e3e3e3" }}
     >
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -96,12 +96,12 @@ export function CaseLogo({
       alt={alt}
       width={imgW * 2}
       height={imgH * 2}
-      className="mx-auto mb-[20px] h-auto w-auto max-w-[200px] xl:mx-0 xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none"
+      className="mx-auto mb-[20px] h-auto w-auto max-w-[200px] xl:mx-0 xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:max-w-[calc(200*var(--u))]"
       style={{
-        ["--x" as string]: `${left - (imgW - boxW) / 2}px`,
-        ["--y" as string]: `${top - (imgH - boxH) / 2}px`,
-        ["--w" as string]: `${imgW}px`,
-        ["--h" as string]: `${imgH}px`,
+        ["--x" as string]: `calc(${left - (imgW - boxW) / 2}*var(--u))`,
+        ["--y" as string]: `calc(${top - (imgH - boxH) / 2}*var(--u))`,
+        ["--w" as string]: `calc(${imgW}*var(--u))`,
+        ["--h" as string]: `calc(${imgH}*var(--u))`,
         order: Math.round(top),
       }}
     />
@@ -132,16 +132,16 @@ export function MetaRow({
         aria-hidden
         className="hidden xl:absolute xl:block xl:border-t xl:border-b xl:border-[#e0e0e0]"
         style={{
-          ["--x" as string]: `${box.left}px`,
-          ["--y" as string]: `${box.top}px`,
+          ["--x" as string]: `calc(${box.left}*var(--u))`,
+          ["--y" as string]: `calc(${box.top}*var(--u))`,
         order: Math.round(box.top),
-          ["--w" as string]: `${box.width}px`,
-          ["--h" as string]: `${box.height}px`,
+          ["--w" as string]: `calc(${box.width}*var(--u))`,
+          ["--h" as string]: `calc(${box.height}*var(--u))`,
           left: "var(--x)", top: "var(--y)", width: "var(--w)", height: "var(--h)",
         }}
       />
       <div
-        className="grid grid-cols-2 gap-x-[24px] gap-y-[18px] border-t border-b border-[#e0e0e0] py-[20px] sm:grid-cols-4 xl:contents"
+        className="grid grid-cols-2 gap-x-[24px] gap-y-[18px] border-t border-b border-[#e0e0e0] py-[20px] sm:grid-cols-4 xl:contents xl:gap-x-[calc(24*var(--u))] xl:gap-y-[calc(18*var(--u))] xl:py-[calc(20*var(--u))]"
         style={{ order: box.top }}
       >
       {items.map((m) => (
@@ -149,15 +149,15 @@ export function MetaRow({
           key={m.label}
           className="xl:absolute xl:left-[var(--x)] xl:top-[var(--y)]"
           style={{
-            ["--x" as string]: `${m.left}px`,
-            ["--y" as string]: `${box.top + 22}px`,
+            ["--x" as string]: `calc(${m.left}*var(--u))`,
+            ["--y" as string]: `calc(${box.top + 22}*var(--u))`,
         order: Math.round(box.top + 22),
           }}
         >
           <p className="type-circ-20 text-[#6b6b6b]" style={{ lineHeight: "24.8px" }}>
             {m.label}
           </p>
-          <p className="mt-[6px] text-[18px] leading-[24.8px] font-normal text-[#222227] xl:mt-[15px] xl:text-[20px]">
+          <p className="mt-[6px] text-[18px] leading-[24.8px] font-normal text-[#222227] xl:mt-[calc(15*var(--u))] xl:text-[calc(20*var(--u))] xl:leading-[calc(24.8*var(--u))]">
             {m.value}
           </p>
         </div>
@@ -181,12 +181,12 @@ export function SectionHeading({
 }) {
   return (
     <h2
-      className="mt-[48px] mb-[16px] font-display text-[26px] leading-[1.25] font-semibold text-[#222227] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[32px] xl:leading-[35.8px]"
+      className="mt-[48px] mb-[16px] font-display text-[26px] leading-[1.25] font-semibold text-[#222227] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[calc(32*var(--u))] xl:leading-[calc(35.8*var(--u))]"
       style={{
-        ["--x" as string]: `${left}px`,
-        ["--y" as string]: `${top}px`,
+        ["--x" as string]: `calc(${left}*var(--u))`,
+        ["--y" as string]: `calc(${top}*var(--u))`,
         order: Math.round(top),
-        ["--w" as string]: `${width}px`,
+        ["--w" as string]: `calc(${width}*var(--u))`,
       }}
     >
       {children}
@@ -224,12 +224,12 @@ export function Body({
        */
       className="mb-[16px] whitespace-pre-line text-[17px] leading-[1.65] font-normal xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)] xl:text-[length:var(--fs)] xl:leading-[var(--lh)]"
       style={{
-        ["--x" as string]: `${left}px`,
-        ["--y" as string]: `${top}px`,
+        ["--x" as string]: `calc(${left}*var(--u))`,
+        ["--y" as string]: `calc(${top}*var(--u))`,
         order: Math.round(top),
-        ["--w" as string]: `${width}px`,
-        ["--fs" as string]: `${size}px`,
-        ["--lh" as string]: `${lh}px`,
+        ["--w" as string]: `calc(${width}*var(--u))`,
+        ["--fs" as string]: `calc(${size}*var(--u))`,
+        ["--lh" as string]: `calc(${lh}*var(--u))`,
         color,
       }}
     >
@@ -270,10 +270,10 @@ export function NumberedCard({
     <div
       className="mb-[36px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)]"
       style={{
-        ["--x" as string]: `${left}px`,
-        ["--y" as string]: `${top}px`,
+        ["--x" as string]: `calc(${left}*var(--u))`,
+        ["--y" as string]: `calc(${top}*var(--u))`,
         order: Math.round(top),
-        ["--w" as string]: `${width}px`,
+        ["--w" as string]: `calc(${width}*var(--u))`,
       }}
     >
       <p
@@ -282,11 +282,11 @@ export function NumberedCard({
       >
         {eyebrow}
       </p>
-      <h3 className="mt-[10px] font-display text-[21px] leading-[1.3] font-semibold text-[#222227] xl:mt-[12px] xl:text-[23.6px] xl:leading-[35.8px]">
+      <h3 className="mt-[10px] font-display text-[21px] leading-[1.3] font-semibold text-[#222227] xl:mt-[calc(12*var(--u))] xl:text-[calc(23.6*var(--u))] xl:leading-[calc(35.8*var(--u))]">
         {title}
       </h3>
       <p
-        className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[16px] xl:leading-[24.8px]"
+        className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[calc(16*var(--u))] xl:leading-[calc(24.8*var(--u))] xl:mt-[calc(12*var(--u))]"
         style={{ color: bodyColor }}
       >
         {body}
@@ -297,7 +297,7 @@ export function NumberedCard({
             {impactLabel ?? "IMPACT"}
           </p>
           <p
-            className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[16px] xl:leading-[24.8px]"
+            className="mt-[12px] text-[17px] leading-[1.65] font-normal xl:text-[calc(16*var(--u))] xl:leading-[calc(24.8*var(--u))] xl:mt-[calc(12*var(--u))]"
             style={{ color: bodyColor }}
           >
             {impact}
@@ -328,19 +328,19 @@ export function StatBlock({
     <div
       className="mb-[36px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:w-[var(--w)]"
       style={{
-        ["--x" as string]: `${left}px`,
-        ["--y" as string]: `${top}px`,
+        ["--x" as string]: `calc(${left}*var(--u))`,
+        ["--y" as string]: `calc(${top}*var(--u))`,
         order: Math.round(top),
-        ["--w" as string]: `${width}px`,
+        ["--w" as string]: `calc(${width}*var(--u))`,
       }}
     >
       <p className="text-[50px] leading-[68px] font-bold text-[#060d19]">{value}</p>
-      <p className="mt-[0px] text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[18px] xl:leading-[24px]">
+      <p className="mt-[0px] text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))] xl:mt-[calc(0*var(--u))]">
         {caption}
       </p>
       <div className="mt-[24px] flex flex-col gap-[8px]">
         {lines.map((l) => (
-          <p key={l} className="text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[18px] xl:leading-[24px]">
+          <p key={l} className="text-[17px] leading-[1.6] font-medium text-[#707581] xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]">
             {l}
           </p>
         ))}
@@ -421,38 +421,38 @@ export function Related({
   return (
     <section
       aria-label="Explore more case studies"
-      className="page-x mt-[56px] w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[642px] xl:w-[1905px]"
-      style={{ ["--y" as string]: `${top}px`, order: Math.round(top) }}
+      className="page-x mt-[56px] w-full xl:absolute xl:left-0 xl:top-[var(--y)] xl:mt-0 xl:h-[calc(642*var(--u))] xl:w-[calc(1905*var(--u))]"
+      style={{ ["--y" as string]: `calc(${top}*var(--u))`, order: Math.round(top) }}
     >
-      <div aria-hidden className="h-px w-full bg-[#ececec] xl:absolute xl:left-[191px] xl:top-[32px] xl:w-[1520px]" />
-      <h2 className="mt-[20px] text-[19px] leading-[24px] font-medium text-[#5d6067] xl:absolute xl:left-[191px] xl:top-[43px] xl:mt-0">
+      <div aria-hidden className="h-px w-full bg-[#ececec] xl:absolute xl:left-[calc(191*var(--u))] xl:top-[calc(32*var(--u))] xl:w-[calc(1520*var(--u))]" />
+      <h2 className="mt-[20px] text-[19px] leading-[24px] font-medium text-[#5d6067] xl:absolute xl:left-[calc(191*var(--u))] xl:top-[calc(43*var(--u))] xl:mt-0 xl:text-[calc(19*var(--u))] xl:leading-[calc(24*var(--u))]">
         Explore More
       </h2>
 
-      <div className="mt-[24px] grid grid-cols-1 gap-[32px] sm:grid-cols-2 xl:mt-0 xl:block">
+      <div className="mt-[24px] grid grid-cols-1 gap-[32px] sm:grid-cols-2 xl:mt-0 xl:block xl:gap-[calc(32*var(--u))]">
         {CASE_STUDIES.map((c, i) => {
           const inner = (
             <>
-              <div className="overflow-hidden rounded-[16px] bg-white xl:h-[278px] xl:w-[496px]">
+              <div className="overflow-hidden rounded-[16px] bg-white xl:h-[calc(278*var(--u))] xl:w-[calc(496*var(--u))] xl:rounded-[calc(16*var(--u))]">
                 <Image
                   src={c.image}
                   alt=""
                   width={1748}
                   height={1028}
-                  className="h-auto w-full object-cover xl:h-[278px] xl:w-[496px]"
+                  className="h-auto w-full object-cover xl:h-[calc(278*var(--u))] xl:w-[calc(496*var(--u))]"
                 />
               </div>
-              <h3 className="mt-[16px] font-display text-[24px] leading-[1.25] font-medium text-[#060d19] xl:absolute xl:left-0 xl:top-[302px] xl:mt-0 xl:text-[32px] xl:leading-[40px]">
+              <h3 className="mt-[16px] font-display text-[24px] leading-[1.25] font-medium text-[#060d19] xl:absolute xl:left-0 xl:top-[calc(302*var(--u))] xl:mt-0 xl:text-[calc(32*var(--u))] xl:leading-[calc(40*var(--u))]">
                 {c.title}
               </h3>
-              <p className="mt-[8px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-0 xl:top-[351px] xl:mt-0 xl:w-[488px]">
+              <p className="mt-[8px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-0 xl:top-[calc(351*var(--u))] xl:mt-0 xl:w-[calc(488*var(--u))] xl:text-[calc(16*var(--u))] xl:leading-[calc(24*var(--u))]">
                 {c.blurb}
               </p>
             </>
           );
           const cls =
-            "group relative block rounded-[8px] xl:absolute xl:left-[var(--cx)] xl:top-[107px] xl:h-[430px] xl:w-[496px]";
-          const style = { ["--cx" as string]: `${191 + i * 516}px` } as React.CSSProperties;
+            "group relative block rounded-[8px] xl:absolute xl:left-[var(--cx)] xl:top-[calc(107*var(--u))] xl:h-[calc(430*var(--u))] xl:w-[calc(496*var(--u))]";
+          const style = { ["--cx" as string]: `calc(${191 + i * 516}*var(--u))` } as React.CSSProperties;
           return c.slug === current ? (
             <div key={c.slug} className={cls} style={style} aria-current="page">
               {inner}

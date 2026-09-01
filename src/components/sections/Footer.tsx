@@ -34,14 +34,14 @@ export function Footer() {
   return (
     <section
       id="contact"
-      className="page-x relative flex w-full flex-col items-start pt-[40px] pb-[56px] xl:block xl:h-[712px] xl:w-[1905px] xl:pt-0 xl:pb-0"
+      className="page-x relative flex w-full flex-col items-start pt-[40px] pb-[56px] xl:block xl:h-[calc(712*var(--u))] xl:w-[calc(1905*var(--u))] xl:pt-0 xl:pb-0"
     >
       {/*
         The mount is the card: white, radius 26, 12px of margin around the
         artwork, and a soft drop shadow. The bitmap itself stays transparent —
         the opaque block baked into the export was the original complaint.
       */}
-      <div className="w-full max-w-[290px] -rotate-[2deg] rounded-[26px] bg-white p-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.10)] sm:max-w-[348px] xl:absolute xl:left-[400px] xl:top-[99px] xl:w-[348px] xl:max-w-none">
+      <div className="w-full max-w-[290px] -rotate-[2deg] rounded-[26px] bg-white p-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.10)] sm:max-w-[348px] xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(99*var(--u))] xl:w-[calc(348*var(--u))] xl:max-w-none xl:max-w-[calc(348*var(--u))] xl:rounded-[calc(26*var(--u))] xl:p-[calc(12*var(--u))]">
         <Image
           src="/images/footer/connect-card.png"
           alt=""
@@ -51,11 +51,11 @@ export function Footer() {
         />
       </div>
 
-      <p className="mt-[44px] text-[13px] leading-[20px] font-medium tracking-[0.11em] text-black/45 uppercase xl:absolute xl:left-[400px] xl:top-[371px] xl:mt-0 xl:text-[16px]">
+      <p className="mt-[44px] text-[13px] leading-[20px] font-medium tracking-[0.11em] text-black/45 uppercase xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(371*var(--u))] xl:mt-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(20*var(--u))]">
         Curious about my work?
       </p>
 
-      <h2 className="type-connect mt-[10px] w-full text-[#4a5568] xl:absolute xl:left-[399px] xl:top-[404px] xl:mt-0 xl:w-[1100px]">
+      <h2 className="type-connect mt-[10px] w-full text-[#4a5568] xl:absolute xl:left-[calc(399*var(--u))] xl:top-[calc(404*var(--u))] xl:mt-0 xl:w-[calc(1100*var(--u))]">
         Let&rsquo;s Connect - or Collaborate
       </h2>
 
@@ -64,7 +64,7 @@ export function Footer() {
         in the same face and size as the heading directly beneath it. The copy
         control rides inside the paragraph so it shares the line at every width.
       */}
-      <p className="type-connect mt-[4px] w-full break-words text-[#4a5568] xl:absolute xl:left-[399px] xl:top-[496px] xl:mt-0 xl:w-[1100px]">
+      <p className="type-connect mt-[4px] w-full break-words text-[#4a5568] xl:absolute xl:left-[calc(399*var(--u))] xl:top-[calc(496*var(--u))] xl:mt-0 xl:w-[calc(1100*var(--u))]">
         <a
           href="mailto:anujithchand2002@gmail.com"
           className="transition-colors hover:text-[#2f3a4d]"
@@ -84,7 +84,7 @@ export function Footer() {
         alt="Email, LinkedIn, Dribbble, Twitter"
         width={184}
         height={40}
-        className="mt-[26px] h-[40px] w-[184px] xl:absolute xl:left-[400px] xl:top-[608px] xl:mt-0"
+        className="mt-[26px] h-[40px] w-[184px] xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(608*var(--u))] xl:mt-0 xl:h-[calc(40*var(--u))] xl:w-[calc(184*var(--u))]"
       />
 
       {/*
@@ -97,7 +97,7 @@ export function Footer() {
         alt=""
         width={300}
         height={300}
-        className="mt-[28px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[1738px] xl:top-[597px] xl:mt-0 xl:h-[98px] xl:w-[134px]"
+        className="mt-[28px] h-[74px] w-[101px] self-end object-cover opacity-80 xl:absolute xl:left-[calc(1738*var(--u))] xl:top-[calc(597*var(--u))] xl:mt-0 xl:h-[calc(98*var(--u))] xl:w-[calc(134*var(--u))]"
       />
     </section>
   );

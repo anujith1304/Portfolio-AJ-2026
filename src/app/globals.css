@@ -55,20 +55,39 @@
     with no markup changes.
   */
   /*
-    Declared in rem, not px. Tailwind's own breakpoints are rem, and it orders
-    the generated media blocks by this value — a px value does not sort against
+    64rem = 1024px: the width at which the scaled canvas takes over from the
+    reflowed layouts. Everything inside it is sized in --u, so between 1024 and
+    1905 the design scales rather than reflowing.
+
+    Declared in rem, not px. Tailwind's own breakpoints are rem and it orders
+    the generated media blocks by this value; a px value does not sort against
     them, so the xl block was emitted before md and every `md:` utility beat its
-    `xl:` counterpart at desktop. That silently cost the section stack its
-    120px gap (it fell back to md's 88) and pulled the footer 160px off its
-    backdrop. 119.0625rem = 1905px.
+    `xl:` counterpart.
   */
-  --breakpoint-xl: 119.0625rem;
+  --breakpoint-xl: 64rem;
 
   /* ---- Layout ---- */
   --spacing-frame: 1904px; /* frame width */
   --spacing-gutter: 48px; /* section inset: content starts at x=49 */
   --spacing-content: 1808px; /* section content width */
   --spacing-section-gap: 120px; /* wrapper itemSpacing (5841:31965) */
+}
+
+/*
+  One design pixel.
+
+  The layout is drawn on a 1905px canvas. Expressing every desktop dimension as
+  a multiple of this makes the whole composition scale with the viewport
+  instead of switching to a reflowed layout, so a 1440 laptop sees the design
+  rather than a different one.
+
+  It caps at 1905, so at or above the design width it resolves to exactly 1px
+  and the desktop rendering is unchanged — which is also how the conversion is
+  verified. Below 1024 the canvas gives way to the reflowed layouts, where
+  these values are not read at all.
+*/
+:root {
+  --u: calc(min(100vw, 1905px) / 1905);
 }
 
 html {
@@ -229,47 +248,47 @@ body {
   /* ---- Display: Recoleta ---- */
   .type-hero {            /* 5854:49620 hero H1 */
     font-family: var(--font-display); font-weight: 500;
-    font-size: 72px; line-height: 80px; letter-spacing: -1.28px;
+    font-size: calc(72*var(--u)); line-height: calc(80*var(--u)); letter-spacing: calc(-1.28*var(--u));
     font-feature-settings: "ss02" 1;
   }
   .type-connect {         /* footer "Let's Connect - or collaborate" */
     font-family: var(--font-display); font-weight: 500;
-    font-size: 72px; line-height: normal; letter-spacing: -1.28px;
+    font-size: calc(72*var(--u)); line-height: normal; letter-spacing: calc(-1.28*var(--u));
   }
 
   /* ---- Display: Satoshi ---- */
-  .type-display-72 { font-family: var(--font-sans); font-weight: 500; font-size: 72px; line-height: 86px;   letter-spacing: -2.4px;  }
-  .type-works-72   { font-family: var(--font-sans); font-weight: 500; font-size: 72px; line-height: 45.6px; letter-spacing: -2.5px;  }
-  .type-quote-72   { font-family: var(--font-sans); font-weight: 700; font-size: 72px; line-height: 74px;   letter-spacing: -1.09px; }
+  .type-display-72 { font-family: var(--font-sans); font-weight: 500; font-size: calc(72*var(--u)); line-height: calc(86*var(--u));   letter-spacing: calc(-2.4*var(--u));  }
+  .type-works-72   { font-family: var(--font-sans); font-weight: 500; font-size: calc(72*var(--u)); line-height: calc(45.6*var(--u)); letter-spacing: calc(-2.5*var(--u));  }
+  .type-quote-72   { font-family: var(--font-sans); font-weight: 700; font-size: calc(72*var(--u)); line-height: calc(74*var(--u));   letter-spacing: calc(-1.09*var(--u)); }
 
   /* ---- Satoshi body ---- */
-  .type-role-32    { font-family: var(--font-sans); font-weight: 500; font-size: 32px; line-height: 14px;   letter-spacing: -0.64px; }
-  .type-lead-28    { font-family: var(--font-sans); font-weight: 500; font-size: 28px; line-height: 36px;   letter-spacing: 0.5px;   }
-  .type-bio-24     { font-family: var(--font-sans); font-weight: 500; font-size: 24px; line-height: 32px;   letter-spacing: -0.36px; }
-  .type-email-24   { font-family: var(--font-sans); font-weight: 700; font-size: 24px; line-height: 10px;                            }
-  .type-eyebrow-20 { font-family: var(--font-sans); font-weight: 400; font-size: 20px; line-height: normal; letter-spacing: -0.72px; }
-  .type-section-20 { font-family: var(--font-sans); font-weight: 500; font-size: 20px; line-height: 18px;   text-transform: capitalize; }
-  .type-date-20    { font-family: var(--font-sans); font-weight: 500; font-size: 20px; line-height: 12px;   }
-  .type-exp-18     { font-family: var(--font-sans); font-weight: 500; font-size: 18px; line-height: 28.8px; }
-  .type-exp-18-reg { font-family: var(--font-sans); font-weight: 400; font-size: 18px; line-height: 28.8px; }
-  .type-btn-18     { font-family: var(--font-sans); font-weight: 500; font-size: 18px; line-height: 20px;   }
-  .type-btn-16     { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 29.7px; }
-  .type-nav        { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 10px;   letter-spacing: -0.4px;  }
-  .type-nav-active { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 10px;   letter-spacing: -0.4px;  }
-  .type-status     { font-family: var(--font-sans); font-weight: 700; font-size: 16px; line-height: 19.2px; }
-  .type-scroll-16  { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 19.2px; }
-  .type-avail-16   { font-family: var(--font-sans); font-weight: 500; font-size: 16px; line-height: 14.4px; }
-  .type-meta-12    { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 12px;   }
-  .type-meta-12-up { font-family: var(--font-sans); font-weight: 400; font-size: 12px; line-height: 12.6px; text-transform: uppercase; }
+  .type-role-32    { font-family: var(--font-sans); font-weight: 500; font-size: calc(32*var(--u)); line-height: calc(14*var(--u));   letter-spacing: calc(-0.64*var(--u)); }
+  .type-lead-28    { font-family: var(--font-sans); font-weight: 500; font-size: calc(28*var(--u)); line-height: calc(36*var(--u));   letter-spacing: calc(0.5*var(--u));   }
+  .type-bio-24     { font-family: var(--font-sans); font-weight: 500; font-size: calc(24*var(--u)); line-height: calc(32*var(--u));   letter-spacing: calc(-0.36*var(--u)); }
+  .type-email-24   { font-family: var(--font-sans); font-weight: 700; font-size: calc(24*var(--u)); line-height: calc(10*var(--u));                            }
+  .type-eyebrow-20 { font-family: var(--font-sans); font-weight: 400; font-size: calc(20*var(--u)); line-height: normal; letter-spacing: calc(-0.72*var(--u)); }
+  .type-section-20 { font-family: var(--font-sans); font-weight: 500; font-size: calc(20*var(--u)); line-height: calc(18*var(--u));   text-transform: capitalize; }
+  .type-date-20    { font-family: var(--font-sans); font-weight: 500; font-size: calc(20*var(--u)); line-height: calc(12*var(--u));   }
+  .type-exp-18     { font-family: var(--font-sans); font-weight: 500; font-size: calc(18*var(--u)); line-height: calc(28.8*var(--u)); }
+  .type-exp-18-reg { font-family: var(--font-sans); font-weight: 400; font-size: calc(18*var(--u)); line-height: calc(28.8*var(--u)); }
+  .type-btn-18     { font-family: var(--font-sans); font-weight: 500; font-size: calc(18*var(--u)); line-height: calc(20*var(--u));   }
+  .type-btn-16     { font-family: var(--font-sans); font-weight: 700; font-size: calc(16*var(--u)); line-height: calc(29.7*var(--u)); }
+  .type-nav        { font-family: var(--font-sans); font-weight: 500; font-size: calc(16*var(--u)); line-height: calc(10*var(--u));   letter-spacing: calc(-0.4*var(--u));  }
+  .type-nav-active { font-family: var(--font-sans); font-weight: 700; font-size: calc(16*var(--u)); line-height: calc(10*var(--u));   letter-spacing: calc(-0.4*var(--u));  }
+  .type-status     { font-family: var(--font-sans); font-weight: 700; font-size: calc(16*var(--u)); line-height: calc(19.2*var(--u)); }
+  .type-scroll-16  { font-family: var(--font-sans); font-weight: 500; font-size: calc(16*var(--u)); line-height: calc(19.2*var(--u)); }
+  .type-avail-16   { font-family: var(--font-sans); font-weight: 500; font-size: calc(16*var(--u)); line-height: calc(14.4*var(--u)); }
+  .type-meta-12    { font-family: var(--font-sans); font-weight: 400; font-size: calc(12*var(--u)); line-height: calc(12*var(--u));   }
+  .type-meta-12-up { font-family: var(--font-sans); font-weight: 400; font-size: calc(12*var(--u)); line-height: calc(12.6*var(--u)); text-transform: uppercase; }
 
   /* ---- Circular Std (Book = 450) ---- */
-  .type-circ-32    { font-family: var(--font-circular); font-weight: 450; font-size: 32px; line-height: 14px;    letter-spacing: -0.64px; }
-  .type-circ-24    { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 37.29px; letter-spacing: -0.5px;  }
-  .type-circ-24-lg { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 32px;    letter-spacing: -0.4px;  }
-  .type-circ-24-sm { font-family: var(--font-circular); font-weight: 450; font-size: 24px; line-height: 10px;    letter-spacing: -0.96px; }
-  .type-circ-20    { font-family: var(--font-circular); font-weight: 450; font-size: 20px; line-height: 29.13px; }
-  .type-circ-20-sm { font-family: var(--font-circular); font-weight: 450; font-size: 20px; line-height: 12px;    }
-  .type-circ-18    { font-family: var(--font-circular); font-weight: 450; font-size: 18px; line-height: 19.23px; }
+  .type-circ-32    { font-family: var(--font-circular); font-weight: 450; font-size: calc(32*var(--u)); line-height: calc(14*var(--u));    letter-spacing: calc(-0.64*var(--u)); }
+  .type-circ-24    { font-family: var(--font-circular); font-weight: 450; font-size: calc(24*var(--u)); line-height: calc(37.29*var(--u)); letter-spacing: calc(-0.5*var(--u));  }
+  .type-circ-24-lg { font-family: var(--font-circular); font-weight: 450; font-size: calc(24*var(--u)); line-height: calc(32*var(--u));    letter-spacing: calc(-0.4*var(--u));  }
+  .type-circ-24-sm { font-family: var(--font-circular); font-weight: 450; font-size: calc(24*var(--u)); line-height: calc(10*var(--u));    letter-spacing: calc(-0.96*var(--u)); }
+  .type-circ-20    { font-family: var(--font-circular); font-weight: 450; font-size: calc(20*var(--u)); line-height: calc(29.13*var(--u)); }
+  .type-circ-20-sm { font-family: var(--font-circular); font-weight: 450; font-size: calc(20*var(--u)); line-height: calc(12*var(--u));    }
+  .type-circ-18    { font-family: var(--font-circular); font-weight: 450; font-size: calc(18*var(--u)); line-height: calc(19.23*var(--u)); }
 }
 
 /*
@@ -320,14 +339,14 @@ body {
    variants and flow normally below it.
 
    Everything in this file's responsive section is therefore scoped to
-   max-width: 1904px. Desktop rendering cannot change as a result of it —
+   max-width: 1023px. Desktop rendering cannot change as a result of it —
    which is what keeps the pixel-for-pixel Figma match that was verified
    against the file.
 
    Breakpoints:
      mobile   < 768px    single column, compact rhythm
-     tablet   768-1904   single column, wider measure
-     desktop  >= 1905    the Figma canvas, unchanged
+     tablet   768-1023   single column, wider measure
+     desktop  >= 1024    the Figma canvas, scaled by --u
    ========================================================================= */
 
 @layer utilities {
@@ -344,15 +363,15 @@ body {
   Scoped to below the desktop breakpoint rather than cancelled there with
   `xl:px-0`: both set padding-inline at the same specificity, and this file is
   appended after Tailwind's utilities, so it would win the tie and shift every
-  section 48px in on desktop. Not applying at all above 1904 is unambiguous.
+  section 48px in on desktop. Not applying at all above 1023 is unambiguous.
 */
-@media (max-width: 1904px) {
+@media (max-width: 1023px) {
   .page-x {
     padding-inline: clamp(20px, 5vw, 48px);
   }
 }
 
-@media (max-width: 1904px) {
+@media (max-width: 1023px) {
   /*
     Fluid display type. Each preferred value is chosen so the utility reaches
     its Figma size exactly at 1280px (e.g. 72/1280 = 5.625vw), which means the
@@ -434,7 +453,7 @@ body {
   breakpoint they keep a legible minimum width and the container scrolls
   instead. `touch-action` keeps the vertical page swipe working over them.
 */
-@media (max-width: 1904px) {
+@media (max-width: 1023px) {
   .figure-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;

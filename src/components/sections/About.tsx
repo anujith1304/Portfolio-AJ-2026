@@ -43,7 +43,7 @@ function Card({
 }) {
   return (
     <div
-      className={`relative mb-[16px] break-inside-avoid rounded-[20px] border border-hairline bg-white p-[20px] xl:absolute xl:mb-0 xl:p-0 ${className ?? ""}`}
+      className={`relative mb-[16px] break-inside-avoid rounded-[20px] border border-hairline bg-white p-[20px] xl:absolute xl:mb-0 xl:p-0 ${className ?? ""} xl:rounded-[calc(20*var(--u))]`}
     >
       {children}
     </div>
@@ -137,12 +137,12 @@ export function About() {
   return (
     <section
       id="about"
-      className="page-x flex w-full flex-col gap-[24px] xl:w-[1808px]"
+      className="page-x flex w-full flex-col gap-[24px] xl:w-[calc(1808*var(--u))] xl:gap-[calc(24*var(--u))]"
     >
       {/* 5854:50991 */}
-      <div className="flex w-full items-center xl:h-[90px] xl:w-[1808px]">
+      <div className="flex w-full items-center xl:h-[calc(90*var(--u))] xl:w-[calc(1808*var(--u))]">
         <h2
-          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[90px] xl:w-[911px]"
+          className="type-works-72 flex items-center bg-clip-text text-transparent xl:h-[calc(90*var(--u))] xl:w-[calc(911*var(--u))]"
           style={{ backgroundImage: GRADIENT }}
         >
           What I&rsquo;m about
@@ -154,25 +154,25 @@ export function About() {
         children keep their offsets inside it. Below xl the same cards are a
         one- then two-column stack, and each card's content flows.
       */}
-      <div className="columns-1 gap-[16px] md:columns-2 xl:relative xl:block xl:columns-1 xl:h-[1500px] xl:w-[1808px]">
+      <div className="columns-1 gap-[16px] md:columns-2 xl:relative xl:block xl:columns-1 xl:h-[calc(1500*var(--u))] xl:w-[calc(1808*var(--u))] xl:gap-[calc(16*var(--u))]">
         {/* ---- Bio card — 5854:50994, 563x301 at (13,21) ---- */}
-        <Card className="xl:left-[13px] xl:top-[21px] xl:h-[301px] xl:w-[563px]">
-          <p className="type-lead-28 text-[#616161] xl:absolute xl:left-[19px] xl:top-[39px] xl:w-[522px]">
+        <Card className="xl:left-[calc(13*var(--u))] xl:top-[calc(21*var(--u))] xl:h-[calc(301*var(--u))] xl:w-[calc(563*var(--u))]">
+          <p className="type-lead-28 text-[#616161] xl:absolute xl:left-[calc(19*var(--u))] xl:top-[calc(39*var(--u))] xl:w-[calc(522*var(--u))]">
             Product Designer with 2+years of experience, focused on creating
             functional and user-centered digital products with visually stunning
             designs.
           </p>
-          <div className="mt-[20px] flex items-center justify-between gap-[16px] xl:mt-0 xl:block">
+          <div className="mt-[20px] flex items-center justify-between gap-[16px] xl:mt-0 xl:block xl:gap-[calc(16*var(--u))]">
             <Image
               src="/images/about/social-links.png"
               alt="Copy email, LinkedIn, Dribbble, Twitter"
               width={725}
               height={147}
-              className="h-[37px] w-[181px] xl:absolute xl:left-[21px] xl:top-[244px]"
+              className="h-[37px] w-[181px] xl:absolute xl:left-[calc(21*var(--u))] xl:top-[calc(244*var(--u))] xl:h-[calc(37*var(--u))] xl:w-[calc(181*var(--u))]"
             />
             <a
               href="#"
-              className="flex h-[38px] w-[111px] shrink-0 items-center justify-center rounded-[57px] bg-black/4 xl:absolute xl:left-[432px] xl:top-[243px]"
+              className="flex h-[38px] w-[111px] shrink-0 items-center justify-center rounded-[57px] bg-black/4 xl:absolute xl:left-[calc(432*var(--u))] xl:top-[calc(243*var(--u))] xl:h-[calc(38*var(--u))] xl:w-[calc(111*var(--u))] xl:rounded-[calc(57*var(--u))]"
             >
               <span className="font-figtree text-[16.04px] leading-[16.04px] font-medium text-black">
                 Resume
@@ -182,7 +182,7 @@ export function About() {
         </Card>
 
         {/* ---- "Good design is balanced." — 5854:51092, 563x572 at (13,346) ---- */}
-        <Card className="xl:left-[13px] xl:top-[346px] xl:h-[572px] xl:w-[563px]">
+        <Card className="xl:left-[calc(13*var(--u))] xl:top-[calc(346*var(--u))] xl:h-[calc(572*var(--u))] xl:w-[calc(563*var(--u))]">
           {/*
             5854:51095 is a MIXED-fill text node, not one gradient:
               "Good design is" -> SOLID #000000 at full opacity
@@ -190,7 +190,7 @@ export function About() {
             Painting the section-heading gradient (50% -> 4%) across both, as
             this previously did, washed the first line out to near-invisible.
           */}
-          <h3 className="type-quote-72 xl:absolute xl:left-[24px] xl:top-[24px] xl:w-[515px]">
+          <h3 className="type-quote-72 xl:absolute xl:left-[calc(24*var(--u))] xl:top-[calc(24*var(--u))] xl:w-[calc(515*var(--u))]">
             <span className="text-black">Good design is</span>
             <br />
             <span
@@ -203,7 +203,7 @@ export function About() {
               balanced.
             </span>
           </h3>
-          <p className="mt-[16px] text-[14px] leading-[20px] text-[#6b6b6b] xl:absolute xl:left-[24px] xl:top-[194px] xl:mt-0 xl:w-[485px]">
+          <p className="mt-[16px] text-[14px] leading-[20px] text-[#6b6b6b] xl:absolute xl:left-[calc(24*var(--u))] xl:top-[calc(194*var(--u))] xl:mt-0 xl:w-[calc(485*var(--u))] xl:text-[calc(14*var(--u))] xl:leading-[calc(20*var(--u))]">
             Strategic thinker crafting clean, effective designs that seamlessly
             blend user delight with business success.
           </p>
@@ -219,16 +219,16 @@ export function About() {
             width={620}
             height={503}
             unoptimized
-            className="mx-auto mt-[20px] h-auto w-full max-w-[348px] rounded-[20px] object-contain xl:absolute xl:left-[107px] xl:top-[266px] xl:mt-0 xl:h-[269px] xl:w-[348px]"
+            className="mx-auto mt-[20px] h-auto w-full max-w-[348px] rounded-[20px] object-contain xl:absolute xl:left-[calc(107*var(--u))] xl:top-[calc(266*var(--u))] xl:mt-0 xl:h-[calc(269*var(--u))] xl:w-[calc(348*var(--u))] xl:max-w-[calc(348*var(--u))] xl:rounded-[calc(20*var(--u))]"
           />
         </Card>
 
         {/* ---- Favorite Jams — border 5854:51099, 563x542 at (13,942) ---- */}
-        <Card className="xl:left-[13px] xl:top-[942px] xl:h-[542px] xl:w-[563px]">
-          <h3 className="text-[20px] leading-[18px] font-medium text-black xl:absolute xl:left-[16px] xl:top-[24px]">
+        <Card className="xl:left-[calc(13*var(--u))] xl:top-[calc(942*var(--u))] xl:h-[calc(542*var(--u))] xl:w-[calc(563*var(--u))]">
+          <h3 className="text-[20px] leading-[18px] font-medium text-black xl:absolute xl:left-[calc(16*var(--u))] xl:top-[calc(24*var(--u))] xl:text-[calc(20*var(--u))] xl:leading-[calc(18*var(--u))]">
             Jams I Keep Coming Back To
           </h3>
-          <div className="mt-[16px] flex flex-col gap-[10px] xl:mt-0 xl:block">
+          <div className="mt-[16px] flex flex-col gap-[10px] xl:mt-0 xl:block xl:gap-[calc(10*var(--u))]">
             {JAMS.map((top, i) => (
               <Image
                 key={top}
@@ -236,8 +236,8 @@ export function About() {
                 alt=""
                 width={1078}
                 height={164}
-                className="h-auto w-full xl:absolute xl:left-[12px] xl:top-[var(--y)] xl:h-[82px] xl:w-[539px]"
-                style={{ ["--y" as string]: `${top}px` }}
+                className="h-auto w-full xl:absolute xl:left-[calc(12*var(--u))] xl:top-[var(--y)] xl:h-[calc(82*var(--u))] xl:w-[calc(539*var(--u))]"
+                style={{ ["--y" as string]: `calc(${top}*var(--u))` }}
               />
             ))}
           </div>
@@ -249,14 +249,14 @@ export function About() {
           alt="Hey, Anujith here"
           width={1214}
           height={1151}
-          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[596px] xl:top-[17px] xl:mb-0 xl:h-[575.5px] xl:w-[607px] xl:max-w-none xl:rounded-none"
+          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[calc(596*var(--u))] xl:top-[calc(17*var(--u))] xl:mb-0 xl:h-[calc(575.5*var(--u))] xl:w-[calc(607*var(--u))] xl:max-w-none xl:rounded-none xl:rounded-[calc(20*var(--u))]"
         />
         <Image
           src="/images/about/design-stack.png"
           alt="Design stack"
           width={1214}
           height={544}
-          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[596px] xl:top-[608px] xl:mb-0 xl:h-[272px] xl:w-[607px] xl:max-w-none xl:rounded-none"
+          className="mb-[16px] h-auto w-full break-inside-avoid rounded-[20px] xl:absolute xl:left-[calc(596*var(--u))] xl:top-[calc(608*var(--u))] xl:mb-0 xl:h-[calc(272*var(--u))] xl:w-[calc(607*var(--u))] xl:max-w-none xl:rounded-none xl:rounded-[calc(20*var(--u))]"
         />
         {/*
           5854:51257 — a Photos component instance, not a still. Ten variants
@@ -264,39 +264,39 @@ export function About() {
           caption, plus a pagination rail. Rendered as a live carousel.
         */}
         <div
-          className="fit-canvas mb-[16px] break-inside-avoid xl:absolute xl:left-[600px] xl:top-[900px] xl:mb-0 xl:h-[584px] xl:w-[599px] xl:max-w-none"
+          className="fit-canvas mb-[16px] break-inside-avoid xl:absolute xl:left-[calc(600*var(--u))] xl:top-[calc(900*var(--u))] xl:mb-0 xl:h-[calc(584*var(--u))] xl:w-[calc(599*var(--u))] xl:max-w-none"
           style={{ ["--fw" as string]: 599, ["--fh" as string]: 584 }}
         >
           <PhotoCarousel className="absolute inset-0 h-full w-full" />
         </div>
 
         {/* ---- Education — 5854:51100, 572x228 at (1223,21) ---- */}
-        <Card className="xl:left-[1223px] xl:top-[21px] xl:h-[228px] xl:w-[572px]">
-          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[32px] xl:top-[32px]">
+        <Card className="xl:left-[calc(1223*var(--u))] xl:top-[calc(21*var(--u))] xl:h-[calc(228*var(--u))] xl:w-[calc(572*var(--u))]">
+          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[calc(32*var(--u))] xl:top-[calc(32*var(--u))] xl:text-[calc(20*var(--u))] xl:leading-[calc(20.62*var(--u))]">
             Education
           </h3>
-          <div className="mt-[18px] flex flex-col gap-[16px] xl:mt-0 xl:block">
+          <div className="mt-[18px] flex flex-col gap-[16px] xl:mt-0 xl:block xl:gap-[calc(16*var(--u))]">
             {EDUCATION.map((e) => (
               <div
                 key={e.years}
-                className="flex flex-col gap-[2px] sm:flex-row sm:gap-[24px] xl:block"
+                className="flex flex-col gap-[2px] sm:flex-row sm:gap-[24px] xl:block xl:gap-[calc(24*var(--u))]"
               >
                 <span
-                  className="shrink-0 text-[18px] leading-[25.66px] font-normal text-black xl:absolute xl:left-[32px] xl:top-[var(--y)]"
-                  style={{ ["--y" as string]: `${e.top}px` }}
+                  className="shrink-0 text-[18px] leading-[25.66px] font-normal text-black xl:absolute xl:left-[calc(32*var(--u))] xl:top-[var(--y)] xl:text-[calc(18*var(--u))] xl:leading-[calc(25.66*var(--u))]"
+                  style={{ ["--y" as string]: `calc(${e.top}*var(--u))` }}
                 >
                   {e.years}
                 </span>
                 <span className="xl:contents">
                   <span
-                    className="block text-[18px] leading-[22.46px] font-medium text-black xl:absolute xl:left-[199px] xl:top-[var(--y)] xl:w-[322px]"
-                    style={{ ["--y" as string]: `${e.top}px` }}
+                    className="block text-[18px] leading-[22.46px] font-medium text-black xl:absolute xl:left-[calc(199*var(--u))] xl:top-[var(--y)] xl:w-[calc(322*var(--u))] xl:text-[calc(18*var(--u))] xl:leading-[calc(22.46*var(--u))]"
+                    style={{ ["--y" as string]: `calc(${e.top}*var(--u))` }}
                   >
                     {e.degree}
                   </span>
                   <span
-                    className="block text-[16px] leading-[22.46px] font-medium text-black/40 xl:absolute xl:left-[199px] xl:top-[var(--y)] xl:w-[322px]"
-                    style={{ ["--y" as string]: `${e.top + 28}px` }}
+                    className="block text-[16px] leading-[22.46px] font-medium text-black/40 xl:absolute xl:left-[calc(199*var(--u))] xl:top-[var(--y)] xl:w-[calc(322*var(--u))] xl:text-[calc(16*var(--u))] xl:leading-[calc(22.46*var(--u))]"
+                    style={{ ["--y" as string]: `calc(${e.top + 28}*var(--u))` }}
                   >
                     {e.school}
                   </span>
@@ -307,47 +307,47 @@ export function About() {
         </Card>
 
         {/* ---- Experience — 5854:51122, 572x1211 at (1223,273) ---- */}
-        <Card className="xl:left-[1223px] xl:top-[273px] xl:h-[1211px] xl:w-[572px]">
-          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[24px] xl:top-[24px]">
+        <Card className="xl:left-[calc(1223*var(--u))] xl:top-[calc(273*var(--u))] xl:h-[calc(1211*var(--u))] xl:w-[calc(572*var(--u))]">
+          <h3 className="text-[20px] leading-[20.62px] font-medium text-black xl:absolute xl:left-[calc(24*var(--u))] xl:top-[calc(24*var(--u))] xl:text-[calc(20*var(--u))] xl:leading-[calc(20.62*var(--u))]">
             My Experience so far
           </h3>
-          <div className="mt-[20px] flex flex-col gap-[28px] xl:mt-0 xl:block">
+          <div className="mt-[20px] flex flex-col gap-[28px] xl:mt-0 xl:block xl:gap-[calc(28*var(--u))]">
             {EXPERIENCE.map((x) => (
               <div key={x.company} className="xl:contents">
-                <div className="flex items-start gap-[12px] xl:contents">
+                <div className="flex items-start gap-[12px] xl:contents xl:gap-[calc(12*var(--u))]">
                   <Image
                     src={`/images/about/${x.logo}`}
                     alt=""
                     width={216}
                     height={216}
-                    className="h-[42px] w-[42px] shrink-0 rounded-[8px] object-contain xl:absolute xl:left-[24px] xl:top-[var(--y)]"
-                    style={{ ["--y" as string]: `${x.logoTop}px` }}
+                    className="h-[42px] w-[42px] shrink-0 rounded-[8px] object-contain xl:absolute xl:left-[calc(24*var(--u))] xl:top-[var(--y)] xl:h-[calc(42*var(--u))] xl:w-[calc(42*var(--u))] xl:rounded-[calc(8*var(--u))]"
+                    style={{ ["--y" as string]: `calc(${x.logoTop}*var(--u))` }}
                   />
-                  <div className="flex min-w-0 flex-1 flex-wrap items-baseline justify-between gap-x-[12px] xl:contents">
+                  <div className="flex min-w-0 flex-1 flex-wrap items-baseline justify-between gap-x-[12px] xl:contents xl:gap-x-[calc(12*var(--u))]">
                     <span
-                      className="text-[18px] leading-[28.8px] font-medium text-[#0f0f0f] xl:absolute xl:left-[78px] xl:top-[var(--y)]"
-                      style={{ ["--y" as string]: `${x.logoTop + 7}px` }}
+                      className="text-[18px] leading-[28.8px] font-medium text-[#0f0f0f] xl:absolute xl:left-[calc(78*var(--u))] xl:top-[var(--y)] xl:text-[calc(18*var(--u))] xl:leading-[calc(28.8*var(--u))]"
+                      style={{ ["--y" as string]: `calc(${x.logoTop + 7}*var(--u))` }}
                     >
                       {x.company}
                     </span>
                     <span
-                      className="text-[16px] leading-[28.8px] font-normal text-[#0f0f0f] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:w-[var(--w)] xl:text-right xl:text-[18px]"
-                      style={{ ["--y" as string]: `${x.logoTop + 1}px`, ["--x" as string]: `${x.datesLeft}px`, ["--w" as string]: `${x.datesWidth}px` }}
+                      className="text-[16px] leading-[28.8px] font-normal text-[#0f0f0f] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:w-[var(--w)] xl:text-right xl:text-[calc(18*var(--u))] xl:leading-[calc(28.8*var(--u))]"
+                      style={{ ["--y" as string]: `calc(${x.logoTop + 1}*var(--u))`, ["--x" as string]: `calc(${x.datesLeft}*var(--u))`, ["--w" as string]: `calc(${x.datesWidth}*var(--u))` }}
                     >
                       {x.dates}
                     </span>
                   </div>
                 </div>
                 <p
-                  className="mt-[10px] text-[17px] leading-[26px] xl:absolute xl:left-[24px] xl:top-[var(--y)] xl:mt-0 xl:text-[18px] xl:leading-[28.8px]"
-                  style={{ ["--y" as string]: `${x.logoTop + 66}px` }}
+                  className="mt-[10px] text-[17px] leading-[26px] xl:absolute xl:left-[calc(24*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(28.8*var(--u))]"
+                  style={{ ["--y" as string]: `calc(${x.logoTop + 66}*var(--u))` }}
                 >
                   <span className="font-medium text-[#0f0f0f]">{x.role}</span>
                   <span className="font-normal text-[#616161]">{x.mode}</span>
                 </p>
                 <p
-                  className="mt-[6px] text-[16px] leading-[26px] font-normal text-[#616161] xl:absolute xl:left-[24px] xl:top-[var(--y)] xl:mt-0 xl:h-[var(--h)] xl:w-[521px] xl:text-[18px] xl:leading-[28.8px]"
-                  style={{ ["--y" as string]: `${x.logoTop + 102}px`, ["--h" as string]: `${x.bodyHeight}px` }}
+                  className="mt-[6px] text-[16px] leading-[26px] font-normal text-[#616161] xl:absolute xl:left-[calc(24*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:h-[var(--h)] xl:w-[calc(521*var(--u))] xl:text-[calc(18*var(--u))] xl:leading-[calc(28.8*var(--u))]"
+                  style={{ ["--y" as string]: `calc(${x.logoTop + 102}*var(--u))`, ["--h" as string]: `calc(${x.bodyHeight}*var(--u))` }}
                 >
                   {x.body}
                 </p>

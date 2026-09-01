@@ -103,7 +103,7 @@ export function PhotoCarousel({ className }: { className?: string }) {
       </div>
 
       {/* dot rail — 5826:26179, 144x20 at (227,540) */}
-      <div className="absolute bottom-[24px] left-1/2 flex h-[20px] w-[144px] -translate-x-1/2 items-center justify-center gap-[6.7px] rounded-[57px] bg-white/30 backdrop-blur-[2px] xl:bottom-auto xl:left-[227px] xl:top-[540px] xl:translate-x-0">
+      <div className="absolute bottom-[24px] left-1/2 flex h-[20px] w-[144px] -translate-x-1/2 items-center justify-center gap-[6.7px] rounded-[57px] bg-white/30 backdrop-blur-[2px] xl:bottom-auto xl:left-[calc(227*var(--u))] xl:top-[calc(540*var(--u))] xl:translate-x-0 xl:bottom-[calc(24*var(--u))] xl:h-[calc(20*var(--u))] xl:w-[calc(144*var(--u))] xl:gap-[calc(6.7*var(--u))] xl:rounded-[calc(57*var(--u))]">
         {SLIDES.map((s, i) => (
           <button
             key={s.src}

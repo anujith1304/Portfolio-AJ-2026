@@ -138,7 +138,7 @@ const SOLUTIONS = [
 export default function DesignSystemCaseStudy() {
   return (
     <main
-      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[64px] xl:h-[16749px] xl:w-[1905px] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[64px] xl:h-[calc(16749*var(--u))] xl:w-[calc(1905*var(--u))] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
       style={canvasSurface}
     >
       <CaseNav />
@@ -156,18 +156,18 @@ export default function DesignSystemCaseStudy() {
         alt=""
         width={2056}
         height={504}
-        className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[269px] xl:h-[126px] xl:w-[514px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
+        className="mb-[16px] xl:absolute xl:left-[calc(188*var(--u))] xl:top-[calc(269*var(--u))] xl:h-[calc(126*var(--u))] xl:w-[calc(514*var(--u))] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none xl:rounded-[calc(10*var(--u))]"
         style={{ order: 269 }}
       />
 
       {/* 5854:42904 — NDA notice, part of the design */}
-      <p className="mb-[16px] text-[20px] leading-[28px] text-[#6b6b6b] xl:absolute xl:left-[1089px] xl:top-[290px] xl:w-[624px] xl:mb-0" style={{ order: 290 }}>
+      <p className="mb-[16px] text-[20px] leading-[28px] text-[#6b6b6b] xl:absolute xl:left-[calc(1089*var(--u))] xl:top-[calc(290*var(--u))] xl:w-[calc(624*var(--u))] xl:mb-0 xl:text-[calc(20*var(--u))] xl:leading-[calc(28*var(--u))]" style={{ order: 290 }}>
         Due to a signed NDA, the work displayed is not an exact representation
         of the real design and is provided only as a conceptual reference.
       </p>
 
       {/* 5854:39499 — title + intro */}
-      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[192px] xl:top-[435px] xl:w-[1072px] xl:mb-0" style={{ order: 435 }}>
+      <h1 className="mb-[16px] font-display text-[64px] leading-[72px] font-medium text-[#060d19] xl:absolute xl:left-[calc(192*var(--u))] xl:top-[calc(435*var(--u))] xl:w-[calc(1072*var(--u))] xl:mb-0 xl:text-[calc(64*var(--u))] xl:leading-[calc(72*var(--u))]" style={{ order: 435 }}>
         Design System for Vitra.AI
       </h1>
       <Body top={527} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -177,10 +177,10 @@ export default function DesignSystemCaseStudy() {
         building the reusable component system and partnered with engineers to
         deliver a strong first release and a foundation for future iterations.
       </Body>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1427px] xl:top-[579px] xl:mb-0" style={{ order: 579 }}>
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1427*var(--u))] xl:top-[calc(579*var(--u))] xl:mb-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 579 }}>
         UX/UI Designer
       </p>
-      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[579px] xl:mb-0" style={{ order: 579 }}>
+      <p className="mb-[16px] text-[18px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1595*var(--u))] xl:top-[calc(579*var(--u))] xl:mb-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 579 }}>
         2025 — 2026
       </p>
 
@@ -191,12 +191,12 @@ export default function DesignSystemCaseStudy() {
         width={3058}
         height={1722}
         priority
-        className="mb-[16px] xl:absolute xl:left-[188px] xl:top-[663px] xl:h-[861px] xl:w-[1529px] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none"
+        className="mb-[16px] xl:absolute xl:left-[calc(188*var(--u))] xl:top-[calc(663*var(--u))] xl:h-[calc(861*var(--u))] xl:w-[calc(1529*var(--u))] xl:mb-0 h-auto w-full rounded-[10px] xl:max-w-none xl:rounded-none xl:rounded-[calc(10*var(--u))]"
         style={{ order: 663 }}
       />
 
       {/* 5854:39473 — standfirst */}
-      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#222227] xl:absolute xl:left-[521px] xl:top-[1600px] xl:w-[995px] xl:mb-0" style={{ order: 1600 }}>
+      <p className="mb-[16px] text-[32px] leading-[43px] font-medium text-[#222227] xl:absolute xl:left-[calc(521*var(--u))] xl:top-[calc(1600*var(--u))] xl:w-[calc(995*var(--u))] xl:mb-0 xl:text-[calc(32*var(--u))] xl:leading-[calc(43*var(--u))]" style={{ order: 1600 }}>
         I collaborated with the Senior Product Designer on the end-to-end design
         of a Design System for Vitra.AI, contributing across the full product
         lifecycle from problem framing and user flows to wireframes, interaction
@@ -227,11 +227,11 @@ export default function DesignSystemCaseStudy() {
           height={b.h * 2}
           className="mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
           style={{
-            ["--x" as string]: `${b.left}px`,
-            ["--y" as string]: `${b.top}px`,
+            ["--x" as string]: `calc(${b.left}*var(--u))`,
+            ["--y" as string]: `calc(${b.top}*var(--u))`,
         order: Math.round(b.top),
-            ["--w" as string]: `${b.w}px`,
-            ["--h" as string]: `${b.h}px`,
+            ["--w" as string]: `calc(${b.w}*var(--u))`,
+            ["--h" as string]: `calc(${b.h}*var(--u))`,
           }}
         />
       ))}

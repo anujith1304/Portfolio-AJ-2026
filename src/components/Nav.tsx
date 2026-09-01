@@ -73,7 +73,7 @@ export function Nav({ base = "", active = "Home" }: { base?: string; active?: st
   return (
     <div ref={wrap} className="relative">
       <nav
-        className="flex h-[48px] items-center justify-center gap-[12px] rounded-[66px] border border-[#F3F3F3] bg-white px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[452px] xl:gap-[16px] xl:px-[24px] xl:py-[18px]"
+        className="flex h-[48px] items-center justify-center gap-[12px] rounded-[66px] border border-[#F3F3F3] bg-white px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[calc(452*var(--u))] xl:gap-[calc(16*var(--u))] xl:px-[calc(24*var(--u))] xl:py-[calc(18*var(--u))] xl:h-[calc(54*var(--u))] xl:rounded-[calc(66*var(--u))]"
         style={{
           boxShadow:
             "0px 8px 10px 0px rgba(0,0,0,0.10), inset 0px 0px 8px 0px rgba(255,255,255,0.45)",
@@ -90,7 +90,7 @@ export function Nav({ base = "", active = "Home" }: { base?: string; active?: st
         </a>
 
         {/* Tablet and up: every link inline, as in the file. */}
-        <div className="hidden items-center gap-[12px] md:flex xl:gap-[16px]">
+        <div className="hidden items-center gap-[12px] md:flex xl:gap-[calc(16*var(--u))]">
           {LINKS.map((l) => (
             <a
               key={l.label}
@@ -142,9 +142,7 @@ export function Nav({ base = "", active = "Home" }: { base?: string; active?: st
               href={`${base}${l.href}`}
               onClick={() => setOpen(false)}
               aria-current={active === l.label ? "page" : undefined}
-              className={`px-[18px] py-[11px] text-[15px] leading-[20px] transition-colors hover:bg-black/[0.04] ${
-                active === l.label ? "font-bold text-black" : "font-medium text-black/60"
-              }`}
+              className={`px-[18px] py-[11px] text-[15px] leading-[20px] transition-colors hover:bg-black/[0.04] ${ active === l.label ? "font-bold text-black" : "font-medium text-black/60" }`}
             >
               {l.label}
             </a>

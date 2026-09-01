@@ -35,7 +35,7 @@ export function CopyEmail({ email }: { email: string }) {
       type="button"
       onClick={copy}
       aria-label={copied ? "Email copied" : "Copy email"}
-      className="relative ml-[10px] inline-flex h-[0.32em] w-[0.32em] min-h-[18px] min-w-[18px] shrink-0 translate-y-[-0.06em] cursor-pointer items-center justify-center opacity-45 transition-opacity hover:opacity-90"
+      className="relative ml-[10px] inline-flex h-[0.32em] w-[0.32em] min-h-[18px] min-w-[18px] shrink-0 translate-y-[-0.06em] cursor-pointer items-center justify-center opacity-45 transition-opacity hover:opacity-90 xl:ml-[calc(10*var(--u))] xl:min-w-[calc(18*var(--u))]"
     >
       <Image
         src="/images/footer/copy.svg"
@@ -46,9 +46,7 @@ export function CopyEmail({ email }: { email: string }) {
       />
       <span
         aria-hidden
-        className={`pointer-events-none absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 whitespace-nowrap text-[12px] leading-[18px] font-medium text-black/50 transition-opacity ${
-          copied ? "opacity-100" : "opacity-0"
-        }`}
+        className={`pointer-events-none absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 whitespace-nowrap text-[12px] leading-[18px] font-medium text-black/50 transition-opacity ${ copied ? "opacity-100" : "opacity-0" }`}
       >
         Copied
       </span>

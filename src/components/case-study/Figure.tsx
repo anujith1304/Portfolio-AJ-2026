@@ -73,25 +73,21 @@ export function Figure({
         width={width}
         height={height}
         priority={priority}
-        className="block h-auto w-full rounded-[10px] xl:h-full xl:w-full xl:rounded-none"
+        className="block h-auto w-full rounded-[10px] xl:h-full xl:w-full xl:rounded-none xl:rounded-[calc(10*var(--u))]"
       />
 
       {zoom && (
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className={`absolute right-[8px] top-[8px] z-10 rounded-full border border-black/10 bg-white/85 px-[9px] py-[4px] text-[11px] leading-[15px] font-medium text-[#222227] shadow-[0_1px_5px_rgba(0,0,0,0.10)] backdrop-blur-[2px] transition-opacity hover:bg-white ${
-            zoom === "small"
-              ? "xl:hidden"
-              : "xl:right-[10px] xl:top-[10px] xl:px-[12px] xl:py-[6px] xl:text-[12px] xl:leading-[16px] xl:opacity-0 xl:group-hover:opacity-100 xl:group-focus-within:opacity-100"
-          }`}
+          className={`absolute right-[8px] top-[8px] z-10 rounded-full border border-black/10 bg-white/85 px-[9px] py-[4px] text-[11px] leading-[15px] font-medium text-[#222227] shadow-[0_1px_5px_rgba(0,0,0,0.10)] backdrop-blur-[2px] transition-opacity hover:bg-white ${ zoom === "small" ? "xl:hidden" : "xl:right-[calc(10*var(--u))] xl:top-[calc(10*var(--u))] xl:px-[calc(12*var(--u))] xl:py-[calc(6*var(--u))] xl:text-[calc(12*var(--u))] xl:leading-[calc(16*var(--u))] xl:opacity-0 xl:group-hover:opacity-100 xl:group-focus-within:opacity-100" }`}
         >
           View Full Component
         </button>
       )}
 
       {caption && (
-        <figcaption className="mt-[10px] text-[15px] leading-[24px] text-[#6b6b6b] xl:text-[16px]">
+        <figcaption className="mt-[10px] text-[15px] leading-[24px] text-[#6b6b6b] xl:text-[calc(16*var(--u))] xl:mt-[calc(10*var(--u))] xl:leading-[calc(24*var(--u))]">
           {caption}
         </figcaption>
       )}

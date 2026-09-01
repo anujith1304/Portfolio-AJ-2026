@@ -56,20 +56,20 @@ function ChangeList({
 }) {
   return (
     <ul
-      className="mt-[10px] list-none text-[16px] leading-[26px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:text-[18px] xl:leading-[28px]"
+      className="mt-[10px] list-none text-[16px] leading-[26px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:text-[calc(18*var(--u))] xl:leading-[calc(28*var(--u))]"
       style={{
-        ["--x" as string]: `${left}px`,
-        ["--y" as string]: `${top}px`,
+        ["--x" as string]: `calc(${left}*var(--u))`,
+        ["--y" as string]: `calc(${top}*var(--u))`,
         order: Math.round(top),
-        ["--w" as string]: `${width}px`,
+        ["--w" as string]: `calc(${width}*var(--u))`,
         color,
       }}
     >
       {items.map((t) => (
-        <li key={t} className="relative mb-[12px] pl-[22px] last:mb-0 xl:mb-[20px] xl:pl-[27.6px]">
+        <li key={t} className="relative mb-[12px] pl-[22px] last:mb-0 xl:mb-[calc(20*var(--u))] xl:pl-[calc(27.6*var(--u))]">
           <span
             aria-hidden
-            className="absolute left-[7px] top-[10px] h-[4.3px] w-[4.3px] rounded-full bg-current xl:left-[10.3px] xl:top-[13.95px]"
+            className="absolute left-[7px] top-[10px] h-[4.3px] w-[4.3px] rounded-full bg-current xl:left-[calc(10.3*var(--u))] xl:top-[calc(13.95*var(--u))] xl:h-[calc(4.3*var(--u))] xl:w-[calc(4.3*var(--u))]"
           />
           {t}
         </li>
@@ -101,8 +101,8 @@ export function CaseBody() {
 
   return (
     <main
-      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[120px] xl:h-[var(--frame-h)] xl:w-[1905px] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
-      style={{ ...canvasSurface, ["--frame-h" as string]: `${s.height}px` }}
+      className="page-x relative mx-auto flex w-full flex-col overflow-x-clip pt-[92px] pb-[120px] xl:h-[var(--frame-h)] xl:w-[calc(1905*var(--u))] xl:block xl:overflow-x-visible xl:px-0 xl:pt-0 xl:pb-0"
+      style={{ ...canvasSurface, ["--frame-h" as string]: `calc(${s.height}*var(--u))` }}
     >
       <CaseNav />
       <BackLink />
@@ -116,11 +116,11 @@ export function CaseBody() {
         alt="Translate.video"
         width={333}
         height={133}
-        className="mx-auto mb-[16px] h-auto w-[240px] max-w-full xl:mx-0 xl:absolute xl:left-[172px] xl:top-[253px] xl:mb-0 xl:h-[133px] xl:w-[333px] xl:max-w-none"
+        className="mx-auto mb-[16px] h-auto w-[240px] max-w-full xl:mx-0 xl:absolute xl:left-[calc(172*var(--u))] xl:top-[calc(253*var(--u))] xl:mb-0 xl:h-[calc(133*var(--u))] xl:w-[calc(333*var(--u))] xl:max-w-none"
         style={{ order: 253 }}
       />
 
-      <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[192px] xl:top-[415px] xl:mb-0 xl:w-[1072px] xl:text-[64px] xl:leading-[72px]" style={{ order: 415 }}>
+      <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[calc(192*var(--u))] xl:top-[calc(415*var(--u))] xl:mb-0 xl:w-[calc(1072*var(--u))] xl:text-[calc(64*var(--u))] xl:leading-[calc(72*var(--u))]" style={{ order: 415 }}>
         Translate.video Product Rethink
       </h1>
       <Body top={507} left={192} width={1072} size={18} lh={24} color="#5d6067">
@@ -131,10 +131,10 @@ export function CaseBody() {
         lip-sync generation, allowing users to create multilingual videos faster
         without relying on complex manual editing processes.
       </Body>
-      <p className="text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1428px] xl:top-[559px] xl:text-[18px]" style={{ order: 559 }}>
+      <p className="text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1428*var(--u))] xl:top-[calc(559*var(--u))] xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 559 }}>
         Product Designer
       </p>
-      <p className="mb-[24px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[1595px] xl:top-[559px] xl:mb-0 xl:text-[18px]" style={{ order: 559 }}>
+      <p className="mb-[24px] text-[16px] leading-[24px] text-[#5d6067] xl:absolute xl:left-[calc(1595*var(--u))] xl:top-[calc(559*var(--u))] xl:mb-0 xl:text-[calc(18*var(--u))] xl:leading-[calc(24*var(--u))]" style={{ order: 559 }}>
         2025 — 2026
       </p>
 
@@ -145,7 +145,7 @@ export function CaseBody() {
         width={1529}
         height={848}
         priority
-        className="mb-[32px] h-auto w-full rounded-[10px] xl:absolute xl:left-[188px] xl:top-[681px] xl:mb-0 xl:h-[848px] xl:w-[1529px] xl:max-w-none xl:rounded-none"
+        className="mb-[32px] h-auto w-full rounded-[10px] xl:absolute xl:left-[calc(188*var(--u))] xl:top-[calc(681*var(--u))] xl:mb-0 xl:h-[calc(848*var(--u))] xl:w-[calc(1529*var(--u))] xl:max-w-none xl:rounded-none xl:rounded-[calc(10*var(--u))]"
         style={{ order: 681 }}
       />
 
@@ -153,7 +153,7 @@ export function CaseBody() {
         5908:27009 is a MIXED-fill node: the body sits at #707581 and only the
         two product names are lifted to #222227.
       */}
-      <p className="my-[32px] text-[clamp(19px,2.5vw,32px)] leading-[1.4] font-medium tracking-[-0.8px] text-[#707581] xl:absolute xl:left-[462px] xl:top-[1587px] xl:my-0 xl:w-[981px] xl:text-[32px] xl:leading-[43px]" style={{ order: 1587 }}>
+      <p className="my-[32px] text-[clamp(19px,2.5vw,32px)] leading-[1.4] font-medium tracking-[-0.8px] text-[#707581] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[calc(1587*var(--u))] xl:my-0 xl:w-[calc(981*var(--u))] xl:text-[calc(32*var(--u))] xl:leading-[calc(43*var(--u))]" style={{ order: 1587 }}>
         Designed the end-to-end experience for{" "}
         <span className="text-[#222227]">Translate.video</span> at{" "}
         <span className="text-[#222227]">Vitra.AI,</span> contributing across
@@ -225,7 +225,7 @@ export function CaseBody() {
       <div
         role="tablist"
         aria-label="Before and after"
-        className={`${STATE_TABS_TRACK} mt-[40px] w-fit xl:absolute xl:left-[462px] xl:top-[2618px] xl:mt-0`}
+        className={`${STATE_TABS_TRACK} mt-[40px] w-fit xl:absolute xl:left-[calc(462*var(--u))] xl:top-[calc(2618*var(--u))] xl:mt-0`}
         style={{ order: 2618 }}
       >
         <StateTabs value={variant} onChange={setVariant} />
@@ -270,12 +270,12 @@ export function CaseBody() {
             is a single MIXED-font node — see labelTilde/labelSuffix.
           */}
           <h3
-            className="mt-[40px] mb-[16px] text-center text-[22px] leading-[1.25] text-[#b2b2b2] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[32px] xl:leading-[35.84px]"
+            className="mt-[40px] mb-[16px] text-center text-[22px] leading-[1.25] text-[#b2b2b2] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:my-0 xl:w-[var(--w)] xl:text-[calc(32*var(--u))] xl:leading-[calc(35.84*var(--u))]"
             style={{
-              ["--x" as string]: `${screen.label.left ?? 462}px`,
-              ["--y" as string]: `${screen.label.top}px`,
+              ["--x" as string]: `calc(${screen.label.left ?? 462}*var(--u))`,
+              ["--y" as string]: `calc(${screen.label.top}*var(--u))`,
         order: Math.round(screen.label.top),
-              ["--w" as string]: `${screen.label.width}px`,
+              ["--w" as string]: `calc(${screen.label.width}*var(--u))`,
             }}
           >
             <span className="font-display font-semibold">{screen.label.name}</span>
@@ -300,11 +300,11 @@ export function CaseBody() {
               zoom="small"
               className="mb-[24px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:rounded-none"
               style={{
-                ["--x" as string]: `${b.left}px`,
-                ["--y" as string]: `${b.top}px`,
+                ["--x" as string]: `calc(${b.left}*var(--u))`,
+                ["--y" as string]: `calc(${b.top}*var(--u))`,
         order: Math.round(b.top),
-                ["--w" as string]: `${b.w}px`,
-                ["--h" as string]: `${b.h}px`,
+                ["--w" as string]: `calc(${b.w}*var(--u))`,
+                ["--h" as string]: `calc(${b.h}*var(--u))`,
               }}
             />
           ))}
@@ -330,14 +330,14 @@ export function CaseBody() {
 
       <div
         aria-hidden
-        className="mt-[48px] h-px w-full bg-[#dddddd] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1104px]"
-        style={{ ["--y" as string]: `${s.ruleTop}px`, order: Math.round(s.ruleTop) }}
+        className="mt-[48px] h-px w-full bg-[#dddddd] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:w-[calc(1104*var(--u))]"
+        style={{ ["--y" as string]: `calc(${s.ruleTop}*var(--u))`, order: Math.round(s.ruleTop) }}
       />
 
       <h2
         id="what-it-changed"
-        className="mt-[32px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:text-[32px] xl:leading-[40px]"
-        style={{ ["--y" as string]: `${13933 + t}px`, order: Math.round(13933 + t) }}
+        className="mt-[32px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:my-0 xl:text-[calc(32*var(--u))] xl:leading-[calc(40*var(--u))]"
+        style={{ ["--y" as string]: `calc(${13933 + t}*var(--u))`, order: Math.round(13933 + t) }}
       >
         What actually changed
       </h2>
@@ -349,8 +349,8 @@ export function CaseBody() {
       */}
       <div className="xl:contents" style={{ order: 14038 + t }}>
         <p
-          className="mt-[8px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
-          style={{ ["--y" as string]: `${14038 + t}px`, order: Math.round(14038 + t) }}
+          className="mt-[8px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:text-[calc(24*var(--u))] xl:leading-[calc(32*var(--u))]"
+          style={{ ["--y" as string]: `calc(${14038 + t}*var(--u))`, order: Math.round(14038 + t) }}
         >
           Before:
         </p>
@@ -358,8 +358,8 @@ export function CaseBody() {
       </div>
       <div className="xl:contents" style={{ order: 14039 + t }}>
         <p
-          className="mt-[28px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[1124px] xl:top-[var(--y)] xl:mt-0 xl:text-[24px]"
-          style={{ ["--y" as string]: `${14038 + t}px`, order: Math.round(14038 + t) }}
+          className="mt-[28px] text-[20px] leading-[32px] font-medium text-[#060d19] xl:absolute xl:left-[calc(1124*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:text-[calc(24*var(--u))] xl:leading-[calc(32*var(--u))]"
+          style={{ ["--y" as string]: `calc(${14038 + t}*var(--u))`, order: Math.round(14038 + t) }}
         >
           After:
         </p>
@@ -373,42 +373,42 @@ export function CaseBody() {
           aria-hidden
           className="hidden bg-[#dddddd] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:block xl:h-[var(--h)] xl:w-[var(--w)]"
           style={{
-            ["--x" as string]: `${r.left}px`,
-            ["--y" as string]: `${r.top + t}px`,
+            ["--x" as string]: `calc(${r.left}*var(--u))`,
+            ["--y" as string]: `calc(${r.top + t}*var(--u))`,
         order: Math.round(r.top + t),
-            ["--w" as string]: `${r.w}px`,
-            ["--h" as string]: `${r.h}px`,
+            ["--w" as string]: `calc(${r.w}*var(--u))`,
+            ["--h" as string]: `calc(${r.h}*var(--u))`,
           }}
         />
       ))}
 
       <h2
         id="what-worked"
-        className="mt-[40px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:my-0 xl:w-[1211px] xl:text-[32px] xl:leading-[40px]"
-        style={{ ["--y" as string]: `${14467 + t}px`, order: Math.round(14467 + t) }}
+        className="mt-[40px] mb-[20px] font-display text-[26px] leading-[1.25] font-semibold text-[#3f3f3f] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:my-0 xl:w-[calc(1211*var(--u))] xl:text-[calc(32*var(--u))] xl:leading-[calc(40*var(--u))]"
+        style={{ ["--y" as string]: `calc(${14467 + t}*var(--u))`, order: Math.round(14467 + t) }}
       >
         Things that didn&rsquo;t work — And how I solved them
       </h2>
       {WORKED.map((w) => (
         <div key={w.label} className="xl:contents" style={{ order: w.top + t }}>
           <p
-            className="mt-[24px] text-[18px] leading-[1.4] font-medium text-[#060d19] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:text-[20px] xl:leading-[var(--lh)]"
+            className="mt-[24px] text-[18px] leading-[1.4] font-medium text-[#060d19] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:text-[calc(20*var(--u))] xl:leading-[var(--lh)]"
             style={{
-              ["--y" as string]: `${w.top + t}px`,
+              ["--y" as string]: `calc(${w.top + t}*var(--u))`,
         order: Math.round(w.top + t),
-              ["--lh" as string]: `${w.labelLh}px`,
+              ["--lh" as string]: `calc(${w.labelLh}*var(--u))`,
             }}
           >
             {w.label}
           </p>
           <p
-            className="mt-[6px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:leading-[var(--lh)]"
+            className="mt-[6px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mt-0 xl:w-[var(--w)] xl:leading-[var(--lh)] xl:text-[calc(16*var(--u))]"
             style={{
-              ["--x" as string]: `${w.textLeft}px`,
-              ["--y" as string]: `${w.top + t}px`,
+              ["--x" as string]: `calc(${w.textLeft}*var(--u))`,
+              ["--y" as string]: `calc(${w.top + t}*var(--u))`,
         order: Math.round(w.top + t),
-              ["--w" as string]: `${w.textWidth}px`,
-              ["--lh" as string]: `${w.textLh}px`,
+              ["--w" as string]: `calc(${w.textWidth}*var(--u))`,
+              ["--lh" as string]: `calc(${w.textLh}*var(--u))`,
             }}
           >
             {w.text}
@@ -426,22 +426,22 @@ export function CaseBody() {
         alt=""
         width={1219}
         height={130}
-        className="mt-[40px] h-auto w-full rounded-[16px] xl:absolute xl:left-[458px] xl:top-[var(--y)] xl:mt-0 xl:h-[130px] xl:w-[1219px] xl:max-w-none xl:rounded-none"
-        style={{ ["--y" as string]: `${15020 + t}px`, order: Math.round(15020 + t) }}
+        className="mt-[40px] h-auto w-full rounded-[16px] xl:absolute xl:left-[calc(458*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:h-[calc(130*var(--u))] xl:w-[calc(1219*var(--u))] xl:max-w-none xl:rounded-none xl:rounded-[calc(16*var(--u))]"
+        style={{ ["--y" as string]: `calc(${15020 + t}*var(--u))`, order: Math.round(15020 + t) }}
       />
       <Anchor id="what-i-learned" top={15052 + t} />
 
       {LEARNINGS.map((l) => (
         <div key={l.title} className="xl:contents" style={{ order: l.top + t }}>
           <p
-            className="mt-[28px] text-[19px] leading-[1.35] font-bold text-[#222227] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:text-[23px] xl:leading-[35.84px]"
-            style={{ ["--y" as string]: `${l.top + t}px`, order: Math.round(l.top + t) }}
+            className="mt-[28px] text-[19px] leading-[1.35] font-bold text-[#222227] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:w-[calc(1211*var(--u))] xl:text-[calc(23*var(--u))] xl:leading-[calc(35.84*var(--u))]"
+            style={{ ["--y" as string]: `calc(${l.top + t}*var(--u))`, order: Math.round(l.top + t) }}
           >
             {l.title}
           </p>
           <p
-            className="mt-[8px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[462px] xl:top-[var(--y)] xl:mt-0 xl:w-[1211px] xl:leading-[24px]"
-            style={{ ["--y" as string]: `${l.top + 48 + t}px`, order: Math.round(l.top + 48 + t) }}
+            className="mt-[8px] text-[16px] leading-[1.6] text-[#777777] xl:absolute xl:left-[calc(462*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:w-[calc(1211*var(--u))] xl:leading-[calc(24*var(--u))] xl:text-[calc(16*var(--u))]"
+            style={{ ["--y" as string]: `calc(${l.top + 48 + t}*var(--u))`, order: Math.round(l.top + 48 + t) }}
           >
             {l.body}
           </p>

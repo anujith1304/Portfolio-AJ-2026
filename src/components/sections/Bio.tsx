@@ -50,11 +50,11 @@ const CANVAS_H = 808;
 
 export function Bio() {
   return (
-    <section className="page-x flex w-full flex-col items-start gap-[40px] xl:h-[808px] xl:w-[1808px] xl:flex-row xl:items-center xl:justify-between xl:gap-0">
+    <section className="page-x flex w-full flex-col items-start gap-[40px] xl:h-[calc(808*var(--u))] xl:w-[calc(1808*var(--u))] xl:flex-row xl:items-center xl:justify-between xl:gap-0">
       {/* 5854:49705 — copy column */}
-      <div className="flex w-full flex-col gap-[28px] xl:w-[960px] xl:gap-[54px]">
+      <div className="flex w-full flex-col gap-[28px] xl:w-[calc(960*var(--u))] xl:gap-[calc(54*var(--u))]">
         {/* 5854:49706 — Satoshi Medium 72/86/-2.4, base black@30, accents black@80 */}
-        <div className="flex flex-col justify-center xl:h-[684px]">
+        <div className="flex flex-col justify-center xl:h-[calc(684*var(--u))]">
           <p className="type-display-72 whitespace-pre-wrap text-black/30">
             {"I’m a Product Designer who focuses on crafting intuitive digital experiences. Previously    a founding designer at "}
             <span className="text-black/80">{"Get My Stock "}</span>
@@ -71,14 +71,14 @@ export function Bio() {
         </div>
 
         {/* 5854:49707 — role + dates, gap 8 */}
-        <div className="flex w-full flex-col gap-[8px] xl:h-[70px] xl:w-[344px]">
-          <div className="flex flex-col justify-center xl:h-[38px]">
+        <div className="flex w-full flex-col gap-[8px] xl:h-[calc(70*var(--u))] xl:w-[calc(344*var(--u))] xl:gap-[calc(8*var(--u))]">
+          <div className="flex flex-col justify-center xl:h-[calc(38*var(--u))]">
             <p className="type-role-32 text-black">
               {"Role ~ "}
               <span className="type-circ-32">Product Designer</span>
             </p>
           </div>
-          <div className="flex flex-col justify-center xl:h-[24px]">
+          <div className="flex flex-col justify-center xl:h-[calc(24*var(--u))]">
             <p className="type-date-20 text-black/40">
               {"April 2025 - "}
               <span className="type-circ-20-sm">Present</span>
