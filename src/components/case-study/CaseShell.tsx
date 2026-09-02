@@ -65,6 +65,9 @@ export function BackLink() {
  * ships as one export; the render bounds run wider than the box because of
  * those shadows, which is why it is centred on the box rather than pinned to it.
  */
+/** Width the mark flows at below xl. */
+const FLOW_W = 200;
+
 export function CaseLogo({
   src,
   alt,
@@ -86,22 +89,24 @@ export function CaseLogo({
 }) {
   return (
     /*
-     * The export covers the node's render bounds, so at xl it is offset by the
-     * spill to land the artwork on the Figma box. In flow it simply sits under
-     * the back control and above the title, at its own size — the offset there
-     * would drag it over the heading.
+     * The export covers the node's render bounds, so at both sizes it is
+     * offset by the spill to land the artwork where the design puts it: on the
+     * Figma box at xl, and flush with the heading's left edge in flow.
      */
     <Image
       src={src}
       alt={alt}
       width={imgW * 2}
       height={imgH * 2}
-      className="mx-auto mb-[20px] h-auto w-auto max-w-[200px] xl:mx-0 xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)] xl:max-w-none xl:max-w-[calc(200*var(--u))]"
+      className="case-logo mb-[20px] xl:absolute xl:left-[var(--x)] xl:top-[var(--y)] xl:mb-0 xl:h-[var(--h)] xl:w-[var(--w)]"
       style={{
         ["--x" as string]: `calc(${left - (imgW - boxW) / 2}*var(--u))`,
         ["--y" as string]: `calc(${top - (imgH - boxH) / 2}*var(--u))`,
         ["--w" as string]: `calc(${imgW}*var(--u))`,
         ["--h" as string]: `calc(${imgH}*var(--u))`,
+        /* Flowed size, and that same left spill scaled to it. */
+        ["--flow-w" as string]: `${FLOW_W}px`,
+        ["--spill" as string]: `${((((imgW - boxW) / 2) / imgW) * FLOW_W).toFixed(2)}px`,
         order: Math.round(top),
       }}
     />

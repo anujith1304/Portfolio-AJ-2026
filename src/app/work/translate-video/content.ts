@@ -80,7 +80,6 @@ export type StateContent = {
   ruleTop: number;
   /** Every tail y is this many px below the Before baseline. */
   tailOffset: number;
-  banner: string;
 };
 
 /* ---------------------------------------------------------------- shared -- */
@@ -242,7 +241,6 @@ export const BEFORE: StateContent = {
   ],
   ruleTop: 13863,
   tailOffset: 0,
-  banner: "learnings-banner.webp",
 };
 
 /* ----------------------------------------------------------------- after -- */
@@ -371,12 +369,6 @@ export const AFTER: StateContent = {
   ],
   ruleTop: 13950,
   tailOffset: 87,
-  /*
-   * Exported from this frame's own banner (5908:31403). Its Figma layer name
-   * reads "Strengthen the value proposition of core products", but that name is
-   * stale — the node's characters are the same heading the Before frame shows.
-   */
-  banner: "after/a-learnings-banner.webp",
 };
 
 export const STATES: Record<Variant, StateContent> = { before: BEFORE, after: AFTER };

@@ -479,6 +479,21 @@ body {
   .type-nav-active {
     line-height: 1.3;
   }
+
+  /*
+    Product marks at the head of a case study. Each export covers the node's
+    RENDER bounds, so it carries transparent spill on its left edge — setting
+    the element flush would indent the visible mark by that spill. --spill is
+    the spill measured at the flowed width, so the mark itself, not its
+    bounding box, lines up with the heading below it.
+  */
+  .case-logo {
+    align-self: flex-start;
+    width: var(--flow-w);
+    max-width: 100%;
+    height: auto;
+    margin-left: calc(-1 * var(--spill, 0px));
+  }
 }
 
 /*

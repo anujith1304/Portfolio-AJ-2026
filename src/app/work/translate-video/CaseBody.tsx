@@ -116,8 +116,12 @@ export function CaseBody() {
         alt="Translate.video"
         width={333}
         height={133}
-        className="mx-auto mb-[16px] h-auto w-[240px] max-w-full xl:mx-0 xl:absolute xl:left-[calc(172*var(--u))] xl:top-[calc(253*var(--u))] xl:mb-0 xl:h-[calc(133*var(--u))] xl:w-[calc(333*var(--u))] xl:max-w-none"
-        style={{ order: 253 }}
+        className="case-logo mb-[16px] xl:absolute xl:left-[calc(172*var(--u))] xl:top-[calc(253*var(--u))] xl:mb-0 xl:h-[calc(133*var(--u))] xl:w-[calc(333*var(--u))]"
+        style={{
+          order: 253,
+          ["--flow-w" as string]: "240px",
+          ["--spill" as string]: `${((20 / 333) * 240).toFixed(2)}px`,
+        }}
       />
 
       <h1 className="mb-[16px] font-display text-[clamp(32px,5vw,64px)] leading-[1.12] font-medium tracking-[-0.01em] text-[#060d19] xl:absolute xl:left-[calc(192*var(--u))] xl:top-[calc(415*var(--u))] xl:mb-0 xl:w-[calc(1072*var(--u))] xl:text-[calc(64*var(--u))] xl:leading-[calc(72*var(--u))]" style={{ order: 415 }}>
@@ -417,18 +421,25 @@ export function CaseBody() {
       ))}
 
       {/*
-        The banner heading is a child of the banner frame, so it is baked into
-        the image — and the two states carry different headings. Only the
-        scroll anchor is placed here.
+        The section heading. This was an exported 1219x130 image with the words
+        baked into it, which meant the type scaled with the picture: at 390 the
+        band came down to ~42px tall and the heading with it. It is now built
+        the same way as the "how might we" card in the Get My Stock case study
+        — same gradient, same radius, same white display type — so the copy
+        stays at a readable size and wraps instead of shrinking.
       */}
-      <Image
-        src={`/images/case/tv/${s.banner}`}
-        alt=""
-        width={1219}
-        height={130}
-        className="mt-[40px] h-auto w-full rounded-[16px] xl:absolute xl:left-[calc(458*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:h-[calc(130*var(--u))] xl:w-[calc(1219*var(--u))] xl:max-w-none xl:rounded-none xl:rounded-[calc(16*var(--u))]"
-        style={{ ["--y" as string]: `calc(${15020 + t}*var(--u))`, order: Math.round(15020 + t) }}
-      />
+      <div
+        className="mt-[40px] mb-[16px] flex items-center rounded-[20px] px-[24px] py-[28px] xl:absolute xl:left-[calc(458*var(--u))] xl:top-[var(--y)] xl:mt-0 xl:mb-0 xl:h-[calc(130*var(--u))] xl:w-[calc(1219*var(--u))] xl:rounded-[calc(16*var(--u))] xl:px-[calc(64*var(--u))] xl:py-0"
+        style={{
+          ["--y" as string]: `calc(${15020 + t}*var(--u))`,
+          order: Math.round(15020 + t),
+          backgroundImage: "linear-gradient(180deg, #003EAF 0%, #87AFF9 100%)",
+        }}
+      >
+        <h2 className="font-display text-[21px] leading-[1.35] font-medium text-white xl:text-[calc(32*var(--u))] xl:leading-[calc(44*var(--u))]">
+          What I learned &amp; the principles I took forward
+        </h2>
+      </div>
       <Anchor id="what-i-learned" top={15052 + t} />
 
       {LEARNINGS.map((l) => (
