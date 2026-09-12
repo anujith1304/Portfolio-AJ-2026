@@ -2,12 +2,13 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Anujith S — portfolio, built from Figma frame 5826:24084",
+  "description": "Anujith S \u2014 portfolio, built from Figma frame 5826:24084",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build --turbopack && node scripts/check-assets.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:assets": "node scripts/check-assets.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
