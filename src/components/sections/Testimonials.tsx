@@ -31,12 +31,12 @@ const BADGE = {
 /*
  * Two independent columns, so a long card does not drag its neighbour down.
  *
- * The card padding (44) and column gap (69) are deliberately larger than the
- * artwork's own 30 and 44. The quotes are real now and shorter than the lorem
- * ipsum they replaced, but the footer backdrop and its gradient are absolutely
- * positioned at the footer's Figma top, so this block has to keep its designed
- * 1272 height or the footer separates from its own artwork. The slack is taken
- * as spacing rather than by padding the writing back out with filler.
+ * This block has to hold its designed 1272 height: the footer backdrop and its
+ * gradient are absolutely positioned at the footer's Figma top rather than
+ * flowing with it, so a section that comes up short detaches the footer from
+ * its own artwork. Dheeraj's testimonial is long enough that the second column
+ * now sets that height, which lets the gap go back to the artwork's own 44;
+ * the card padding carries the small remainder at 38 against a designed 30.
  */
 const COLUMNS: Card[][] = [
   [
@@ -50,7 +50,7 @@ const COLUMNS: Card[][] = [
     },
     {
       avatar: "/images/testimonials/avatars/a2.png",
-      name: "Dheeraj",
+      name: "Roger",
       handle: "@Get My Stock",
       role: "Product Marketer",
       platform: "x",
@@ -69,12 +69,13 @@ const COLUMNS: Card[][] = [
   [
     {
       avatar: "/images/testimonials/avatars/a4.png",
-      name: "Roger",
+      name: "Dheeraj",
       handle: "@Get My Stock",
       role: "Founder",
       platform: "x",
+      /* Dheeraj's own words, kept verbatim. */
       quote:
-        "First designer we ever hired. I expected to hand him wireframes, and instead he went and talked to fifteen shop owners and came back to tell us two of our assumptions were wrong. He was right about both. The app we launched is his call end to end.",
+        "I worked closely with Anujith during the early days of the company, where he was our founding designer. Building a product from the ground up comes with a lot of ambiguity, and I was always impressed by how he handled it. He could take a complicated problem, understand what actually mattered to the user, and turn it into an experience that felt simple and intentional. He also worked incredibly well with engineering — he was open to feedback, understood technical constraints, and cared about how the design actually came to life. Anujith didn’t just design our product; he played a big part in shaping the product itself.",
     },
     {
       avatar: "/images/testimonials/avatars/a5.png",
@@ -97,7 +98,7 @@ const COLUMNS: Card[][] = [
 
 function Testimonial({ c }: { c: Card }) {
   return (
-    <figure className="rounded-[18px] border border-black/4 bg-white px-[20px] py-[22px] shadow-[0_1px_2px_rgba(16,24,40,0.04),0_10px_28px_rgba(16,24,40,0.05)] xl:rounded-[calc(24*var(--u))] xl:px-[calc(28*var(--u))] xl:py-[calc(44*var(--u))]">
+    <figure className="rounded-[18px] border border-black/4 bg-white px-[20px] py-[22px] shadow-[0_1px_2px_rgba(16,24,40,0.04),0_10px_28px_rgba(16,24,40,0.05)] xl:rounded-[calc(24*var(--u))] xl:px-[calc(28*var(--u))] xl:py-[calc(38*var(--u))]">
       <figcaption className="flex items-center gap-[11px] xl:gap-[calc(15*var(--u))]">
         {/*
           Cropped from the original export, so each still carries its verified
@@ -167,7 +168,7 @@ export function Testimonials() {
         {COLUMNS.map((col, i) => (
           <div
             key={i}
-            className="flex flex-col gap-[18px] xl:gap-[calc(69*var(--u))]"
+            className="flex flex-col gap-[18px] xl:gap-[calc(44*var(--u))]"
           >
             {col.map((c, j) => (
               <Testimonial key={j} c={c} />
