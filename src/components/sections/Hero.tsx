@@ -79,7 +79,9 @@ export function Hero() {
             </a>
 
             <a
-              href="#"
+              href="/Anujith-S-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative flex h-[48px] w-full flex-1 items-center justify-center rounded-[14px] xl:w-[calc(164*var(--u))] xl:flex-none xl:h-[calc(48*var(--u))] xl:rounded-[calc(14*var(--u))]"
               style={{
                 background: "linear-gradient(180deg, #FFFFFF 0%, #EBECEE 17%)",

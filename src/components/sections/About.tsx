@@ -171,7 +171,9 @@ export function About() {
               className="h-[37px] w-[181px] xl:absolute xl:left-[calc(21*var(--u))] xl:top-[calc(244*var(--u))] xl:h-[calc(37*var(--u))] xl:w-[calc(181*var(--u))]"
             />
             <a
-              href="#"
+              href="/Anujith-S-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-[38px] w-[111px] shrink-0 items-center justify-center rounded-[57px] bg-black/4 xl:absolute xl:left-[calc(432*var(--u))] xl:top-[calc(243*var(--u))] xl:h-[calc(38*var(--u))] xl:w-[calc(111*var(--u))] xl:rounded-[calc(57*var(--u))]"
             >
               <span className="font-figtree text-[16.04px] leading-[16.04px] font-medium text-black">
