@@ -1,4 +1,5 @@
 import Image from "@/components/Img";
+import { SocialRow } from "@/components/SocialRow";
 import { CopyEmail } from "@/components/CopyEmail";
 
 /**
@@ -79,11 +80,10 @@ export function Footer() {
         <CopyEmail email="anujithchand2002@gmail.com" />
       </p>
 
-      <Image
+      <SocialRow
         src="/images/footer/social.svg"
-        alt="Email, LinkedIn, Dribbble, Twitter"
-        width={184}
-        height={40}
+        w={184}
+        h={40}
         className="mt-[26px] h-[40px] w-[184px] xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(608*var(--u))] xl:mt-0 xl:h-[calc(40*var(--u))] xl:w-[calc(184*var(--u))]"
       />
 

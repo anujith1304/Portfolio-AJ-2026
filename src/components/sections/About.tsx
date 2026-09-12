@@ -1,4 +1,5 @@
 import Image from "@/components/Img";
+import { SocialRow } from "@/components/SocialRow";
 import { PhotoCarousel } from "@/components/PhotoCarousel";
 
 /**
@@ -163,11 +164,10 @@ export function About() {
             designs.
           </p>
           <div className="mt-[20px] flex items-center justify-between gap-[16px] xl:mt-0 xl:block xl:gap-[calc(16*var(--u))]">
-            <Image
+            <SocialRow
               src="/images/about/social-links.png"
-              alt="Copy email, LinkedIn, Dribbble, Twitter"
-              width={725}
-              height={147}
+              w={725}
+              h={147}
               className="h-[37px] w-[181px] xl:absolute xl:left-[calc(21*var(--u))] xl:top-[calc(244*var(--u))] xl:h-[calc(37*var(--u))] xl:w-[calc(181*var(--u))]"
             />
             <a
