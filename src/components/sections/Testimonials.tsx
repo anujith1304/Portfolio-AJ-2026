@@ -28,7 +28,16 @@ const BADGE = {
   threads: "/images/testimonials/badge-threads.png",
 } as const;
 
-/* Two independent columns, so a long card does not drag its neighbour down. */
+/*
+ * Two independent columns, so a long card does not drag its neighbour down.
+ *
+ * The card padding (44) and column gap (69) are deliberately larger than the
+ * artwork's own 30 and 44. The quotes are real now and shorter than the lorem
+ * ipsum they replaced, but the footer backdrop and its gradient are absolutely
+ * positioned at the footer's Figma top, so this block has to keep its designed
+ * 1272 height or the footer separates from its own artwork. The slack is taken
+ * as spacing rather than by padding the writing back out with filler.
+ */
 const COLUMNS: Card[][] = [
   [
     {
@@ -37,16 +46,16 @@ const COLUMNS: Card[][] = [
       handle: "@Vitra.ai",
       platform: "x",
       quote:
-        "Anujith has a way of taking a half-defined problem and coming back with a flow the whole team can actually build. He asks the awkward questions early — who is this for, what happens when it fails — which saves us weeks further down the line. I have watched him turn a vague one-line brief into a shipped feature more than once.",
+        "Anujith spoiled me a little. I’d hand him a one-line brief and he’d come back with the questions I should’ve asked myself. Who’s actually using this? What do they see when the model returns nothing? By the time we got to real screens, most of the arguments we’d normally have were already settled.",
     },
     {
       avatar: "/images/testimonials/avatars/a2.png",
-      name: "Roger",
+      name: "Dheeraj",
       handle: "@Get My Stock",
       role: "Product Marketer",
       platform: "x",
       quote:
-        "We gave him a three-month runway for the MVP and he shipped with time to spare. What stood out wasn’t the speed though, it was that he never traded away the research to get there. Every screen he handed over had a reason behind it, and he could tell you what that reason was. When we questioned a decision, he had the interview notes ready.",
+        "Three months for the whole MVP and he still made time to talk to users. I kept waiting for the part where we cut the research to hit the date, and it never came. When I asked why a screen worked the way it did, he’d pull up the actual interview where someone got stuck. Made my job a lot easier.",
     },
     {
       avatar: "/images/testimonials/avatars/a3.png",
@@ -54,7 +63,7 @@ const COLUMNS: Card[][] = [
       handle: "@Vitra.ai",
       platform: "threads",
       quote:
-        "He built our component library from nothing while the product was still moving underneath him. Half the reason our releases got faster is that engineers stopped guessing at spacing and states — it was all there, documented, with the edge cases already thought through. He also sits with the engineers rather than throwing files over the wall, which is rarer than it should be. Months on, that system is still what we onboard new designers into, and it has survived two redesigns of the product without needing to be rebuilt — which tells you how carefully the foundations were laid in the first place.",
+        "Our design system exists because Anujith built it while the product was still changing underneath him. I’m an engineer, so what I noticed is that I stopped asking. Spacing, states, what an empty table looks like, it was already there and already named. He’d come sit at my desk when something didn’t translate cleanly into code instead of leaving comments on a file. We’ve redesigned around that system twice now and never had to start it over.",
     },
   ],
   [
@@ -65,7 +74,7 @@ const COLUMNS: Card[][] = [
       role: "Founder",
       platform: "x",
       quote:
-        "Anujith was the first designer we hired and he behaved like a founder about it. He ran the interviews, made the calls, and pushed back on us when the business idea and the user need didn’t line up. The product we launched is his, and the usability numbers we put in front of investors came out of his testing.",
+        "First designer we ever hired. I expected to hand him wireframes, and instead he went and talked to fifteen shop owners and came back to tell us two of our assumptions were wrong. He was right about both. The app we launched is his call end to end.",
     },
     {
       avatar: "/images/testimonials/avatars/a5.png",
@@ -73,7 +82,7 @@ const COLUMNS: Card[][] = [
       handle: "@Vitra.ai",
       platform: "x",
       quote:
-        "Our product is genuinely hard to design for — dense data, AI output that isn’t always predictable, and enterprise users with no patience for a learning curve. Anujith is good at finding the simple spine inside all of that. He’ll take a workflow with fourteen states and make it feel like three, without hiding anything the user actually needs to see. That is the part most designers get wrong here.",
+        "Our product is a nightmare to design for. Dense data, AI output you can’t fully predict, and enterprise users who won’t sit through a tutorial. Anujith finds the spine in it. He took the dubbing flow from something like fourteen states down to feeling like three, and didn’t hide anything people needed along the way.",
     },
     {
       avatar: "/images/testimonials/avatars/a6.png",
@@ -81,14 +90,14 @@ const COLUMNS: Card[][] = [
       handle: "@Vitra.ai",
       platform: "x",
       quote:
-        "Deadlines don’t rattle him. He scopes honestly up front, flags early when something is going to slip rather than on the day it does, and ships the version that works instead of the version that is perfect. Easy to plan around, and he holds the same standard when the timeline gets tight.",
+        "The thing I’d tell anyone hiring him is that he tells you early. If something’s going to slip you hear it that week, not the morning it’s due. He scopes honestly, ships the version that works instead of the perfect one, and doesn’t go quiet when it gets tight.",
     },
   ],
 ];
 
 function Testimonial({ c }: { c: Card }) {
   return (
-    <figure className="rounded-[18px] border border-black/4 bg-white px-[20px] py-[22px] shadow-[0_1px_2px_rgba(16,24,40,0.04),0_10px_28px_rgba(16,24,40,0.05)] xl:rounded-[calc(24*var(--u))] xl:px-[calc(28*var(--u))] xl:py-[calc(30*var(--u))]">
+    <figure className="rounded-[18px] border border-black/4 bg-white px-[20px] py-[22px] shadow-[0_1px_2px_rgba(16,24,40,0.04),0_10px_28px_rgba(16,24,40,0.05)] xl:rounded-[calc(24*var(--u))] xl:px-[calc(28*var(--u))] xl:py-[calc(44*var(--u))]">
       <figcaption className="flex items-center gap-[11px] xl:gap-[calc(15*var(--u))]">
         {/*
           Cropped from the original export, so each still carries its verified
@@ -158,7 +167,7 @@ export function Testimonials() {
         {COLUMNS.map((col, i) => (
           <div
             key={i}
-            className="flex flex-col gap-[16px] xl:gap-[calc(44*var(--u))]"
+            className="flex flex-col gap-[18px] xl:gap-[calc(69*var(--u))]"
           >
             {col.map((c, j) => (
               <Testimonial key={j} c={c} />
