@@ -1,4 +1,5 @@
 import Image from "@/components/Img";
+import { CollageVideo } from "@/components/CollageVideo";
 
 /**
  * Bio + collage — Figma 5854:49704 "Frame 2147228576".
@@ -28,6 +29,13 @@ type Card = {
    * chrome and its shadow spill, so they must not be rounded or clipped.
    */
   card?: boolean;
+  /**
+   * Set when the tile is a looping clip rather than a still. It fills the tile
+   * edge to edge instead of sitting centred on a white card, because the clip
+   * carries its own flat ground (#e9f2fe) and insetting it would read as a
+   * blue patch pasted onto a white one.
+   */
+  video?: { src: string; poster: string };
 };
 
 /* left/top/w/h are absoluteRenderBounds relative to 5854:49710. */
@@ -40,7 +48,11 @@ const CARDS: Card[] = [
   { src: "bio-screens.png",      alt: "",  left: 486, top:  -2, w: 316, h: 322 },
   { src: "bio-smallmoments.png", alt: "",  left:  -4, top: 162, w: 482, h: 322 },
   { src: "bio-apps.png",         alt: "",  left: 486, top: 328, w: 316, h: 156 },
-  { src: "bio-folder.png",       alt: "",  left:  -4, top: 492, w: 316, h: 322 },
+  // Animated blob supplied by the user, replacing the rock still that sat
+  // here. Shipped as H.264 rather than the source GIF: 264KB against 3MB,
+  // and a 256-colour GIF visibly bands a gradient this smooth.
+  { src: "bio-blob-motion.mp4", alt: "", left: -4, top: 492, w: 316, h: 322,
+    video: { src: "bio-blob-motion.mp4", poster: "bio-blob-motion-poster.webp" } },
   { src: "bio-manga.png",        alt: "",  left: 320, top: 492, w: 482, h: 322 },
 ];
 
@@ -105,6 +117,27 @@ export function Bio() {
             width: `${(c.w / CANVAS_W) * 100}%`,
             height: `${(c.h / CANVAS_H) * 100}%`,
           };
+          if (c.video) {
+            return (
+              /* Same chrome as a `card` tile, but the clip fills it. */
+              <div
+                key={c.src}
+                className="absolute overflow-hidden rounded-[16px] bg-[#e9f2fe]"
+                style={{
+                  ...box,
+                  boxShadow:
+                    "0.5px 0.5px 2px 0px rgba(103,109,124,0.12), 0px 2px 4px 0px rgba(103,109,124,0.1)",
+                }}
+              >
+                <CollageVideo
+                  src={`/images/collage/${c.video.src}`}
+                  poster={`/images/collage/${c.video.poster}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            );
+          }
+
           return c.card ? (
             /* Figma card chrome: white, r16, and the collage drop shadow. */
             <div
