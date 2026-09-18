@@ -45,6 +45,21 @@ function HomeIcon() {
  * On a case study the hashes have no targets, so they resolve to "/#works" and
  * navigate home first.
  */
+/**
+ * The nav's surface: white, hairline border, 66px radius, the drop shadow with
+ * its inset highlight, and the blur behind it. Exported so anything that is
+ * meant to read as the same object — the jams player, for one — shares the
+ * literal values rather than a copy of them that can drift.
+ */
+export const NAV_SURFACE_CLASS =
+  "rounded-[66px] border border-[#F3F3F3] bg-white xl:rounded-[calc(66*var(--u))]";
+
+export const NAV_SURFACE_STYLE = {
+  boxShadow:
+    "0px 8px 10px 0px rgba(0,0,0,0.10), inset 0px 0px 8px 0px rgba(255,255,255,0.45)",
+  backdropFilter: "blur(16px)",
+} as const;
+
 export function Nav({ base = "", active = "Home" }: { base?: string; active?: string }) {
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
@@ -73,12 +88,8 @@ export function Nav({ base = "", active = "Home" }: { base?: string; active?: st
   return (
     <div ref={wrap} className="relative">
       <nav
-        className="flex h-[48px] items-center justify-center gap-[12px] rounded-[66px] border border-[#F3F3F3] bg-white px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[calc(452*var(--u))] xl:gap-[calc(16*var(--u))] xl:px-[calc(24*var(--u))] xl:py-[calc(18*var(--u))] xl:h-[calc(54*var(--u))] xl:rounded-[calc(66*var(--u))]"
-        style={{
-          boxShadow:
-            "0px 8px 10px 0px rgba(0,0,0,0.10), inset 0px 0px 8px 0px rgba(255,255,255,0.45)",
-          backdropFilter: "blur(16px)",
-        }}
+        className={`flex h-[48px] items-center justify-center gap-[12px] px-[16px] md:h-[54px] md:gap-[16px] md:px-[20px] xl:w-[calc(452*var(--u))] xl:gap-[calc(16*var(--u))] xl:px-[calc(24*var(--u))] xl:py-[calc(18*var(--u))] xl:h-[calc(54*var(--u))] ${NAV_SURFACE_CLASS}`}
+        style={NAV_SURFACE_STYLE}
       >
         <a
           href={base || "#top"}

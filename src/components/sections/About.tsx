@@ -1,5 +1,6 @@
 import Image from "@/components/Img";
 import { SocialRow } from "@/components/SocialRow";
+import { Jams } from "@/components/Jams";
 import { PhotoCarousel } from "@/components/PhotoCarousel";
 
 /**
@@ -230,19 +231,7 @@ export function About() {
           <h3 className="text-[20px] leading-[18px] font-medium text-black xl:absolute xl:left-[calc(16*var(--u))] xl:top-[calc(24*var(--u))] xl:text-[calc(20*var(--u))] xl:leading-[calc(18*var(--u))]">
             Jams I Keep Coming Back To
           </h3>
-          <div className="mt-[16px] flex flex-col gap-[10px] xl:mt-0 xl:block xl:gap-[calc(10*var(--u))]">
-            {JAMS.map((top, i) => (
-              <Image
-                key={top}
-                src={`/images/about/jam-${i + 1}.png`}
-                alt=""
-                width={1078}
-                height={164}
-                className="h-auto w-full xl:absolute xl:left-[calc(12*var(--u))] xl:top-[var(--y)] xl:h-[calc(82*var(--u))] xl:w-[calc(539*var(--u))]"
-                style={{ ["--y" as string]: `calc(${top}*var(--u))` }}
-              />
-            ))}
-          </div>
+          <Jams tops={JAMS} />
         </Card>
 
         {/* ---- Column 2 — exports carry 4px shadow spill a side ---- */}
