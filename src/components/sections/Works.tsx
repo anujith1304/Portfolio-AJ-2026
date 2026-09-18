@@ -20,10 +20,11 @@ import Link from "next/link";
  * the hover here is that opacity change and nothing else.
  *
  * Card 03 links to the Translate.video case study — the home frame wires it up
- * (5908:32696 -> 5908:21013) — but it is a plain frame with no hover variant,
- * so it links without dimming. Its preview is the redesigned dashboard, taken
+ * (5908:32696 -> 5908:21013). Its preview is the redesigned dashboard, taken
  * from the card's own Container (5908:32701) rather than the case study, which
- * renders a slightly different sidebar.
+ * renders a slightly different sidebar. Figma gives it no hover variant, so
+ * there is only the one full-opacity export; it gets the same rest-and-hover
+ * treatment as 01 and 02 in CSS instead. See cssDim below for the numbers.
  *
  * Card 04 is "Vitra Universe (Product)": Figma fills its preview with a padlock
  * placeholder (5908:33741) and gives it no click target, so it reads as locked
@@ -70,7 +71,7 @@ const WORKS: Work[] = [
     title: "Translate.video V2 (Product)",
     image: "work-03-translatevideo.png",
     href: "/work/translate-video",
-    dims: false,
+    dims: true,
     left: 0,
     top: 626,
   },
@@ -85,6 +86,19 @@ const WORKS: Work[] = [
 ];
 
 function Card({ work }: { work: Work }) {
+  /*
+   * Cards 01 and 02 carry the dimming inside their bitmaps, so they cross-fade
+   * between two exports. Card 03 has only the full-opacity export, so the same
+   * change is made here instead.
+   *
+   * The numbers are measured off the pair rather than taken from the Figma
+   * spec: fitting base against hover across both cards gives the mockup at
+   * 0.63 opacity over a 247 ground, with a residual standard deviation under
+   * one level. The layer is nominally 0.7, but 0.63 over #f8f8f8 is what those
+   * exports actually are, and matching them is the point.
+   */
+  const cssDim = work.dims && !work.hoverImage;
+
   const inner = (
     <>
       {/* Overlay — 877x64 at (8,8), #f8f8f8, r16 */}
@@ -104,13 +118,22 @@ function Card({ work }: { work: Work }) {
         shipped and cross-faded. Fading a single 70% export up to full instead
         would wash the mockup out, because the dimming is baked into it.
       */}
-      <div className="relative mx-[8px] mb-[8px] overflow-hidden rounded-[16px] xl:absolute xl:left-[calc(8*var(--u))] xl:top-[calc(80*var(--u))] xl:mx-0 xl:mb-0 xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:rounded-[calc(16*var(--u))]">
+      <div className={
+        "relative mx-[8px] mb-[8px] overflow-hidden rounded-[16px] " +
+        (cssDim ? "bg-surface-muted " : "") +
+        "xl:absolute xl:left-[calc(8*var(--u))] xl:top-[calc(80*var(--u))] xl:mx-0 xl:mb-0 xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:rounded-[calc(16*var(--u))]"
+      }>
         <Image
           src={`/images/works/${work.image}`}
           alt={work.title}
           width={1748}
           height={1028}
-          className="block h-auto w-full xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:max-w-none"
+          className={
+            "block h-auto w-full xl:h-[calc(514*var(--u))] xl:w-[calc(874*var(--u))] xl:max-w-none" +
+            (cssDim
+              ? " opacity-[0.63] transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+              : "")
+          }
         />
         {work.hoverImage && (
           <Image
