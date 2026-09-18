@@ -16,10 +16,7 @@ import { NAV_SURFACE_CLASS, NAV_SURFACE_STYLE } from "@/components/Nav";
  * under a usable touch target.
  *
  * Playback is a Spotify embed. These are commercial recordings, so the audio
- * cannot be hosted here; the embed is the licensed way to play them, and it
- * brings its own scrubber, which is what lets the listener move around inside
- * the track. The 152px variant is used rather than the 80px one precisely
- * because the compact size has no usable seek bar.
+ * cannot be hosted here; the embed is the licensed way to play them.
  *
  * Worth knowing: Spotify serves a 30-second preview to anyone not logged in,
  * and swaps the player for a "Get Spotify" panel once that preview runs out.
@@ -51,8 +48,15 @@ const TRACKS: Track[] = [
   { title: "June Ponal", artist: "Krishh", id: "6S6DFMfhwIZYHUffVzuWOI" },
 ];
 
-/* Tall enough for the embed's seek bar; the 80px variant has none. */
-const EMBED_H = 152;
+/*
+ * Spotify has two embed sizes, not a range: ask for anything between 80 and
+ * 152 and it still draws the 80px card and leaves the remainder blank. The
+ * compact one is used here because the tall one spends its extra height on a
+ * larger sleeve and a "Save on Spotify" row rather than on controls, and at
+ * 152 the dock stood three times the nav's height with the nav's 66px radius,
+ * which stops reading as a pill and starts reading as a blob.
+ */
+const EMBED_H = 80;
 
 /* The play disc, as a share of the export it is drawn in. */
 const DISC = {
@@ -87,46 +91,40 @@ export function Jams({ tops }: { tops: number[] }) {
   /* Set when the API never arrives, so the player still works as a plain embed. */
   const [plain, setPlain] = useState(false);
 
+  /* State, not a ref, because the controller can only be built once the dock
+     has rendered — so the API's arrival has to re-run an effect. */
+  const [apiReady, setApiReady] = useState(false);
+
   const host = useRef<HTMLDivElement | null>(null);
   const api = useRef<SpotifyApi | null>(null);
   const controller = useRef<Controller | null>(null);
   const wanted = useRef<string | null>(null);
 
   const start = useCallback((id: string) => {
-    const uri = `spotify:track:${id}`;
-    wanted.current = uri;
-
+    wanted.current = `spotify:track:${id}`;
     if (controller.current) {
-      controller.current.loadUri(uri);
+      controller.current.loadUri(wanted.current);
       /* loadUri does not resume on its own; the embed needs a beat to swap. */
       window.setTimeout(() => controller.current?.play(), 400);
-      return;
     }
-    if (!api.current || !host.current) return; // picked up once ready
-
-    api.current.createController(
-      host.current,
-      { uri, width: "100%", height: EMBED_H },
-      (c) => {
-        controller.current = c;
-        c.addListener("ready", () => c.play());
-      },
-    );
+    /* With no controller yet there is nothing to build it in: the dock, and
+       the host element inside it, only mount on the render after this click.
+       The effect below picks the request up once that host exists. */
   }, []);
 
   /* Load the API the first time a track is asked for, not on page load. */
   useEffect(() => {
-    if (active === null || api.current || plain) return;
+    if (active === null || apiReady || plain) return;
 
     let cancelled = false;
     const give_up = window.setTimeout(() => {
-      if (!cancelled && !api.current) setPlain(true);
+      if (!cancelled) setPlain(true);
     }, 6000);
 
     if (!document.getElementById("spotify-iframe-api")) {
       window.onSpotifyIframeApiReady = (IFrameAPI) => {
         api.current = IFrameAPI;
-        if (wanted.current) start(wanted.current.split(":")[2]);
+        setApiReady(true);
       };
       const s = document.createElement("script");
       s.id = "spotify-iframe-api";
@@ -140,7 +138,29 @@ export function Jams({ tops }: { tops: number[] }) {
       cancelled = true;
       window.clearTimeout(give_up);
     };
-  }, [active, plain, start]);
+  }, [active, apiReady, plain]);
+
+  /*
+   * Build the embed once both halves exist: the API, and the host element that
+   * is only mounted while the dock is open. Closing destroys the controller,
+   * so this has to run again on the next open — that reopen is what used to
+   * leave an empty pill, the click handler finding no host to build in and the
+   * API-loading effect having already done its one job.
+   */
+  useEffect(() => {
+    if (active === null || plain) return;
+    if (controller.current || !api.current || !host.current) return;
+    const uri = wanted.current ?? `spotify:track:${TRACKS[active].id}`;
+
+    api.current.createController(
+      host.current,
+      { uri, width: "100%", height: EMBED_H },
+      (c) => {
+        controller.current = c;
+        c.addListener("ready", () => c.play());
+      },
+    );
+  }, [active, apiReady, plain]);
 
   const close = useCallback(() => {
     controller.current?.destroy();
@@ -194,20 +214,28 @@ export function Jams({ tops }: { tops: number[] }) {
 
       {track && (
         <div
-          className="group fixed bottom-[16px] left-1/2 z-50 w-[min(420px,calc(100vw-24px))] -translate-x-1/2 md:bottom-[24px]"
+          /*
+            A full-width strip that centres the pill, rather than a width doing
+            `100vw` arithmetic: `100vw` counts the scrollbar, so asking for
+            `calc(100vw - 32px)` left a 9px gutter on the side you can see. A
+            padded flex row measures against the viewport the pill actually
+            sits in. The strip itself must not swallow clicks meant for the
+            page behind it, hence the pointer-events pair.
+          */
+          className="pointer-events-none fixed inset-x-0 bottom-[16px] z-50 flex justify-center px-[16px] md:bottom-[24px]"
           role="region"
           aria-label={`Now playing: ${track.title} by ${track.artist}`}
         >
           <div
-            className={`relative p-[8px] ${NAV_SURFACE_CLASS}`}
+            className={`group pointer-events-auto relative w-full max-w-[560px] p-[5px] ${NAV_SURFACE_CLASS}`}
             style={NAV_SURFACE_STYLE}
           >
             {/*
-              Clipped to a radius concentric with the pill — outer less the 8px
+              Clipped to a radius concentric with the pill — outer less the 5px
               of padding — so the embed's own square corners do not leave white
               wedges inside the curve.
             */}
-            <div className="overflow-hidden rounded-[58px] xl:rounded-[calc(66*var(--u)-8px)]">
+            <div className="overflow-hidden rounded-[61px] xl:rounded-[calc(66*var(--u)-5px)]">
               {plain ? (
                 <iframe
                   title={`${track.title} by ${track.artist}`}
@@ -231,14 +259,14 @@ export function Jams({ tops }: { tops: number[] }) {
               aria-label="Close player"
               /* Revealed on hover, as asked — but always there where there is
                  no hover to give, and whenever it has keyboard focus. */
-              className="absolute -top-[8px] -right-[8px] flex h-[28px] w-[28px] items-center justify-center rounded-full border border-[#F3F3F3] bg-white text-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/60 [@media(hover:none)]:opacity-100"
+              className="absolute -top-[7px] -right-[7px] flex h-[24px] w-[24px] items-center justify-center rounded-full border border-[#F3F3F3] bg-white text-black/55 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/60 [@media(hover:none)]:opacity-100"
               style={NAV_SURFACE_STYLE}
             >
-              <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 12 12" aria-hidden="true">
                 <path
                   d="M1 1l10 10M11 1L1 11"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.3"
                   strokeLinecap="round"
                 />
               </svg>
