@@ -1,5 +1,4 @@
 import Image from "@/components/Img";
-import { CollageVideo } from "@/components/CollageVideo";
 import { SocialRow } from "@/components/SocialRow";
 import { CopyEmail } from "@/components/CopyEmail";
 
@@ -45,22 +44,34 @@ export function Footer() {
       */}
       <div className="w-full max-w-[290px] -rotate-[2deg] rounded-[26px] bg-white p-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.10)] sm:max-w-[348px] xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(99*var(--u))] xl:w-[calc(348*var(--u))] xl:max-w-none xl:max-w-[calc(348*var(--u))] xl:rounded-[calc(26*var(--u))] xl:p-[calc(12*var(--u))]">
         {/*
-          The clip replaces the still that sat here, on the same 696x448 slot
-          so the mount does not move. Treated exactly as in the bio collage:
-          lifted so its own #e9f2fe ground goes pure white, then multiplied so
-          that white drops out and the mount's #f5f5f5 shows through it.
+          A <picture> rather than a <video>: this clip ships as an animated
+          WebP, which is an image, and an animated image cannot be paused from
+          script the way a video can. The reduced-motion source is how it is
+          made pausable — anyone who has asked their system for less motion is
+          served a single frame instead, decided by the browser with no
+          JavaScript involved.
+
+          Shipped as WebP because the source is a 5.8MB GIF, which is far too
+          much for a decorative loop and would have been the heaviest asset on
+          the site. Re-encoded it is 0.61MB, and cleaner than the original: the
+          GIF's 256 colours visibly dither the sky, where the WebP does not.
+          No lift or blend here, unlike the bio collage — this one is full-bleed
+          imagery rather than a subject on a flat ground, so it is left alone.
         */}
-        <div className="relative isolate aspect-[696/448] w-full overflow-hidden rounded-[16px] bg-[#f5f5f5]">
-          <CollageVideo
-            src="/images/collage/bio-blob-motion.mp4"
-            poster="/images/collage/bio-blob-motion-poster.webp"
-            className="h-full w-full object-cover"
-            style={{
-              filter: "brightness(1.095) saturate(1.06)",
-              mixBlendMode: "multiply",
-            }}
+        <picture>
+          <source
+            srcSet="/images/footer/footer-clip-still.webp"
+            media="(prefers-reduced-motion: reduce)"
           />
-        </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/footer/footer-clip.webp"
+            alt=""
+            width={400}
+            height={225}
+            className="aspect-[696/448] w-full rounded-[16px] bg-[#f5f5f5] object-cover"
+          />
+        </picture>
       </div>
 
       <p className="mt-[44px] text-[13px] leading-[20px] font-medium tracking-[0.11em] text-black/45 uppercase xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(371*var(--u))] xl:mt-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(20*var(--u))]">
