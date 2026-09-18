@@ -1,4 +1,5 @@
 import Image from "@/components/Img";
+import { CollageVideo } from "@/components/CollageVideo";
 import { SocialRow } from "@/components/SocialRow";
 import { CopyEmail } from "@/components/CopyEmail";
 
@@ -43,13 +44,23 @@ export function Footer() {
         the opaque block baked into the export was the original complaint.
       */}
       <div className="w-full max-w-[290px] -rotate-[2deg] rounded-[26px] bg-white p-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.10)] sm:max-w-[348px] xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(99*var(--u))] xl:w-[calc(348*var(--u))] xl:max-w-none xl:max-w-[calc(348*var(--u))] xl:rounded-[calc(26*var(--u))] xl:p-[calc(12*var(--u))]">
-        <Image
-          src="/images/footer/connect-card.png"
-          alt=""
-          width={696}
-          height={448}
-          className="h-auto w-full rounded-[16px] bg-[#f5f5f5]"
-        />
+        {/*
+          The clip replaces the still that sat here, on the same 696x448 slot
+          so the mount does not move. Treated exactly as in the bio collage:
+          lifted so its own #e9f2fe ground goes pure white, then multiplied so
+          that white drops out and the mount's #f5f5f5 shows through it.
+        */}
+        <div className="relative isolate aspect-[696/448] w-full overflow-hidden rounded-[16px] bg-[#f5f5f5]">
+          <CollageVideo
+            src="/images/collage/bio-blob-motion.mp4"
+            poster="/images/collage/bio-blob-motion-poster.webp"
+            className="h-full w-full object-cover"
+            style={{
+              filter: "brightness(1.095) saturate(1.06)",
+              mixBlendMode: "multiply",
+            }}
+          />
+        </div>
       </div>
 
       <p className="mt-[44px] text-[13px] leading-[20px] font-medium tracking-[0.11em] text-black/45 uppercase xl:absolute xl:left-[calc(400*var(--u))] xl:top-[calc(371*var(--u))] xl:mt-0 xl:text-[calc(16*var(--u))] xl:leading-[calc(20*var(--u))]">

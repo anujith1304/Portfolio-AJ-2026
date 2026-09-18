@@ -1,5 +1,6 @@
 import Image from "@/components/Img";
 import { CollageVideo } from "@/components/CollageVideo";
+import { canvasSurface } from "@/lib/canvas";
 
 /**
  * Bio + collage — Figma 5854:49704 "Frame 2147228576".
@@ -122,28 +123,44 @@ export function Bio() {
               /* Same chrome as a `card` tile, but the clip fills it. */
               <div
                 key={c.src}
-                className="absolute overflow-hidden rounded-[16px] bg-white"
+                /*
+                  `isolate` keeps the clip's blend inside this tile instead of
+                  letting it reach the page behind.
+                */
+                className="absolute isolate overflow-hidden rounded-[16px]"
                 style={{
                   ...box,
+                  ...canvasSurface,
                   boxShadow:
                     "0.5px 0.5px 2px 0px rgba(103,109,124,0.12), 0px 2px 4px 0px rgba(103,109,124,0.1)",
                 }}
               >
                 {/*
-                  The clip is rendered on a flat #e9f2fe ground, and the tile
-                  wants white. Lifting it by 255/233 takes that ground to pure
-                  white, and the blob survives it: its brightest pixel is luma
-                  215 against the ground's 241, so nothing of the form clips.
-                  Done in the compositor rather than by re-encoding, because
-                  the only encoder available here would mean rebuilding from
-                  the 400x300 GIF instead of this 720x540 source. The touch of
-                  saturation puts back the richness the lift costs.
+                  The clip is rendered on a flat #e9f2fe ground. Lifting it by
+                  255/233 takes that ground to pure white, and the blob survives
+                  it: its brightest pixel is luma 215 against the ground's 241,
+                  so nothing of the form clips. Done in the compositor rather
+                  than by re-encoding, because the only encoder available here
+                  would mean rebuilding from the 400x300 GIF instead of this
+                  720x540 source. The touch of saturation puts back the richness
+                  the lift costs.
+
+                  Multiplying then makes that pure white transparent — white is
+                  multiply's identity — so the tile's own surface shows through
+                  and the blob sits on the same warm, grained ground as the rest
+                  of the page. Left opaque it was the only surface here with no
+                  grain at all: flat 255 against a page measuring 254 with a
+                  standard deviation of 2.9, which is what made it read as a
+                  hole rather than a card.
                 */}
                 <CollageVideo
                   src={`/images/collage/${c.video.src}`}
                   poster={`/images/collage/${c.video.poster}`}
                   className="h-full w-full object-cover"
-                  style={{ filter: "brightness(1.095) saturate(1.06)" }}
+                  style={{
+                    filter: "brightness(1.095) saturate(1.06)",
+                    mixBlendMode: "multiply",
+                  }}
                 />
               </div>
             );
