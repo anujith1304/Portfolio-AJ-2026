@@ -540,4 +540,20 @@ body {
     max-width: calc(var(--fw) * 1px);
     aspect-ratio: var(--fw) / var(--fh);
   }
+
+  /*
+    Above the breakpoint the whole canvas scales with --u, so this cap has to
+    scale with it. In fixed pixels it stopped at the design size and became a
+    floor instead of a ceiling: at 1440, where --u is 0.756, the photo carousel
+    held 599 real pixels where it should have held 453, which is 792 in design
+    terms against the 599 the file gives it. That extra 193 ran it straight
+    into the experience card alongside. Only at 1905, where --u resolves to
+    exactly 1px, did the two agree — which is why this held up on a full-width
+    desktop and nowhere else.
+  */
+  @media (min-width: 64rem) {
+    .fit-canvas {
+      max-width: calc(var(--fw) * var(--u));
+    }
+  }
 }
