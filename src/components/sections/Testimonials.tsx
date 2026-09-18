@@ -59,11 +59,13 @@ const COLUMNS: Card[][] = [
     },
     {
       avatar: "/images/testimonials/avatars/a3.png",
-      name: "Roger",
+      name: "SriBalaji",
       handle: "@Vitra.ai",
+      role: "Senior Software Engineer",
       platform: "threads",
+      /* SriBalaji's own words, kept verbatim. */
       quote:
-        "Our design system exists because Anujith built it while the product was still changing underneath him. I’m an engineer, so what I noticed is that I stopped asking. Spacing, states, what an empty table looks like, it was already there and already named. He’d come sit at my desk when something didn’t translate cleanly into code instead of leaving comments on a file. We’ve redesigned around that system twice now and never had to start it over.",
+        "Anujith is a talented Product designer who brings a strong understanding of users and product requirements to his work. He has a great eye for detail and creates simple, intuitive experiences. I especially appreciate how he works closely with the engineering team and takes the time to compare the implementation with the prototype to catch UI gaps and inconsistencies. He takes ownership of his work and always cares about delivering a polished final experience. He is a great collaborator and a valuable part of the team.",
     },
   ],
   [
