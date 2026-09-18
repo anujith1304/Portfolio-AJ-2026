@@ -122,17 +122,28 @@ export function Bio() {
               /* Same chrome as a `card` tile, but the clip fills it. */
               <div
                 key={c.src}
-                className="absolute overflow-hidden rounded-[16px] bg-[#e9f2fe]"
+                className="absolute overflow-hidden rounded-[16px] bg-white"
                 style={{
                   ...box,
                   boxShadow:
                     "0.5px 0.5px 2px 0px rgba(103,109,124,0.12), 0px 2px 4px 0px rgba(103,109,124,0.1)",
                 }}
               >
+                {/*
+                  The clip is rendered on a flat #e9f2fe ground, and the tile
+                  wants white. Lifting it by 255/233 takes that ground to pure
+                  white, and the blob survives it: its brightest pixel is luma
+                  215 against the ground's 241, so nothing of the form clips.
+                  Done in the compositor rather than by re-encoding, because
+                  the only encoder available here would mean rebuilding from
+                  the 400x300 GIF instead of this 720x540 source. The touch of
+                  saturation puts back the richness the lift costs.
+                */}
                 <CollageVideo
                   src={`/images/collage/${c.video.src}`}
                   poster={`/images/collage/${c.video.poster}`}
                   className="h-full w-full object-cover"
+                  style={{ filter: "brightness(1.095) saturate(1.06)" }}
                 />
               </div>
             );
