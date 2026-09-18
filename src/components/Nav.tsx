@@ -47,9 +47,13 @@ function HomeIcon() {
  */
 /**
  * The nav's surface: white, hairline border, 66px radius, the drop shadow with
- * its inset highlight, and the blur behind it. Exported so anything that is
- * meant to read as the same object — the jams player, for one — shares the
- * literal values rather than a copy of them that can drift.
+ * its inset highlight, and the blur behind it.
+ *
+ * The shadow and blur are exported separately because the jams player shares
+ * those literally rather than keeping a copy that can drift. It does not take
+ * the class: a pill radius sized for a bar of text clipped the corners of the
+ * Spotify card it has to hold, and the hairline read as heavy around artwork
+ * that already has an edge of its own.
  */
 export const NAV_SURFACE_CLASS =
   "rounded-[66px] border border-[#F3F3F3] bg-white xl:rounded-[calc(66*var(--u))]";

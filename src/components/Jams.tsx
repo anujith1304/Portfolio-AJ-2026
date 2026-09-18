@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "@/components/Img";
-import { NAV_SURFACE_CLASS, NAV_SURFACE_STYLE } from "@/components/Nav";
+import { NAV_SURFACE_STYLE } from "@/components/Nav";
 
 /**
  * The jams list, and the player it opens.
@@ -226,16 +226,20 @@ export function Jams({ tops }: { tops: number[] }) {
           role="region"
           aria-label={`Now playing: ${track.title} by ${track.artist}`}
         >
+          {/*
+            The nav's shadow and blur, but not its border or its radius. The
+            pill radius belonged to a bar whose content is text: here it cut
+            through the embed's own furniture — Spotify's mark sits 8px in
+            from the right and 9px down, and the sleeve 8px in from the
+            top-left, which puts the ceiling at a 27px clip. The embed's card
+            carries its own 8px corner with nothing behind it, so 15px inside
+            and 20px outside hugs that curve without touching anything.
+          */}
           <div
-            className={`group pointer-events-auto relative w-full max-w-[560px] p-[5px] ${NAV_SURFACE_CLASS}`}
+            className="group pointer-events-auto relative w-full max-w-[560px] rounded-[20px] bg-white p-[5px]"
             style={NAV_SURFACE_STYLE}
           >
-            {/*
-              Clipped to a radius concentric with the pill — outer less the 5px
-              of padding — so the embed's own square corners do not leave white
-              wedges inside the curve.
-            */}
-            <div className="overflow-hidden rounded-[61px] xl:rounded-[calc(66*var(--u)-5px)]">
+            <div className="overflow-hidden rounded-[15px]">
               {plain ? (
                 <iframe
                   title={`${track.title} by ${track.artist}`}
@@ -259,7 +263,7 @@ export function Jams({ tops }: { tops: number[] }) {
               aria-label="Close player"
               /* Revealed on hover, as asked — but always there where there is
                  no hover to give, and whenever it has keyboard focus. */
-              className="absolute -top-[7px] -right-[7px] flex h-[24px] w-[24px] items-center justify-center rounded-full border border-[#F3F3F3] bg-white text-black/55 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/60 [@media(hover:none)]:opacity-100"
+              className="absolute -top-[7px] -right-[7px] flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white text-black/55 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/60 [@media(hover:none)]:opacity-100"
               style={NAV_SURFACE_STYLE}
             >
               <svg width="10" height="10" viewBox="0 0 12 12" aria-hidden="true">
