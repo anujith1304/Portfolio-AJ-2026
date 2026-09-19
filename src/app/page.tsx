@@ -38,6 +38,14 @@ export default function Home() {
       {/*
         5854:49627 — page-level backdrop, behind the section stack.
 
+        The top here is a page-absolute design offset, so it only lines up
+        while everything above it keeps its height. It tracks the footer's own
+        top: the image sits 15 design px below it, the gradient 67 above. Any
+        copy change that makes a section taller — a longer testimonial is the
+        usual one — slides the footer out from under this artwork, and both
+        numbers have to move by the same delta. The check is the gap between
+        #contact's top and this image's: it should read +15.
+
         Masked to fade in over its own top edge. The gradient panel below is
         only ~89% opaque where the image starts (the image begins 82px into a
         794px gradient whose first stop is solid), so the artwork appeared at
@@ -50,7 +58,7 @@ export default function Home() {
         alt=""
         width={3808}
         height={1424}
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[calc(6593*var(--u))] xl:min-w-[calc(1904*var(--u))] xl:h-[calc(712*var(--u))]"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[calc(6651*var(--u))] xl:min-w-[calc(1904*var(--u))] xl:h-[calc(712*var(--u))]"
         style={{
           maskImage:
             "linear-gradient(180deg, transparent 0px, rgba(0,0,0,0.55) 90px, #000 190px)",
@@ -65,11 +73,12 @@ export default function Home() {
         the page-level image above, which bleeds to the window edge. Kept
         inside the 1905-wide frame it left the image bare down both sides and
         across the bottom 15px, so it is bled to match. Geometry is Figma's: it
-        starts at the footer's own top (6578) and runs its full 794px.
+        starts at the footer's own top and runs its full 794px. Pinned the
+        same way as the image above, and moves with it.
       */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[calc(6511*var(--u))] xl:bottom-auto xl:min-w-[calc(1904*var(--u))] xl:h-[calc(794*var(--u))]"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[calc(6569*var(--u))] xl:bottom-auto xl:min-w-[calc(1904*var(--u))] xl:h-[calc(794*var(--u))]"
         style={{
           backgroundImage:
             "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",

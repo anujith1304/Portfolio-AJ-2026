@@ -42,11 +42,13 @@ const COLUMNS: Card[][] = [
   [
     {
       avatar: "/images/testimonials/avatars/a1.png",
-      name: "Roger",
+      name: "Nandan Holla",
       handle: "@Vitra.ai",
+      role: "Senior Software Engineer",
       platform: "x",
+      /* Nandan's own words, kept verbatim. */
       quote:
-        "Anujith spoiled me a little. I’d hand him a one-line brief and he’d come back with the questions I should’ve asked myself. Who’s actually using this? What do they see when the model returns nothing? By the time we got to real screens, most of the arguments we’d normally have were already settled.",
+        "I worked with Anujith for about two years at Vitra.ai, from his internship to his role as UI Designer. He’s one of the quickest learners I’ve worked with, and his curiosity never stopped at design. He wanted to understand how the product was built, how decisions were made, and why things worked the way they did. That made him easy to build with as a developer. We clicked from day one, and any team would be lucky to have him.",
     },
     {
       avatar: "/images/testimonials/avatars/a2.png",
