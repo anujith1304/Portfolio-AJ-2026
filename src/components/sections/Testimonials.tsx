@@ -54,7 +54,6 @@ const COLUMNS: Card[][] = [
       avatar: "/images/testimonials/avatars/a2.png",
       name: "Roger",
       handle: "@Get My Stock",
-      role: "Product Marketer",
       platform: "x",
       quote:
         "Three months for the whole MVP and he still made time to talk to users. I kept waiting for the part where we cut the research to hit the date, and it never came. When I asked why a screen worked the way it did, he’d pull up the actual interview where someone got stuck. Made my job a lot easier.",
@@ -83,8 +82,9 @@ const COLUMNS: Card[][] = [
     },
     {
       avatar: "/images/testimonials/avatars/a5.png",
-      name: "Roger",
-      handle: "@Vitra.ai",
+      name: "Kevin",
+      handle: "@Get My Stock",
+      role: "Product Marketer",
       platform: "x",
       quote:
         "Our product is a nightmare to design for. Dense data, AI output you can’t fully predict, and enterprise users who won’t sit through a tutorial. Anujith finds the spine in it. He took the dubbing flow from something like fourteen states down to feeling like three, and didn’t hide anything people needed along the way.",
