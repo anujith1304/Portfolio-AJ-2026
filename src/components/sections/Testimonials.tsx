@@ -91,8 +91,8 @@ const COLUMNS: Card[][] = [
     },
     {
       avatar: "/images/testimonials/avatars/a6.png",
-      name: "Roger",
-      handle: "@Vitra.ai",
+      name: "Arun",
+      handle: "@Capecom Technologies",
       platform: "x",
       quote:
         "The thing I’d tell anyone hiring him is that he tells you early. If something’s going to slip you hear it that week, not the morning it’s due. He scopes honestly, ships the version that works instead of the perfect one, and doesn’t go quiet when it gets tight.",
