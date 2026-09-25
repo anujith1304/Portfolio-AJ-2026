@@ -58,7 +58,7 @@ export default function Home() {
         alt=""
         width={3808}
         height={1424}
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[calc(6651*var(--u))] xl:min-w-[calc(1904*var(--u))] xl:h-[calc(712*var(--u))]"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[712px] w-screen max-w-none -translate-x-1/2 object-cover xl:top-[calc(6738*var(--u))] xl:min-w-[calc(1904*var(--u))] xl:h-[calc(712*var(--u))]"
         style={{
           maskImage:
             "linear-gradient(180deg, transparent 0px, rgba(0,0,0,0.55) 90px, #000 190px)",
@@ -78,7 +78,7 @@ export default function Home() {
       */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[calc(6569*var(--u))] xl:bottom-auto xl:min-w-[calc(1904*var(--u))] xl:h-[calc(794*var(--u))]"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[794px] w-screen max-w-none -translate-x-1/2 xl:top-[calc(6656*var(--u))] xl:bottom-auto xl:min-w-[calc(1904*var(--u))] xl:h-[calc(794*var(--u))]"
         style={{
           backgroundImage:
             "linear-gradient(180deg, #FDFCF9 0%, rgba(253,251,249,0.5) 47.4%, rgba(253,251,249,0) 100%)",

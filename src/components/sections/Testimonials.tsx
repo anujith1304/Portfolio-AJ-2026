@@ -56,7 +56,7 @@ const COLUMNS: Card[][] = [
       handle: "@Get My Stock",
       platform: "x",
       quote:
-        "Three months for the whole MVP and he still made time to talk to users. I kept waiting for the part where we cut the research to hit the date, and it never came. When I asked why a screen worked the way it did, he’d pull up the actual interview where someone got stuck. Made my job a lot easier.",
+        "I worked with Anujith at Get My Stock while he was designing the app. We had about three months to ship the MVP, and I expected the user research to be the first thing cut for time. It never was. When I asked why a screen worked the way it did, he’d pull up the interview where someone had got stuck on it. That made my job a lot easier.",
     },
     {
       avatar: "/images/testimonials/avatars/a3.png",
@@ -87,7 +87,7 @@ const COLUMNS: Card[][] = [
       role: "Product Marketer",
       platform: "x",
       quote:
-        "Our product is a nightmare to design for. Dense data, AI output you can’t fully predict, and enterprise users who won’t sit through a tutorial. Anujith finds the spine in it. He took the dubbing flow from something like fourteen states down to feeling like three, and didn’t hide anything people needed along the way.",
+        "I handled marketing at Get My Stock, so I spent a lot of my time explaining the product to people who’d never seen it before. Anujith made that much easier. Stock management has a lot of detail in it, and the early flows put all of it on screen at once. He worked out what people actually needed at each step and left the rest out, without hiding anything that mattered.",
     },
     {
       avatar: "/images/testimonials/avatars/a6.png",
@@ -95,7 +95,7 @@ const COLUMNS: Card[][] = [
       handle: "@Capecom Technologies",
       platform: "x",
       quote:
-        "The thing I’d tell anyone hiring him is that he tells you early. If something’s going to slip you hear it that week, not the morning it’s due. He scopes honestly, ships the version that works instead of the perfect one, and doesn’t go quiet when it gets tight.",
+        "If you’re thinking of working with Anujith, the thing worth knowing is that he tells you early. If something’s going to slip, you hear about it that week rather than on the morning it’s due. He’s honest about what fits in the time there is, and he’d rather ship the version that works than hold out for a perfect one. He doesn’t go quiet when things get difficult either.",
     },
   ],
 ];
