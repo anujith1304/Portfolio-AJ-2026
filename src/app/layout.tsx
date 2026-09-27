@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { satoshi, figtree, recoleta, circular } from "./fonts";
 import { cn } from "@/lib/utils";
+import { PasswordGate } from "@/components/PasswordGate";
+import { GATE_KEY } from "@/lib/gate";
 import "./globals.css";
 
 /*
@@ -57,6 +59,21 @@ export default function RootLayout({
               "if(window.ResizeObserver)new ResizeObserver(u).observe(d)})()",
           }}
         />
+        {/*
+          Lifts the gate before the body paints, so someone who has already
+          entered the password never sees the lock screen flash. It only ever
+          sets the attribute — nothing here can hide the gate by failing, and a
+          browser that refuses localStorage just asks again.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(localStorage.getItem(" +
+              JSON.stringify(GATE_KEY) +
+              ")==='1')document.documentElement.dataset.unlocked='1'}catch(e){}})()",
+          }}
+        />
+        <PasswordGate />
         {children}
       </body>
     </html>

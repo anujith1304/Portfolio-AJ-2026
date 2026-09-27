@@ -557,3 +557,23 @@ body {
     }
   }
 }
+
+/*
+  The site gate.
+
+  Both states live in the markup and CSS picks between them off one attribute
+  on <html>, which the layout's inline script sets before the body paints. Done
+  as conditional rendering instead, a returning visitor would see the lock
+  screen flash while React hydrated, and with scripting off the page would fall
+  open rather than stay shut.
+
+  `body > *` rather than a wrapper element: the page's own root is positioned
+  and sized against the body, and slipping a div in between it risked the
+  layout. Scripts are hidden by this too, which costs nothing — they still run.
+*/
+html:not([data-unlocked="1"]) body > *:not([data-gate-overlay]) {
+  display: none !important;
+}
+html[data-unlocked="1"] [data-gate-overlay] {
+  display: none !important;
+}
