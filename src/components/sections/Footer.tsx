@@ -69,6 +69,13 @@ export function Footer() {
             alt=""
             width={400}
             height={225}
+            /* Animated WebP, 594KB, sitting in the footer — it was being
+               fetched eagerly and was the heaviest thing on first paint.
+               next/image sets this itself; a raw <img> is needed here because
+               an animated WebP must not go through the optimizer, which would
+               flatten it, so the attribute goes on by hand. */
+            loading="lazy"
+            decoding="async"
             className="aspect-[696/448] w-full rounded-[16px] bg-[#f5f5f5] object-cover"
           />
         </picture>

@@ -16,8 +16,15 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: {
-    // next/image's default loader needs a server; static export requires this.
-    unoptimized: true,
+    /*
+     * The default loader needs /_next/image, which is a server route a static
+     * export does not have — hence `unoptimized: true` here until now. A
+     * custom loader is the way round it: scripts/optimize-images.mjs builds
+     * the widths at build time and src/lib/image-loader.ts points next/image
+     * at them, so srcset, density candidates and lazy loading all still work.
+     */
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
   },
 };
 
